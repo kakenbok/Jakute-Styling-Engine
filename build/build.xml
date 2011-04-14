@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="JCSS" default="APIDoc" basedir="../" >
+	
+	<property name="flexSDK" value="c:\FDT\plugins\com.powerflasher.fdt.shippedFlexSDK_3.5.0.12683a_1000\\flex" />
+	<property name="asdoc" value="${flexSDK}\bin\asdoc.exe" />
+
+	<property name="as3commonsSrc" value="P:\org\as3commons\as3-commons-collections\src\main\actionscript" />
+
+	<target name="Clean" description="Clean">
+ 		<delete includeemptydirs="true">
+			<fileset dir="doc/apidoc" includes="**/*" />
+		</delete>
+   </target>
+
+	<target name="APIDoc" depends="as3CommonsManifest">
+		<exec executable="${asdoc}" failonerror="true">
+			<arg line="-doc-sources 'src/com/sibirjak/jakute'" />
+			<arg line="-source-path 'src'" />
+			<arg line="-source-path '${as3commonsSrc}'" />
+			<arg line="-window-title 'Jakute Styling Engine (BETA)'" />
+			<arg line="-output 'doc/apidoc'"/>
+
+			<arg line="-package com.sibirjak.jakute 'Public JCSS package (public).'" />
+			<arg line="-package com.sibirjak.jakute.framework 'Framework internal code (hidden).'" />
+			<arg line="-package com.sibirjak.jakute.framework.core 'Framework internal code (hidden).'" />
+			<arg line="-package com.sibirjak.jakute.framework.finder 'Framework internal code (hidden).'" />
+			<arg line="-package com.sibirjak.jakute.framework.parser 'Framework internal code (hidden).'" />
+			<arg line="-package com.sibirjak.jakute.framework.roles 'Framework internal code (hidden).'" />
+			<arg line="-package com.sibirjak.jakute.framework.states 'Framework internal code (hidden).'" />
+			<arg line="-package com.sibirjak.jakute.framework.stylerules 'Framework internal code (hidden).'" />
+			<arg line="-package com.sibirjak.jakute.framework.styles 'Framework internal code (hidden).'" />
+			<arg line="-package com.sibirjak.jakute.framework.update 'Framework internal code (hidden).'" />
+
+			<arg line="-library-path '${flexSDK}/frameworks/locale/en_US'" />
+			<arg line="-exclude-classes ${as3CommonsExcludedClasses} --"/>
+
+		</exec>
+   </target>
+
+	<target name="Zip" description="ZIP">
+ 		<delete file="zip/jakute_beta4.zip" />
+		<zip destfile="zip/jakute_beta4.zip">
+			<zipfileset dir="src" prefix="src" />
+			<zipfileset dir="../examples/src" prefix="examples" />
+			<zipfileset dir="${as3commonsSrc}" prefix="src" />
+			<zipfileset dir="doc" prefix="doc" />
+			<zipfileset file="swc/jakute_beta4.swc" prefix="swc" />
+		</zip>
+		
+	</target>
+
+	<target name="as3CommonsManifest">
+        <!-- Get the list of all files, exclude those that we wish to document (not a typo) -->
+        <fileset id="fileset" dir="${as3commonsSrc}" />
+
+         <!-- convert the names of excldued classes to packages with class names -->
+          <pathconvert property="as3CommonsExcludedClasses" pathsep=" " refid="fileset">
+                  <chainedmapper>
+                          <globmapper from="${as3commonsSrc}\*" to="*"/>
+                          <mapper type="package" from="*.as" to="*"/>
+                  </chainedmapper>
+          </pathconvert>
+
+          <!-- echo the exlcusions for debugging purposes -->
+          <echo message="manifest = ${as3CommonsExcludedClasses}"/>
+
+
+    </target>
+
+</project>
