@@ -2,8 +2,6 @@ h3. Jakute Styling Engine - CSS Framework for ActionScript/Flash
 
 h2. Features
 
-h3. Features
-
 * Style your application using CSS
 * Load external style sheets
 * Set styles programmatically
