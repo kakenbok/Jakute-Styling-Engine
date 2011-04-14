@@ -1,1 +1,15 @@
-h2. Jakute Styling Engine - CSS Framework for ActionScript / FlashThe Jakute Styling Engine (JCSS) is a CSS framework for Flash. JCSS enables us to easily create rich styleable applications and components without the demand to implement any aspect of the style handling (CSS parsing, component initialization, display list monitoring, runtime component updates) on our own.h3. Features* Style your application using CSS* Load external style sheets* Set styles programmatically* Update styles at runtime* Use states for interactivity* Use ID and class selectors to filter components* Use descendant selectors to filter components* Move components around the display list* Control styling with specifities and priorities
+﻿h2. Jakute Styling Engine - CSS Framework for ActionScript / Flash
+
+The Jakute Styling Engine (JCSS) is a CSS framework for Flash. JCSS enables us to easily create rich styleable applications and components without the demand to implement any aspect of the style handling (CSS parsing, component initialization, display list monitoring, runtime component updates) on our own.
+
+h3. Features
+
+* Style your application using CSS
+* Load external style sheets
+* Set styles programmatically
+* Update styles at runtime
+* Use states for interactivity
+* Use ID and class selectors to filter components
+* Use descendant selectors to filter components
+* Move components around the display list
+* Control styling with specifities and priorities
