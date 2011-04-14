@@ -1,4 +1,4 @@
-﻿h2. Jakute Styling Engine - CSS Framework for ActionScript / Flash.
+h2. Jakute Styling Engine - CSS Framework for ActionScript / Flash
 
 * Style your application using CSS
 * Load external style sheets
