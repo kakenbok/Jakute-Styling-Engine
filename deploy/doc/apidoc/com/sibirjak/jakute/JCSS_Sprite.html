@@ -10,7 +10,7 @@
 <body>
 <script type="text/javascript" language="javascript" src="../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'JCSS_Sprite - Jakute Styling Engine (BETA)';
+				asdocTitle = 'JCSS_Sprite - Jakute Styling Engine 0.9.0';
 				var baseRef = '../../../';
 				window.onload = configPage;
 			--></script>
@@ -140,7 +140,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#jcss_commitBulkUpdate()">jcss_commitBulkUpdate</a>():void</div>
 <div class="summaryTableDescription">
-   Executes a bulk update that was started via <code>startBulkUpdate()</code>.</div>
+   </div>
 </td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
 </tr>
 <tr class="">
@@ -220,7 +220,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#jcss_startBulkUpdate()">jcss_startBulkUpdate</a>():void</div>
 <div class="summaryTableDescription">
-   Starts a bulk update procedure.</div>
+   </div>
 </td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
 </tr>
 <tr class="">
@@ -228,7 +228,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#jcss_styleRuleTreeAsString()">jcss_styleRuleTreeAsString</a>():String</div>
 <div class="summaryTableDescription">
-   Returns a formatted tree of all currently set style rules.</div>
+   </div>
 </td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
 </tr>
 <tr class="">
@@ -439,15 +439,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function jcss_commitBulkUpdate():void</code><p>
-   Executes a bulk update that was started via <code>startBulkUpdate()</code>.
-   
-   </p><p>Affected components are notified only once regardless of the specific
-   changes between <code>startBulkUpdate()</code> and this command.</p>
-   
-   <p>Ancestor components are always notified before their children. A further
-   order is not specified. It can be possible that children of different branches
-   are notified alternating, e.g. C-1, C-2, C-2.1, C-2.2, C-1.3, C-2.4, C-1.1
-   </div>
+   </p></div>
 <a name="jcss_componentSelectorAsString()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -768,13 +760,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function jcss_startBulkUpdate():void</code><p>
-   Starts a bulk update procedure.
-   
-   </p><p>If invoked, affected components are buffered and notified only once
-   after a later call of <code>commitBulkUpdate()</code>. If there are
-   different styles or state to set, that might affect a particular multiple
-   times, it is recommended to wrap the update in the bulk transaction.</p>
-   </div>
+   </p></div>
 <a name="jcss_styleRuleTreeAsString()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -783,90 +769,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function jcss_styleRuleTreeAsString():String</code><p>
-   Returns a formatted tree of all currently set style rules.
-   
-   </p><p>The following example shows a style sheet and its tree representation.</p>
-   
-   <div class='listing'><pre>
-   var styleSheet : String = &lt;styles&gt;&lt;![CDATA[
-   
-       ToolTip {
-           borderSize: 0;
-       }
-   
-       Blue {
-           backgroundColor: #0000CC;
-           borderColor: #000066;
-           color: #FFFFFF;
-       }
-   
-       Blue ToolTip {
-           backgroundColor: #6666FF;
-           color: #FFFFFF;
-       }
-   
-       Red {
-           backgroundColor: #CC0000;
-           borderColor: #660000;
-           color: #FFFFFF;
-       }
-   
-       Red ToolTip {
-           backgroundColor: #FF6666;
-           color: #FFFFFF;
-       }
-   
-       Yellow {
-           backgroundColor: #CCCC00;
-           borderColor: #666600;
-       }
-   
-       Yellow ToolTip {
-           backgroundColor: #FFFF66;
-       }
-   
-   ]]&gt;&lt;/styles&gt;.toString();
-   </pre></div>
-   
-   <div class='listing'><pre>
-   [This 2]
-   |_____[Yellow 22]
-       | &gt;This Yellow specifity:2 {
-       |    backgroundColor: #CCCC00 (12);
-       |    borderColor: #666600 (13);
-       | }
-       |_____[ToolTip 26]
-           | &gt;This Yellow ToolTip specifity:3 {
-           |    backgroundColor: #FFFF66 (14);
-           | }
-   |_____[Blue 8]
-       | &gt;This Blue specifity:2 {
-       |    backgroundColor: #0000CC (2);
-       |    color: #FFFFFF (4);
-       |    borderColor: #000066 (3);
-       | }
-       |_____[ToolTip 12]
-           | &gt;This Blue ToolTip specifity:3 {
-           |    backgroundColor: #6666FF (5);
-           |    color: #FFFFFF (6);
-           | }
-   |_____[ToolTip 5]
-       | &gt;This ToolTip specifity:2 {
-       |    borderSize: 0 (1);
-       | }
-   |_____[Red 15]
-       | &gt;This Red specifity:2 {
-       |    backgroundColor: #CC0000 (7);
-       |    color: #FFFFFF (9);
-       |    borderColor: #660000 (8);
-       | }
-       |_____[ToolTip 19]
-           | &gt;This Red ToolTip specifity:3 {
-           |    backgroundColor: #FF6666 (10);
-           |    color: #FFFFFF (11);
-           | }
-   </pre></div>
-   <p></p>
+   </p><p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
