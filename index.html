@@ -63,10 +63,11 @@
 
 	With Jakute you may configure your application using style sheets. Style sheets can be created at runtime or may be loaded from an external source. You can apply style sheets globally or to a particular component instance.
 
-	<object id="Demo" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="270" height="60">
-		<param name="movie" value="examples/WithoutStyles.swf" />
-		<!--[if !IE]>-->
-		<object type="application/x-shockwave-flash" data="examples/WithoutStyles.swf" width="270" height="60">
+	<object id="Demo" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="290" height="80">
+		<param name="movie" value="examples/Example.swf" />
+		<param value="movie=examples/WithoutStyles" name="flashvars">
+ 		<!--[if !IE]>-->
+		<object type="application/x-shockwave-flash" data="examples/Example.swf" flashvars="movie=examples/WithoutStyles" width="290" height="80">
 			<!--<![endif]-->
 			<p>
 				Alternative content
