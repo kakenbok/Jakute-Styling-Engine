@@ -11,22 +11,26 @@
       background-color: #FFFFFF;
       font-family: Helvetica, Arial, FreeSans, san-serif;
       color: #333333;
+	  line-height: 1.5;
     }
     #container {
       margin: 0 auto;
       width: 700px;
     }
-    h1 { font-size: 3.8em; color: #CC3300; margin-bottom: 3px; }
+    h1 a { font-size: 40px; color: #CC3300; margin-bottom: 3px; font-weight: normal; }
     h1 .small { font-size: 0.4em; }
     h1 a { text-decoration: none }
     h2 { font-size: 1.5em; color: #CC3300; }
-    h3 { text-align: center; color: #CC3300; }
+    h3 { font-size: 26px; color: #CC3300; font-weight: normal; }
     a { color: #4466BB; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+    .description { font-size: 16px; margin-top: 30px; font-style: italic; color: #999; }
     .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
+
+    pre { background: #EEE; border: 1px solid #DDD; color: #444; padding: 15px;}
+	object { margin: 20px 0; }
+
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
+    .footer { padding-top:30px; font-style: italic; }
   </style>
 
 	<script type="text/javascript" src="swfobject/swfobject.js">
@@ -34,6 +38,7 @@
 	<script type="text/javascript">
 		swfobject.registerObject("WithoutStyles", "9.0.115", "expressInstall.swf");
 		swfobject.registerObject("WithStyles", "9.0.115", "expressInstall.swf");
+		swfobject.registerObject("LoadExternalStyles", "9.0.115", "expressInstall.swf");
 	</script>
   
   </head>
@@ -50,12 +55,25 @@
         <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
     </div>
 
-    <h1><a href="http://github.com/kakenbok/Jakute-Styling-Engine">Jakute-Styling-Engine</a>
-      <span class="small">by <a href="http://github.com/kakenbok">kakenbok</a></span></h1>
+    <h1><a href="http://github.com/kakenbok/Jakute-Styling-Engine">Jakute Styling Engine</a></h1>
 
     <div class="description">
-      Jakute is a CSS framework for ActionScript/Flash.
+      Jakute is a complete styling engine for ActionScript/Flash applications. Jakute enables you to easily add rich CSS capabilities to your project. Using Jakute you may develop styleable applications basically the same way you would do with HTML/CSS/JavaScript.
     </div>
+
+	<div>
+		<object id="SelectorTest" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="440" height="300">
+			<param name="movie" value="examples/Example.swf" />
+			<param value="movie=examples/SelectorTest.swf" name="flashvars">
+			<!--[if !IE]>-->
+			<object type="application/x-shockwave-flash" data="examples/Example.swf" flashvars="movie=examples/SelectorTest.swf" width="440" height="300">
+				<!--<![endif]-->
+				<p>
+					Alternative content
+				</p><!--[if !IE]>-->
+			</object> <!--<![endif]-->
+		</object>
+	</div>
 
 	This pages shows you briefly the features of JCSS.
 
@@ -78,12 +96,12 @@
 		</object>
 	</div>
 
-	<pre lang="actionscript3">JCSS.getInstance().setStyleSheet(&lt;styles&gt;&lt;![CDATA[
-		Box#first { w: 90; h: 90; color: #FF9900; }
-		Box#second { w: 70; h: 70; x: 100; y: 10; color: #0099FF; }
-		Box#third { w: 50; h: 50; x: 180; y: 20; color: #DDDD00; }
-		Box#last { w: 30; h: 30; x: 240; y: 30; color: #66DD66; }
-	]]&gt;&lt;/styles>);</pre>
+<pre lang="actionscript3">JCSS.getInstance().setStyleSheet(&lt;styles&gt;&lt;![CDATA[
+	Box#first { w: 90; h: 90; color: #FF9900; }
+	Box#second { w: 70; h: 70; x: 100; y: 10; color: #0099FF; }
+	Box#third { w: 50; h: 50; x: 180; y: 20; color: #DDDD00; }
+	Box#last { w: 30; h: 30; x: 240; y: 30; color: #66DD66; }
+]]&gt;&lt;/styles>);</pre>
 
 	<div>
 		<object id="WithoutStyles" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="290" height="110">
@@ -101,32 +119,44 @@
 
 	<h3>Load external style sheets</h3>
 
-	<pre lang="css">Box {
-		w: 200;	h: 150;
-		border-color: #CC9900;
-		background-color: #FFBB00;
-	}
+<pre lang="css">Box {
+	w: 200;	h: 150;
+	border-color: #CC9900;
+	background-color: #FFBB00;
+}
 
-	Box Box {
-		w: 50; h: 50; x: 120; y: 70;
-		border-color: #DDDDFF;
-		background-color: #00BBFF;
-	}</pre>
+Box Box {
+	w: 50; h: 50; x: 120; y: 70;
+	border-color: #DDDDFF;
+	background-color: #00BBFF;
+}</pre>
 
-	<pre lang="actionscript3">var loader : URLLoader = new URLLoader();
-	loader.addEventListener(Event.COMPLETE, stylesLoaded);
-	loader.load(new URLRequest("styles.css"));
-	...
+<pre lang="actionscript3">var loader : URLLoader = new URLLoader();
+loader.addEventListener(Event.COMPLETE, stylesLoaded);
+loader.load(new URLRequest("styles.css"));
+...
 
-	private function stylesLoaded(event : Event) : void {
-		JCSS.getInstance().setStyleSheet(event.target.data);
+private function stylesLoaded(event : Event) : void {
+	JCSS.getInstance().setStyleSheet(event.target.data);
 
-		var box : Box = new Box();
-		box.addChild(new Box());
-		addChild(box);
-	}</pre>
+	var box : Box = new Box();
+	box.addChild(new Box());
+	addChild(box);
+}</pre>
 
-	[SWFExample example="http://sibirjak.com/osflash/wp-content/uploads/jakute/examples/features/externalcss/LoadExternalStyles.swf" width="220" height="170" /]
+	<div>
+		<object id="LoadExternalStyles" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="220" height="170">
+			<param name="movie" value="examples/Example.swf" />
+			<param value="movie=examples/LoadExternalStyles.swf" name="flashvars">
+			<!--[if !IE]>-->
+			<object type="application/x-shockwave-flash" data="examples/Example.swf" flashvars="movie=examples/LoadExternalStyles.swf" width="220" height="170">
+				<!--<![endif]-->
+				<p>
+					Alternative content
+				</p><!--[if !IE]>-->
+			</object> <!--<![endif]-->
+		</object>
+	</div>
 
 	<h3>Set styles programmatically</h3>
 
@@ -140,73 +170,109 @@
 
 	JCSS is not limited to initial or default styles. With JCSS you can set and update styles at any time. The subject components of the declared style rules are notified automatically.
 
-	<pre lang="actionscript3">private function setLabelColor(color : uint) : void {
-		_button.jcss_setStyle("Label", "color", color);
-	}
+<pre lang="actionscript3">private function setLabelColor(color : uint) : void {
+	_button.jcss_setStyle("Label", "color", color);
+}
 
-	private function setBackgroundColor(color : uint) : void {
-		_button.jcss_setStyle("ButtonSkin", "backgroundColor", color);
-	}
+private function setBackgroundColor(color : uint) : void {
+	_button.jcss_setStyle("ButtonSkin", "backgroundColor", color);
+}
 
-	private function setBorderColor(color : uint) : void {
-		_button.jcss_setStyle("ButtonSkin", "borderColor", color);
-	}
+private function setBorderColor(color : uint) : void {
+	_button.jcss_setStyle("ButtonSkin", "borderColor", color);
+}
 
-	...</pre>
+...</pre>
 
-	[SWFExample example="http://sibirjak.com/osflash/wp-content/uploads/jakute/examples/buttontutorial/ButtonExampleFinal.swf" width="530" height="330" /]
+	<div>
+		<object id="ButtonExampleFinal" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="530" height="330">
+			<param name="movie" value="examples/Example.swf" />
+			<param value="movie=examples/ButtonExampleFinal.swf" name="flashvars">
+			<!--[if !IE]>-->
+			<object type="application/x-shockwave-flash" data="examples/Example.swf" flashvars="movie=examples/ButtonExampleFinal.swf" width="530" height="330">
+				<!--<![endif]-->
+				<p>
+					Alternative content
+				</p><!--[if !IE]>-->
+			</object> <!--<![endif]-->
+		</object>
+	</div>
 
 	<h3>Use states for interactivity</h3>
 
 	States is perhaps the most charming feature of JCSS. You now states from HTML/CSS where they are called pseudo-classes. There can be multiple states for one component. You may apply states to multiple selectors of a syle rule.
 
-	<pre lang="css">Box:over {
-		background-color: #FFCC00;
-	}
+<pre lang="css">Box:over {
+	background-color: #FFCC00;
+}
 
-	Box:down {
-		background-gradient: dark_to_bright;
-	}
+Box:down {
+	background-gradient: dark_to_bright;
+}
 
-	Box Box:over {
-		background-color: #00CCFF;
-	}
+Box Box:over {
+	background-color: #00CCFF;
+}
 
-	...</pre>
+...</pre>
 
-	[SWFExample example="http://sibirjak.com/osflash/wp-content/uploads/jakute/examples/features/states/States.swf" width="220" height="170" /]
+	<div>
+		<object id="States" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="220" height="170">
+			<param name="movie" value="examples/Example.swf" />
+			<param value="movie=examples/States.swf" name="flashvars">
+			<!--[if !IE]>-->
+			<object type="application/x-shockwave-flash" data="examples/Example.swf" flashvars="movie=examples/States.swf" width="220" height="170">
+				<!--<![endif]-->
+				<p>
+					Alternative content
+				</p><!--[if !IE]>-->
+			</object> <!--<![endif]-->
+		</object>
+	</div>
 
 	<h3>Use ID and class selectors to filter components</h3>
 
 	The selector API of JCSS supports ID and class selectors. While the component css ID is persistent, the css class may be changed at runtime.
 
-	<pre lang="css">Box.big {
-		w: 200; h: 200;
-	}
+<pre lang="css">Box.big {
+	w: 200; h: 200;
+}
 
-	Box.big#second {
-		x: 220;
-	}
+Box.big#second {
+	x: 220;
+}
 
-	Box.small {
-		x: 30; y: 30; w: 140; h: 60;
-	}
+Box.small {
+	x: 30; y: 30; w: 140; h: 60;
+}
 
-	Box.small#second {
-		y: 120;
-	}
+Box.small#second {
+	y: 120;
+}
 
-	Box#first {
-		background-color: #FFFFFF;
-	}
+Box#first {
+	background-color: #FFFFFF;
+}
 
-	Box.small {
-		border-size: 2;
-		border-color: #006699;
-		background-color: #00BBFF;
-	}</pre>
+Box.small {
+	border-size: 2;
+	border-color: #006699;
+	background-color: #00BBFF;
+}</pre>
 
-	[SWFExample example="http://sibirjak.com/osflash/wp-content/uploads/jakute/examples/features/selectors/Selectors.swf" width="440" height="220" /]
+	<div>
+		<object id="Selectors" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="440" height="220">
+			<param name="movie" value="examples/Example.swf" />
+			<param value="movie=examples/Selectors.swf" name="flashvars">
+			<!--[if !IE]>-->
+			<object type="application/x-shockwave-flash" data="examples/Example.swf" flashvars="movie=examples/Selectors.swf" width="440" height="220">
+				<!--<![endif]-->
+				<p>
+					Alternative content
+				</p><!--[if !IE]>-->
+			</object> <!--<![endif]-->
+		</object>
+	</div>
 
 	<h3>Use descendant selectors to filter components</h3>
 
@@ -214,31 +280,43 @@
 
 	Let's say we have a scrollbar in a list component for that we like to change the navigation buttons color. In such a case we may use a selector that includes only those buttons who are children of a scrollbar.
 
-	<pre lang="css">List ScrollBar Button {
-		background-color: #66CCFF;
-	}</pre>
+<pre lang="css">List ScrollBar Button {
+	background-color: #66CCFF;
+}</pre>
 
 	<h3>Move components around the display list</h3>
 
 	Once registered, your component styles are always up to date - even when you modify the display list.
 
-	<pre lang="css">Box#red Box {
-		background-color: #FFCC66;
-	}
+<pre lang="css">Box#red Box {
+	background-color: #FFCC66;
+}
 
-	Box#blue Box {
-		background-color: #66CCFF;
-	}
+Box#blue Box {
+	background-color: #66CCFF;
+}
 
-	Box#yellow Box {
-		background-color: #EEEE66;
-	}
+Box#yellow Box {
+	background-color: #EEEE66;
+}
 
-	Box#green Box {
-		background-color: #99FF99;
-	}</pre>
+Box#green Box {
+	background-color: #99FF99;
+}</pre>
 
-	[SWFExample example="http://sibirjak.com/osflash/wp-content/uploads/jakute/examples/features/displaylist/MovingDisplayObject4.swf" width="450" height="120" /]
+	<div>
+		<object id="MovingDisplayObject4" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="450" height="120">
+			<param name="movie" value="examples/Example.swf" />
+			<param value="movie=examples/MovingDisplayObject4.swf" name="flashvars">
+			<!--[if !IE]>-->
+			<object type="application/x-shockwave-flash" data="examples/Example.swf" flashvars="movie=examples/MovingDisplayObject4.swf" width="450" height="120">
+				<!--<![endif]-->
+				<p>
+					Alternative content
+				</p><!--[if !IE]>-->
+			</object> <!--<![endif]-->
+		</object>
+	</div>
 
 	Just drag the inner box from one container into another.
 
@@ -246,29 +324,29 @@
 
 	If there are many style rules addressing the same style property of a particular component, JCSS evaluates specifity and priority of the style to calculate the rule that is finally to apply.
 
-	<pre lang="css">Button {
-		background-color: black default; // lowest precedence
-	}
+<pre lang="css">Button {
+	background-color: black default; // lowest precedence
+}
 
-	Button {
-		background-color: yellow; // overrides default style
-	}
+Button {
+	background-color: yellow; // overrides default style
+}
 
-	ScrollBar Button { // more specific
-		background-color: red;
-	}
+ScrollBar Button { // more specific
+	background-color: red;
+}
 
-	ScrollBar Button.up { // more specific
-		background-color: blue;
-	}
+ScrollBar Button.up { // more specific
+	background-color: blue;
+}
 
-	ScrollBar Button.up:over { // more specific
-		background-color: green;
-	}
+ScrollBar Button.up:over { // more specific
+	background-color: green;
+}
 
-	Button {
-		background-color: grey !important; // higher priority
-	}</pre>
+Button {
+	background-color: grey !important; // higher priority
+}</pre>
 
 
 
@@ -291,9 +369,10 @@
 
 
  <h2>Authors</h2>
-<p>kakenbok (jens@struwe.net)<br/><br/>      </p>
+<p>kakenbok (jens@struwe.net)</p>
+
 <h2>Contact</h2>
-<p>Jens Struwe (jens@struwe.net)<br/>      </p>
+<p>Jens Struwe (jens@struwe.net)</p>
 
 
     <h2>Download</h2>
@@ -308,7 +387,8 @@
     </p>
 
     <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/kakenbok/Jakute-Styling-Engine">kakenbok/Jakute-Styling-Engine</a>
+      get the source code on GitHub : <a href="http://github.com/kakenbok/Jakute-Styling-Engine">kakenbok/Jakute-Styling-Engine</a><br />
+	  <br />
     </div>
 
   </div>
