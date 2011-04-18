@@ -1,13 +1,14 @@
-h2. Jakute Styling Engine - CSS Framework for ActionScript/Flash
+h2. Jakute Styling Engine - CSS Framework for Flash
 
-* "Project Homepage":http://sibirjak.com/osflash/projects/jakute-styling-engine/
-* "Quick Overview":http://kakenbok.github.com/Jakute-Styling-Engine/
+h3. References
+
+* "Project Homepage":http://sibirjak.com/osflash/projects/jakute-styling-engine/ (Overview, Features, Documentation, Examples)
 * "APIDoc":http://kakenbok.github.com/Jakute-Styling-Engine/apidoc/
-* "Downloads":https://github.com/kakenbok/Jakute-Styling-Engine/downloads
+* "Downloads":https://github.com/kakenbok/Jakute-Styling-Engine/downloads (ZIP, SWC)
 
-h3. Welcome
+h3. What is Jakute
 
-Welcome!
+Jakute is a complete styling engine for ActionScript/Flash applications. Jakute enables you to easily add rich CSS capabilities to your project. Using Jakute you may develop styleable applications basically the same way you would do with HTML/CSS/JavaScript.
 
 h3. Features
 
@@ -19,4 +20,4 @@ h3. Features
 * Use ID and class selectors to filter components
 * Use descendant selectors to filter components
 * Move components around the display list
-* Control styling with specifities and priorities
+* Control styling with style rule specifities and priorities
