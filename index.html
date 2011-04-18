@@ -49,195 +49,194 @@
       Jakute is a CSS framework for ActionScript/Flash.
     </div>
 
- 
+	This pages shows you briefly the features of JCSS.
 
-The Jakute Styling Engine (JCSS) is a CSS framework for Flash. This pages shows you briefly the features of JCSS.
+		
+	<h3>Style your application using CSS</h3>
 
-<h1>Style your application using CSS</h1>
+	With Jakute you may configure your application using style sheets. Style sheets can be created at runtime or may be loaded from an external source. You can apply style sheets globally or to a particular component instance.
 
-With Jakute you may configure your application using style sheets. Style sheets can be created at runtime or may be loaded from an external source. You can apply style sheets globally or to a particular component instance.
+	[SWFExample example="http://sibirjak.com/osflash/wp-content/uploads/jakute/examples/features/usestyles/WithoutStyles.swf" width="290" height="80" /]
 
-[SWFExample example="http://sibirjak.com/osflash/wp-content/uploads/jakute/examples/features/usestyles/WithoutStyles.swf" width="290" height="80" /]
+	<pre lang="actionscript3">JCSS.getInstance().setStyleSheet(<styles><![CDATA[
+		Box#first { w: 90; h: 90; color: #FF9900; }
+		Box#second { w: 70; h: 70; x: 100; y: 10; color: #0099FF; }
+		Box#third { w: 50; h: 50; x: 180; y: 20; color: #DDDD00; }
+		Box#last { w: 30; h: 30; x: 240; y: 30; color: #66DD66; }
+	]]></styles>);</pre>
 
-<pre lang="actionscript3">JCSS.getInstance().setStyleSheet(<styles><![CDATA[
-	Box#first { w: 90; h: 90; color: #FF9900; }
-	Box#second { w: 70; h: 70; x: 100; y: 10; color: #0099FF; }
-	Box#third { w: 50; h: 50; x: 180; y: 20; color: #DDDD00; }
-	Box#last { w: 30; h: 30; x: 240; y: 30; color: #66DD66; }
-]]></styles>);</pre>
+	[SWFExample example="http://sibirjak.com/osflash/wp-content/uploads/jakute/examples/features/usestyles/WithStyles.swf" width="290" height="110" /]
 
-[SWFExample example="http://sibirjak.com/osflash/wp-content/uploads/jakute/examples/features/usestyles/WithStyles.swf" width="290" height="110" /]
+	<h3>Load external style sheets</h3>
 
-<h1>Load external style sheets</h1>
+	<pre lang="css">Box {
+		w: 200;	h: 150;
+		border-color: #CC9900;
+		background-color: #FFBB00;
+	}
 
-<pre lang="css">Box {
-	w: 200;	h: 150;
-	border-color: #CC9900;
-	background-color: #FFBB00;
-}
+	Box Box {
+		w: 50; h: 50; x: 120; y: 70;
+		border-color: #DDDDFF;
+		background-color: #00BBFF;
+	}</pre>
 
-Box Box {
-	w: 50; h: 50; x: 120; y: 70;
-	border-color: #DDDDFF;
-	background-color: #00BBFF;
-}</pre>
+	<pre lang="actionscript3">var loader : URLLoader = new URLLoader();
+	loader.addEventListener(Event.COMPLETE, stylesLoaded);
+	loader.load(new URLRequest("styles.css"));
+	...
 
-<pre lang="actionscript3">var loader : URLLoader = new URLLoader();
-loader.addEventListener(Event.COMPLETE, stylesLoaded);
-loader.load(new URLRequest("styles.css"));
-...
+	private function stylesLoaded(event : Event) : void {
+		JCSS.getInstance().setStyleSheet(event.target.data);
 
-private function stylesLoaded(event : Event) : void {
-	JCSS.getInstance().setStyleSheet(event.target.data);
+		var box : Box = new Box();
+		box.addChild(new Box());
+		addChild(box);
+	}</pre>
 
-	var box : Box = new Box();
-	box.addChild(new Box());
-	addChild(box);
-}</pre>
+	[SWFExample example="http://sibirjak.com/osflash/wp-content/uploads/jakute/examples/features/externalcss/LoadExternalStyles.swf" width="220" height="170" /]
 
-[SWFExample example="http://sibirjak.com/osflash/wp-content/uploads/jakute/examples/features/externalcss/LoadExternalStyles.swf" width="220" height="170" /]
+	<h3>Set styles programmatically</h3>
 
-<h1>Set styles programmatically</h1>
+	You are also allowed to set or update styles programmatically. In difference to external or style sheets written in XML, programmatic styles allow you to use variables to specify the style values.
 
-You are also allowed to set or update styles programmatically. In difference to external or style sheets written in XML, programmatic styles allow you to use variables to specify the style values.
+	<pre lang="actionscript3" line="1">scrollBar.setStyle("Button:over", "background-color", bgColor);
+	scrollBar.setStyle("Button.up", "icon", upIcon);
+	scrollBar.setStyle(":disabled Button", "visible", false);</pre>
 
-<pre lang="actionscript3" line="1">scrollBar.setStyle("Button:over", "background-color", bgColor);
-scrollBar.setStyle("Button.up", "icon", upIcon);
-scrollBar.setStyle(":disabled Button", "visible", false);</pre>
+	<h3>Update styles at runtime</h3>
 
-<h1>Update styles at runtime</h1>
+	JCSS is not limited to initial or default styles. With JCSS you can set and update styles at any time. The subject components of the declared style rules are notified automatically.
 
-JCSS is not limited to initial or default styles. With JCSS you can set and update styles at any time. The subject components of the declared style rules are notified automatically.
+	<pre lang="actionscript3">private function setLabelColor(color : uint) : void {
+		_button.jcss_setStyle("Label", "color", color);
+	}
 
-<pre lang="actionscript3">private function setLabelColor(color : uint) : void {
-	_button.jcss_setStyle("Label", "color", color);
-}
+	private function setBackgroundColor(color : uint) : void {
+		_button.jcss_setStyle("ButtonSkin", "backgroundColor", color);
+	}
 
-private function setBackgroundColor(color : uint) : void {
-	_button.jcss_setStyle("ButtonSkin", "backgroundColor", color);
-}
+	private function setBorderColor(color : uint) : void {
+		_button.jcss_setStyle("ButtonSkin", "borderColor", color);
+	}
 
-private function setBorderColor(color : uint) : void {
-	_button.jcss_setStyle("ButtonSkin", "borderColor", color);
-}
+	...</pre>
 
-...</pre>
+	[SWFExample example="http://sibirjak.com/osflash/wp-content/uploads/jakute/examples/buttontutorial/ButtonExampleFinal.swf" width="530" height="330" /]
 
-[SWFExample example="http://sibirjak.com/osflash/wp-content/uploads/jakute/examples/buttontutorial/ButtonExampleFinal.swf" width="530" height="330" /]
+	<h3>Use states for interactivity</h3>
 
-<h1>Use states for interactivity</h1>
+	States is perhaps the most charming feature of JCSS. You now states from HTML/CSS where they are called pseudo-classes. There can be multiple states for one component. You may apply states to multiple selectors of a syle rule.
 
-States is perhaps the most charming feature of JCSS. You now states from HTML/CSS where they are called pseudo-classes. There can be multiple states for one component. You may apply states to multiple selectors of a syle rule.
+	<pre lang="css">Box:over {
+		background-color: #FFCC00;
+	}
 
-<pre lang="css">Box:over {
-	background-color: #FFCC00;
-}
+	Box:down {
+		background-gradient: dark_to_bright;
+	}
 
-Box:down {
-	background-gradient: dark_to_bright;
-}
+	Box Box:over {
+		background-color: #00CCFF;
+	}
 
-Box Box:over {
-	background-color: #00CCFF;
-}
+	...</pre>
 
-...</pre>
+	[SWFExample example="http://sibirjak.com/osflash/wp-content/uploads/jakute/examples/features/states/States.swf" width="220" height="170" /]
 
-[SWFExample example="http://sibirjak.com/osflash/wp-content/uploads/jakute/examples/features/states/States.swf" width="220" height="170" /]
+	<h3>Use ID and class selectors to filter components</h3>
 
-<h1>Use ID and class selectors to filter components</h1>
+	The selector API of JCSS supports ID and class selectors. While the component css ID is persistent, the css class may be changed at runtime.
 
-The selector API of JCSS supports ID and class selectors. While the component css ID is persistent, the css class may be changed at runtime.
+	<pre lang="css">Box.big {
+		w: 200; h: 200;
+	}
 
-<pre lang="css">Box.big {
-	w: 200; h: 200;
-}
+	Box.big#second {
+		x: 220;
+	}
 
-Box.big#second {
-	x: 220;
-}
+	Box.small {
+		x: 30; y: 30; w: 140; h: 60;
+	}
 
-Box.small {
-	x: 30; y: 30; w: 140; h: 60;
-}
+	Box.small#second {
+		y: 120;
+	}
 
-Box.small#second {
-	y: 120;
-}
+	Box#first {
+		background-color: #FFFFFF;
+	}
 
-Box#first {
-	background-color: #FFFFFF;
-}
+	Box.small {
+		border-size: 2;
+		border-color: #006699;
+		background-color: #00BBFF;
+	}</pre>
 
-Box.small {
-	border-size: 2;
-	border-color: #006699;
-	background-color: #00BBFF;
-}</pre>
+	[SWFExample example="http://sibirjak.com/osflash/wp-content/uploads/jakute/examples/features/selectors/Selectors.swf" width="440" height="220" /]
 
-[SWFExample example="http://sibirjak.com/osflash/wp-content/uploads/jakute/examples/features/selectors/Selectors.swf" width="440" height="220" /]
+	<h3>Use descendant selectors to filter components</h3>
 
-<h1>Use descendant selectors to filter components</h1>
+	Descendant selectors are useful in modular applications where the same component appears in different contexts.
 
-Descendant selectors are useful in modular applications where the same component appears in different contexts.
+	Let's say we have a scrollbar in a list component for that we like to change the navigation buttons color. In such a case we may use a selector that includes only those buttons who are children of a scrollbar.
 
-Let's say we have a scrollbar in a list component for that we like to change the navigation buttons color. In such a case we may use a selector that includes only those buttons who are children of a scrollbar.
+	<pre lang="css">List ScrollBar Button {
+		background-color: #66CCFF;
+	}</pre>
 
-<pre lang="css">List ScrollBar Button {
-	background-color: #66CCFF;
-}</pre>
+	<h3>Move components around the display list</h3>
 
-<h1>Move components around the display list</h1>
+	Once registered, your component styles are always up to date - even when you modify the display list.
 
-Once registered, your component styles are always up to date - even when you modify the display list.
+	<pre lang="css">Box#red Box {
+		background-color: #FFCC66;
+	}
 
-<pre lang="css">Box#red Box {
-	background-color: #FFCC66;
-}
+	Box#blue Box {
+		background-color: #66CCFF;
+	}
 
-Box#blue Box {
-	background-color: #66CCFF;
-}
+	Box#yellow Box {
+		background-color: #EEEE66;
+	}
 
-Box#yellow Box {
-	background-color: #EEEE66;
-}
+	Box#green Box {
+		background-color: #99FF99;
+	}</pre>
 
-Box#green Box {
-	background-color: #99FF99;
-}</pre>
+	[SWFExample example="http://sibirjak.com/osflash/wp-content/uploads/jakute/examples/features/displaylist/MovingDisplayObject4.swf" width="450" height="120" /]
 
-[SWFExample example="http://sibirjak.com/osflash/wp-content/uploads/jakute/examples/features/displaylist/MovingDisplayObject4.swf" width="450" height="120" /]
+	Just drag the inner box from one container into another.
 
-Just drag the inner box from one container into another.
+	<h3>Control styling with specifities and priorities</h3>
 
-<h1>Control styling with specifities and priorities</h1>
+	If there are many style rules addressing the same style property of a particular component, JCSS evaluates specifity and priority of the style to calculate the rule that is finally to apply.
 
-If there are many style rules addressing the same style property of a particular component, JCSS evaluates specifity and priority of the style to calculate the rule that is finally to apply.
+	<pre lang="css">Button {
+		background-color: black default; // lowest precedence
+	}
 
-<pre lang="css">Button {
-	background-color: black default; // lowest precedence
-}
+	Button {
+		background-color: yellow; // overrides default style
+	}
 
-Button {
-	background-color: yellow; // overrides default style
-}
+	ScrollBar Button { // more specific
+		background-color: red;
+	}
 
-ScrollBar Button { // more specific
-	background-color: red;
-}
+	ScrollBar Button.up { // more specific
+		background-color: blue;
+	}
 
-ScrollBar Button.up { // more specific
-	background-color: blue;
-}
+	ScrollBar Button.up:over { // more specific
+		background-color: green;
+	}
 
-ScrollBar Button.up:over { // more specific
-	background-color: green;
-}
-
-Button {
-	background-color: grey !important; // higher priority
-}</pre>
+	Button {
+		background-color: grey !important; // higher priority
+	}</pre>
 
 
 
