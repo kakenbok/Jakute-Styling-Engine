@@ -22,3 +22,13 @@ h3. Features
 * Use descendant selectors to filter components
 * Move components around the display list
 * Control styling with style rule specifities and priorities
+
+h3. How it works
+
+*Architecture*
+
+!http://sibirjak.com/osflash/wp-content/uploads/2011/01/jcss_displaylist_small.png!
+
+*Communication*
+
+!http://sibirjak.com/osflash/wp-content/uploads/2011/01/jcss_communication_small.png!
