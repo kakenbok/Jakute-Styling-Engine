@@ -8,7 +8,7 @@
   <style type="text/css">
     body {
       margin-top: 1.0em;
-      background-color: #CCCCCC;
+      background-color: #FFFFFF;
       font-family: Helvetica, Arial, FreeSans, san-serif;
       color: #333333;
     }
@@ -33,6 +33,7 @@
 
 	<script type="text/javascript">
 		swfobject.registerObject("WithoutStyles", "9.0.115", "expressInstall.swf");
+		swfobject.registerObject("WithStyles", "9.0.115", "expressInstall.swf");
 	</script>
   
   </head>
@@ -63,28 +64,40 @@
 
 	With Jakute you may configure your application using style sheets. Style sheets can be created at runtime or may be loaded from an external source. You can apply style sheets globally or to a particular component instance.
 
-	<object id="WithoutStyles" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="290" height="80">
-		<param name="movie" value="examples/Example.swf" />
-		<param value="movie=examples/WithoutStyles.swf" name="flashvars">
- 		<!--[if !IE]>-->
-		<object type="application/x-shockwave-flash" data="examples/Example.swf" flashvars="movie=examples/WithoutStyles.swf" width="290" height="80">
-			<!--<![endif]-->
-			<p>
-				Alternative content
-			</p><!--[if !IE]>-->
-		</object> <!--<![endif]-->
-	</object>
+	<div>
+		<object id="WithoutStyles" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="290" height="80">
+			<param name="movie" value="examples/Example.swf" />
+			<param value="movie=examples/WithoutStyles.swf" name="flashvars">
+			<!--[if !IE]>-->
+			<object type="application/x-shockwave-flash" data="examples/Example.swf" flashvars="movie=examples/WithoutStyles.swf" width="290" height="80">
+				<!--<![endif]-->
+				<p>
+					Alternative content
+				</p><!--[if !IE]>-->
+			</object> <!--<![endif]-->
+		</object>
+	</div>
 
-	[SWFExample example="http://sibirjak.com/osflash/wp-content/uploads/jakute/examples/features/usestyles/WithoutStyles.swf" width="290" height="80" /]
-
-	<pre lang="actionscript3">JCSS.getInstance().setStyleSheet(<styles><![CDATA[
+	<pre lang="actionscript3">JCSS.getInstance().setStyleSheet(&lt;styles&gt;&lt;![CDATA[
 		Box#first { w: 90; h: 90; color: #FF9900; }
 		Box#second { w: 70; h: 70; x: 100; y: 10; color: #0099FF; }
 		Box#third { w: 50; h: 50; x: 180; y: 20; color: #DDDD00; }
 		Box#last { w: 30; h: 30; x: 240; y: 30; color: #66DD66; }
-	]]></styles>);</pre>
+	]]&gt;&lt;/styles>);</pre>
 
-	[SWFExample example="http://sibirjak.com/osflash/wp-content/uploads/jakute/examples/features/usestyles/WithStyles.swf" width="290" height="110" /]
+	<div>
+		<object id="WithoutStyles" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="290" height="110">
+			<param name="movie" value="examples/Example.swf" />
+			<param value="movie=examples/WithStyles.swf" name="flashvars">
+			<!--[if !IE]>-->
+			<object type="application/x-shockwave-flash" data="examples/Example.swf" flashvars="movie=examples/WithStyles.swf" width="290" height="110">
+				<!--<![endif]-->
+				<p>
+					Alternative content
+				</p><!--[if !IE]>-->
+			</object> <!--<![endif]-->
+		</object>
+	</div>
 
 	<h3>Load external style sheets</h3>
 
