@@ -25,10 +25,10 @@ h3. Features
 
 h3. How it works
 
-*Architecture*
+*Architecture* (Click to enlarge)
 
-!http://sibirjak.com/osflash/wp-content/uploads/2011/01/jcss_displaylist_small.png!
+!http://sibirjak.com/osflash/wp-content/uploads/2011/01/jcss_displaylist_small.png!:http://sibirjak.com/osflash/wp-content/uploads/2011/01/jcss_displaylist.png
 
-*Communication*
+*Communication* (Click to enlarge)
 
-!http://sibirjak.com/osflash/wp-content/uploads/2011/01/jcss_communication_small.png!
+!http://sibirjak.com/osflash/wp-content/uploads/2011/01/jcss_communication_small.png!:http://sibirjak.com/osflash/wp-content/uploads/2011/01/jcss_communication.png
