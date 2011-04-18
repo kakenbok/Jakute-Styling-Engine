@@ -1,0 +1,824 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../print.css" type="text/css" media="print">
+<meta content="JCSS_Sprite,com.sibirjak.jakute.JCSS_Sprite,_jcssAdapter,jcss_cssClass,jcss_cssID,jcss_cssName,jcss_initialized,jcss_virtualParent,jcss_childrenEnclosed,jcss_commitBulkUpdate,jcss_componentSelectorAsString,jcss_defineStyle,jcss_encloseChildren,jcss_getState,jcss_getStyle,jcss_onStylesChanged,jcss_onStylesInitialized,jcss_parentChainAsString,jcss_setState,jcss_setStyle,jcss_setStyleSheet,jcss_startBulkUpdate,jcss_styleRuleTreeAsString,jcss_stylesAsString" name="keywords">
+<title>com.sibirjak.jakute.JCSS_Sprite</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'JCSS_Sprite - Jakute Styling Engine 0.9.0';
+				var baseRef = '../../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../index-list.html')" href="../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../index.html?com/sibirjak/jakute/JCSS_Sprite.html&amp;com/sibirjak/jakute/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;JCSS_Sprite</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#propertySummary">Properties</a>&nbsp;| <a href="#methodSummary">Methods</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class JCSS_Sprite"); titleBar_setSubNav(false,true,false,false,false,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">com.sibirjak.jakute</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class JCSS_Sprite</td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Inheritance</td><td class="inheritanceList">JCSS_Sprite <img class="inheritArrow" alt="Inheritance" title="Inheritance" src="../../../images/inherit-arrow.gif"> flash.display.Sprite</td>
+</tr>
+</table>
+<p></p>
+  JCSS enabled base ui class (optional and just for convenience).
+  
+  <p>Although it is intended to fully decouple Jaktute Styling Engine code from the
+  actual component implementations, the probable cleanest and preferred way to work
+  is to put the style handling in a base ui class, and let all components inherit
+  from that class. Such a class is JCSS_Sprite.</p>
+  
+  <p><strong>Notes</strong></p>
+  
+  <p>JCSS_Sprite has nearly the same interface as JCSS_Adapter with the
+  difference, that all properties and methods carry a leading "jcss_" prefix
+  to avoid collision with component code.</p>
+  
+  <p>A handler for the component registered event is not available. Related code might be
+  added right to the constructor of the subclass, because the constructor itself performs
+  the registraion.</p>
+  
+  <p></p>
+<br>
+<hr>
+</div>
+<a name="propertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Properties</div>
+<table id="summaryTableProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#jcss_cssClass">jcss_cssClass</a> : String<div class="summaryTableDescription">
+   Sets and returns the component css class.</div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#jcss_cssID">jcss_cssID</a> : String<div class="summaryTableDescription">
+   Sets and returns the component selector ID.</div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#jcss_cssName">jcss_cssName</a> : String<div class="summaryTableDescription">
+   Sets and returns the component selector name.</div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#jcss_initialized">jcss_initialized</a> : Boolean<div class="summaryTableDescription">[read-only]
+   Returns true if style already have been initialized.</div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#jcss_virtualParent">jcss_virtualParent</a> : DisplayObject<div class="summaryTableDescription">
+   Sets and gets the virtual parent of a component.</div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+</table>
+</div>
+<a name="protectedPropertySummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Properties</div>
+<table id="summaryTableProtectedProperty" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#_jcssAdapter">_jcssAdapter</a> : <a href="../jakute/JCSS_Adapter.html">JCSS_Adapter</a>
+<div class="summaryTableDescription">
+   The JCSS adapter.</div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+</table>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#JCSS_Sprite()">JCSS_Sprite</a>()</div>
+<div class="summaryTableDescription">
+   JCSS_Sprite.</div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#jcss_childrenEnclosed()">jcss_childrenEnclosed</a>():Boolean</div>
+<div class="summaryTableDescription">
+   Returns <code>true</code>, if <code>encloseChildren()</code> is set, else false.</div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#jcss_commitBulkUpdate()">jcss_commitBulkUpdate</a>():void</div>
+<div class="summaryTableDescription">
+   </div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#jcss_componentSelectorAsString()">jcss_componentSelectorAsString</a>():String</div>
+<div class="summaryTableDescription">
+   Returns the full selector of a component.</div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#jcss_defineStyle()">jcss_defineStyle</a>(styleName:<a href="">String</a>, styleValue:<a href="">String</a>, format:<a href="">uint</a>, priority:<a href=""></a> = 0):void</div>
+<div class="summaryTableDescription">
+   Defines a style prior to be used with JCSS.</div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#jcss_encloseChildren()">jcss_encloseChildren</a>():void</div>
+<div class="summaryTableDescription">
+   Declares all child component to be selectable only via this component selector.</div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#jcss_getState()">jcss_getState</a>(stateName:<a href="">String</a>):String</div>
+<div class="summaryTableDescription">
+   Returns the value of a component state.</div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#jcss_getStyle()">jcss_getStyle</a>(styleName:<a href="">String</a>):*</div>
+<div class="summaryTableDescription">
+   Returns the current value of the given style name.</div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#jcss_parentChainAsString()">jcss_parentChainAsString</a>():String</div>
+<div class="summaryTableDescription">
+   Returns the JCSS parent chain of a componet.</div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#jcss_setState()">jcss_setState</a>(stateName:<a href="">String</a>, value:<a href="">String</a>):void</div>
+<div class="summaryTableDescription">
+   Sets a component state.</div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#jcss_setStyle()">jcss_setStyle</a>(selector:<a href="">String</a>, styleName:<a href="">String</a>, styleValue:<a href="">uint</a>, priority:<a href=""></a> = 1):void</div>
+<div class="summaryTableDescription">
+   Sets a style to a component instance.</div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#jcss_setStyleSheet()">jcss_setStyleSheet</a>(styleSheet:<a href="">String</a>):void</div>
+<div class="summaryTableDescription">
+   Sets a style sheet to a component instance.</div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#jcss_startBulkUpdate()">jcss_startBulkUpdate</a>():void</div>
+<div class="summaryTableDescription">
+   </div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#jcss_styleRuleTreeAsString()">jcss_styleRuleTreeAsString</a>():String</div>
+<div class="summaryTableDescription">
+   </div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#jcss_stylesAsString()">jcss_stylesAsString</a>():String</div>
+<div class="summaryTableDescription">
+   Returns a formatted String with all currently set styles.</div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+</table>
+</div>
+<a name="protectedMethodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Protected Methods</div>
+<table id="summaryTableProtectedMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#jcss_onStylesChanged()">jcss_onStylesChanged</a>(styles:<a href="">Object</a>):void</div>
+<div class="summaryTableDescription">
+   Default handler for the styles changed event.</div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#jcss_onStylesInitialized()">jcss_onStylesInitialized</a>(styles:<a href="">Object</a>):void</div>
+<div class="summaryTableDescription">
+   Default handler for the initialized event.</div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="propertyDetail"></a>
+<div class="detailSectionHeader">Property detail</div>
+<a name="_jcssAdapter"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">_jcssAdapter</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected var _jcssAdapter:<a href="../jakute/JCSS_Adapter.html">JCSS_Adapter</a></code><p>
+   The JCSS adapter.
+   </p></div>
+<a name="jcss_cssClass"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_cssClass</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>jcss_cssClass:String</code>&nbsp;&nbsp;[read-write]<p>
+   Sets and returns the component css class.
+   
+   </p><p>Can be set initially or at runtime.</p>
+   <span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get jcss_cssClass():String</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set jcss_cssClass(value:String):void</code>
+<br>
+</div>
+<a name="jcss_cssID"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_cssID</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>jcss_cssID:String</code>&nbsp;&nbsp;[read-write]<p>
+   Sets and returns the component selector ID.
+   
+   </p><p>Can be set only initially (before the initialized event). Otherwise throws an error.</p>
+   <span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get jcss_cssID():String</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set jcss_cssID(value:String):void</code>
+<br>
+</div>
+<a name="jcss_cssName"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_cssName</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>jcss_cssName:String</code>&nbsp;&nbsp;[read-write]<p>
+   Sets and returns the component selector name.
+   
+   </p><p>Can be set only initially (before the initialized event). Otherwise throws an error.</p>
+   <span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get jcss_cssName():String</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set jcss_cssName(value:String):void</code>
+<br>
+</div>
+<a name="jcss_initialized"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_initialized</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>jcss_initialized:Boolean</code>&nbsp;&nbsp;[read-only]<p>
+   Returns true if style already have been initialized.
+   
+   </p><span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get jcss_initialized():Boolean</code>
+<br>
+</div>
+<a name="jcss_virtualParent"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_virtualParent</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>jcss_virtualParent:DisplayObject</code>&nbsp;&nbsp;[read-write]<p>
+   Sets and gets the virtual parent of a component.
+   
+   </p><p>If a virtual parent is set, the component styles are calculated using
+   the virtual parent's display list instead of the physical parent's display
+   list. A virtual parent is a great possibility to connect components that
+   do not have a physical parent-child relation such as tooltips or popups,
+   which usually live in a separated container.</p>
+   
+   <div class='listing'><pre>
+   CSS
+   -----------------------------------------------
+   Button.red ToolTip {
+    color: red;
+   }
+
+   Button.blue ToolTip {
+    color: blue;
+   }
+
+   Pseudo code
+   -----------------------------------------------
+   redButton.onMouseOver = {
+    tooltip.virtualParent = redButton;
+    tooltip.show(redButton.position.toGlobal());
+   }
+
+   blueButton.onMouseOver = {
+    tooltip.virtualParent = blueButton;
+    tooltip.show(blueButton.position.toGlobal());
+   }
+   </pre></div>
+   
+   <p>Can be set initially or at runtime.</p>
+   <span class="label">Implementation</span>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function get jcss_virtualParent():DisplayObject</code>
+<br>
+<code>&nbsp;&nbsp;&nbsp;&nbsp;public function set jcss_virtualParent(value:DisplayObject):void</code>
+<br>
+</div>
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="JCSS_Sprite()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">JCSS_Sprite</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function JCSS_Sprite()</code><p>
+   JCSS_Sprite.
+   </p></div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="jcss_childrenEnclosed()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_childrenEnclosed</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function jcss_childrenEnclosed():Boolean</code><p>
+   Returns <code>true</code>, if <code>encloseChildren()</code> is set, else false.
+   </p><p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>Boolean</code></td>
+</tr>
+</table>
+</div>
+<a name="jcss_commitBulkUpdate()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_commitBulkUpdate</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function jcss_commitBulkUpdate():void</code><p>
+   </p></div>
+<a name="jcss_componentSelectorAsString()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_componentSelectorAsString</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function jcss_componentSelectorAsString():String</code><p>
+   Returns the full selector of a component.
+   
+   </p><p>E.g. <code>Box#mini.highlight</code></p>
+   
+   <p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>String</code> &mdash; The component selector.
+   </td>
+</tr>
+</table>
+</div>
+<a name="jcss_defineStyle()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_defineStyle</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function jcss_defineStyle(styleName:<a href="">String</a>, styleValue:<a href="">String</a>, format:<a href="">uint</a>, priority:<a href=""></a> = 0):void</code><p>
+   Defines a style prior to be used with JCSS.
+   
+   </p><p>Styles need to be defined initially. Not initially defined styles are ignored
+   and never affect the particular component.</p>
+   
+   <p>Styles can be defined only initially (before the initialized event).
+   Otherwise an error is thrown.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">styleName</span>:<a href="">String</a></code> &mdash; The name of the style of a component.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">styleValue</span>:<a href="">String</a></code> &mdash; The initial value of the component style.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">format</span>:<a href="">uint</a></code> &mdash; The key of the formatter of the style value.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">priority</span>:<a href=""></a></code> (default = <code>0</code>)<code></code> &mdash; Indicates if the initial style value may be overriden.
+   </td>
+</tr>
+</table>
+</div>
+<a name="jcss_encloseChildren()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_encloseChildren</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function jcss_encloseChildren():void</code><p>
+   Declares all child component to be selectable only via this component selector.
+   
+   </p><p>Enclosing children is useful when setting up stateful default styles that
+   should not be overriden by accident. In example, we create a Button with several
+   states and default styles that affect the contained label color. Setting now a
+   global label color would override the Button declarations and make the label
+   state insensitive. Invoking <code>encloseChildren()<code> lets match only styles rules
+   that include this component in the selector chain.:</p>
+   
+   <div class='listing'><pre>
+   Without encloseChildren();
+   -----------------------------------------------
+   myButton.setStyle(":over Label", "color", "red", "default"); // Button Label is red on mouse over by default.
+   JCSS.getInstance().setStyle("Label", "color", "blue"); // Button Label is now blue even on mouse over.
+   
+   With encloseChildren();
+   -----------------------------------------------
+   myButton.setStyle(":over Label", "color", "red", "default"); // Button Label is red on mouse over by default.
+   myButton.encloseChildren();
+   JCSS.getInstance().setStyle("Label", "color", "blue"); // Does not affect the Button Label.
+   JCSS.getInstance().setStyle("Button Label", "color", "blue"); // Button Label is now blue, since the selector includes Button.
+   </pre></div>
+   
+   <p>This method can be called only initially (before the initialized event).
+   Otherwise an error is thrown.</p>
+   </div>
+<a name="jcss_getState()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_getState</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function jcss_getState(stateName:<a href="">String</a>):String</code><p>
+   Returns the value of a component state.
+   
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">stateName</span>:<a href="">String</a></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>String</code> &mdash; The state value.
+   </td>
+</tr>
+</table>
+</div>
+<a name="jcss_getStyle()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_getStyle</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function jcss_getStyle(styleName:<a href="">String</a>):*</code><p>
+   Returns the current value of the given style name.
+   
+   </p><p>Returns initially (before the initialized event) <code>null<code>, for sure.</p>
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">styleName</span>:<a href="">String</a></code></td>
+</tr>
+</table>
+<p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>*</code></td>
+</tr>
+</table>
+</div>
+<a name="jcss_onStylesChanged()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_onStylesChanged</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function jcss_onStylesChanged(styles:<a href="">Object</a>):void</code><p>
+   Default handler for the styles changed event.
+   
+   </p><p>Template method, to be overridden in a sub class.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">styles</span>:<a href="">Object</a></code> &mdash; All recently changed styles.
+   </td>
+</tr>
+</table>
+</div>
+<a name="jcss_onStylesInitialized()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_onStylesInitialized</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function jcss_onStylesInitialized(styles:<a href="">Object</a>):void</code><p>
+   Default handler for the initialized event.
+   
+   </p><p>Template method, to be overridden in a sub class.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">styles</span>:<a href="">Object</a></code> &mdash; All initial styles of the component.
+   </td>
+</tr>
+</table>
+</div>
+<a name="jcss_parentChainAsString()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_parentChainAsString</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function jcss_parentChainAsString():String</code><p>
+   Returns the JCSS parent chain of a componet.
+   
+   </p><p>E.g. <code>Box#mini.highlight(64) < Box(56) < Box(48) < Box.blue(39)</code></p>
+   
+   <p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>String</code> &mdash; The parent chain of a component.
+   </td>
+</tr>
+</table>
+</div>
+<a name="jcss_setState()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_setState</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function jcss_setState(stateName:<a href="">String</a>, value:<a href="">String</a>):void</code><p>
+   Sets a component state.
+   
+   </p><p>Can be set initially or at runtime.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">stateName</span>:<a href="">String</a></code> &mdash; The name of the state.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">value</span>:<a href="">String</a></code> &mdash; The value of the state.
+   
+   </td>
+</tr>
+</table>
+</div>
+<a name="jcss_setStyle()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_setStyle</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function jcss_setStyle(selector:<a href="">String</a>, styleName:<a href="">String</a>, styleValue:<a href="">uint</a>, priority:<a href=""></a> = 1):void</code><p>
+   Sets a style to a component instance.
+   
+   </p><p>It is possible to repeatedly invoke this method with equal style rules.
+   They are then merged together for performance reasons, no worries, too.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">selector</span>:<a href="">String</a></code> &mdash; A selector that matchs a particular component.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">styleName</span>:<a href="">String</a></code> &mdash; The name of the style to set.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">styleValue</span>:<a href="">uint</a></code> &mdash; The value of the style to set.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">priority</span>:<a href=""></a></code> (default = <code>1</code>)<code></code> &mdash; The style priority (null, "!important" or "default").
+   </td>
+</tr>
+</table>
+</div>
+<a name="jcss_setStyleSheet()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_setStyleSheet</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function jcss_setStyleSheet(styleSheet:<a href="">String</a>):void</code><p>
+   Sets a style sheet to a component instance.
+   
+   </p><p>The style sheet can be loaded from an external source or created at runtime.</p>
+      <div class='listing'><pre>
+   var styleSheet : String = &lt;styles&gt;&lt;![CDATA[
+    Box {
+     backgroundColor: 0xFF0000;
+    }
+   ]]&gt;&lt;/styles&gt;.toString()
+   </pre></div>
+   
+   <p>It is possible to repeatedly invoke this method with different style sheets.
+   Equal style rules in different or the same sheet are merged together for performance
+   reasons, no worries.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">styleSheet</span>:<a href="">String</a></code> &mdash; The stylesheet to set.
+   </td>
+</tr>
+</table>
+</div>
+<a name="jcss_startBulkUpdate()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_startBulkUpdate</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function jcss_startBulkUpdate():void</code><p>
+   </p></div>
+<a name="jcss_styleRuleTreeAsString()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_styleRuleTreeAsString</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function jcss_styleRuleTreeAsString():String</code><p>
+   </p><p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>String</code></td>
+</tr>
+</table>
+</div>
+<a name="jcss_stylesAsString()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_stylesAsString</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function jcss_stylesAsString():String</code><p>
+   Returns a formatted String with all currently set styles.
+   
+   <div class='listing'><pre>
+   Styles for Box#mini.highlight(64) < Box(56) < Box(48) < Box.blue(39)
+
+   borderColor: 255;
+   ------------------------------ specifity:103 timestamp:7
+   backgroundColor: 16777215;
+   ------------------------------ specifity:3 timestamp:11
+   borderAlpha: 0.5;
+   ------------------------------ specifity:2 timestamp:2
+   color: 0 default;
+   ------------------------------ specifity:40001 timestamp:35
+   borderSize: 1;
+   ------------------------------ specifity:2 timestamp:1
+   </pre></div>
+   
+   </p><p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>String</code> &mdash; Currently set styles in a formatted string.
+   </td>
+</tr>
+</table>
+</div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright"> 
+</center>
+</div>
+</body>
+</html>
+<!-- -->

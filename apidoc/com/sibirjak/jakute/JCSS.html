@@ -1,0 +1,761 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../../print.css" type="text/css" media="print">
+<meta content="JCSS,com.sibirjak.jakute.JCSS,FORMAT_BOOLEAN,FORMAT_CLASS,FORMAT_COLOR,FORMAT_NUMBER,FORMAT_STRING,PRIORITY_DEFAULT,PRIORITY_FIX,PRIORITY_IMPORTANT,commitBulkUpdate,getInstance,registerComponent,registerStyleValueFormatter,registerType,setStyle,setStyleSheet,startBulkUpdate,startTypeMonitoring,styleRuleTreeAsString,unregisterComponent" name="keywords">
+<title>com.sibirjak.jakute.JCSS</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'JCSS - Jakute Styling Engine 0.9.0';
+				var baseRef = '../../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../all-classes.html')" href="../../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../../index-list.html')" href="../../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../../index.html?com/sibirjak/jakute/JCSS.html&amp;com/sibirjak/jakute/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Class&nbsp;JCSS</td><td align="right" id="subNav" class="titleTableSubNav"><a href="#methodSummary">Methods</a>&nbsp;| <a href="#constantSummary">Constants</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Class JCSS"); titleBar_setSubNav(true,false,false,false,false,false,true,false,false,false,false,false,false,false);}
+--></script>
+<div class="MainContent">
+<table cellspacing="0" cellpadding="0" class="classHeaderTable">
+<tr>
+<td class="classHeaderTableLabel">Package</td><td><a onclick="javascript:loadClassListFrame('class-list.html')" href="package-detail.html">com.sibirjak.jakute</a></td>
+</tr>
+<tr>
+<td class="classHeaderTableLabel">Class</td><td class="classSignature">public class JCSS</td>
+</tr>
+</table>
+<p></p>
+  Jakute Styling Engine (JCSS).
+  
+  <p>The single instance of this class provides global settings and
+  operations that affect all components:</p>
+  
+  <ol>
+  <li>Initialize JCSS.</li>
+  <li>Register a component instance in the JCSS system.</li>
+  <li>Register a type to be recognized by JCSS.</li>
+  <li>Register a style value formatter.</li>
+  <li>Set global styles.</li>
+  <li>Start and commit a bulk update.</li>
+  </ol>
+  
+  <p></p>
+<br>
+<hr>
+</div>
+<a name="methodSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Methods</div>
+<table id="summaryTableMethod" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Method</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#JCSS()">JCSS</a>()</div>
+<div class="summaryTableDescription">
+   JCSS.</div>
+</td><td class="summaryTableOwnerCol">JCSS</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#commitBulkUpdate()">commitBulkUpdate</a>():void</div>
+<div class="summaryTableDescription">
+   Executes a bulk update that was started via <code>startBulkUpdate()</code>.</div>
+</td><td class="summaryTableOwnerCol">JCSS</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#getInstance()">getInstance</a>():<a href="../jakute/JCSS.html">JCSS</a>
+</div>
+<div class="summaryTableDescription">[static]
+   Returns the single instance of the JCSS service.</div>
+</td><td class="summaryTableOwnerCol">JCSS</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#registerComponent()">registerComponent</a>(component:DisplayObject, adapter:<a href="JCSS_Adapter.html">JCSS_Adapter</a>):void</div>
+<div class="summaryTableDescription">
+   Registers a component instance in JCSS.</div>
+</td><td class="summaryTableOwnerCol">JCSS</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#registerStyleValueFormatter()">registerStyleValueFormatter</a>(formatterKey:String, formatter:Function):void</div>
+<div class="summaryTableDescription">
+   Registers a style value formatter function.</div>
+</td><td class="summaryTableOwnerCol">JCSS</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#registerType()">registerType</a>(type:Class, Adapter:Class):void</div>
+<div class="summaryTableDescription">
+   Registers an type to be automatically detected by JCSS.</div>
+</td><td class="summaryTableOwnerCol">JCSS</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#setStyle()">setStyle</a>(selector:String, styleName:String, styleValue:uint, priority:* = 1):void</div>
+<div class="summaryTableDescription">
+   Sets a global style.</div>
+</td><td class="summaryTableOwnerCol">JCSS</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#setStyleSheet()">setStyleSheet</a>(styleSheet:String):void</div>
+<div class="summaryTableDescription">
+   Sets a global style sheet.</div>
+</td><td class="summaryTableOwnerCol">JCSS</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#startBulkUpdate()">startBulkUpdate</a>():void</div>
+<div class="summaryTableDescription">
+   Starts a bulk update procedure.</div>
+</td><td class="summaryTableOwnerCol">JCSS</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#startTypeMonitoring()">startTypeMonitoring</a>(stage:Stage):void</div>
+<div class="summaryTableDescription">
+   Starts the automatic type registration.</div>
+</td><td class="summaryTableOwnerCol">JCSS</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#styleRuleTreeAsString()">styleRuleTreeAsString</a>():String</div>
+<div class="summaryTableDescription">
+   Returns a formatted tree of all currently set style rules.</div>
+</td><td class="summaryTableOwnerCol">JCSS</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#unregisterComponent()">unregisterComponent</a>(component:DisplayObject):void</div>
+<div class="summaryTableDescription">
+   Removes a component instance from JCSS.</div>
+</td><td class="summaryTableOwnerCol">JCSS</td>
+</tr>
+</table>
+</div>
+<a name="constantSummary"></a>
+<div class="summarySection">
+<div class="summaryTableTitle">Public Constants</div>
+<table id="summaryTableConstant" class="summaryTable " cellpadding="3" cellspacing="0">
+<tr>
+<th>&nbsp;</th><th colspan="2">Constant</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#FORMAT_BOOLEAN">FORMAT_BOOLEAN</a> : String = "jcss_format_boolan"<div class="summaryTableDescription">[static]
+   Constant for the boolean formatter.</div>
+</td><td class="summaryTableOwnerCol">JCSS</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#FORMAT_CLASS">FORMAT_CLASS</a> : String = "jcss_format_class"<div class="summaryTableDescription">[static]
+   Constant for the class formatter.</div>
+</td><td class="summaryTableOwnerCol">JCSS</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#FORMAT_COLOR">FORMAT_COLOR</a> : String = "jcss_format_color"<div class="summaryTableDescription">[static]
+   Constant for the color formatter.</div>
+</td><td class="summaryTableOwnerCol">JCSS</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#FORMAT_NUMBER">FORMAT_NUMBER</a> : String = "jcss_format_number"<div class="summaryTableDescription">[static]
+   Constant for the number formatter.</div>
+</td><td class="summaryTableOwnerCol">JCSS</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#FORMAT_STRING">FORMAT_STRING</a> : String = "jcss_format_string"<div class="summaryTableDescription">[static]
+   Constant for the string formatter.</div>
+</td><td class="summaryTableOwnerCol">JCSS</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#PRIORITY_DEFAULT">PRIORITY_DEFAULT</a> : uint = 0<div class="summaryTableDescription">[static]
+   Constant for the style priority "default".</div>
+</td><td class="summaryTableOwnerCol">JCSS</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#PRIORITY_FIX">PRIORITY_FIX</a> : uint = 1<div class="summaryTableDescription">[static]
+   Constant for the style priority "fix".</div>
+</td><td class="summaryTableOwnerCol">JCSS</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#PRIORITY_IMPORTANT">PRIORITY_IMPORTANT</a> : uint = 2<div class="summaryTableDescription">[static]
+   Constant for the style priority "important".</div>
+</td><td class="summaryTableOwnerCol">JCSS</td>
+</tr>
+</table>
+</div>
+<script type="text/javascript" language="javascript">
+<!--
+showHideInherited();
+--></script>
+<div class="MainContent">
+<a name="constructorDetail"></a>
+<div class="detailSectionHeader">Constructor detail</div>
+<a name="JCSS()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">JCSS</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">constructor</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function JCSS()</code><p>
+   JCSS.
+   
+   </p><p>Do not call the private constructor.</p>
+   
+   </div>
+<a name="methodDetail"></a>
+<div class="detailSectionHeader">Method detail</div>
+<a name="commitBulkUpdate()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">commitBulkUpdate</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function commitBulkUpdate():void</code><p>
+   Executes a bulk update that was started via <code>startBulkUpdate()</code>.
+   
+   </p><p>Affected components are notified only once regardless of the specific
+   changes between <code>startBulkUpdate()</code> and this command.</p>
+   
+   <p>Ancestor components are always notified before their children. A further
+   order is not specified. It can be possible that children of different branches
+   are notified alternating, e.g. C-1, C-2, C-2.1, C-2.2, C-1.3, C-2.4, C-1.1
+   </div>
+<a name="getInstance()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">getInstance</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static function getInstance():<a href="../jakute/JCSS.html">JCSS</a></code><p>
+   Returns the single instance of the JCSS service.
+   
+   </p><p>The JCSS service will be created with the first call to this method.</p>
+   
+   <p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code><a href="../jakute/JCSS.html">JCSS</a></code> &mdash; 
+                        The single JCSS instance.
+   
+                        
+                     </td>
+</tr>
+</table>
+</div>
+<a name="registerComponent()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">registerComponent</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function registerComponent(component:DisplayObject, adapter:<a href="JCSS_Adapter.html">JCSS_Adapter</a>):void</code><p>
+   Registers a component instance in JCSS.
+   
+   </p><p>After the registration the component is enabled to receive styles and
+   style change notifications.</p>
+   
+   <p>Registering a component twice throws an error.</p>
+   
+   <p>Registering the same adapter with different components throws an error.</p>
+   
+   <p>Registering a component that is already in the display list throws an error.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">component</span>:DisplayObject</code> &mdash; The display object to be styled.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">adapter</span>:<a href="JCSS_Adapter.html">JCSS_Adapter</a></code> &mdash; The JCSS component adapter.
+   </td>
+</tr>
+</table>
+</div>
+<a name="registerStyleValueFormatter()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">registerStyleValueFormatter</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function registerStyleValueFormatter(formatterKey:String, formatter:Function):void</code><p>
+   Registers a style value formatter function.
+   
+   </p><p>The given key can be afterwards used to define component style
+   formats. There is a default list of formatters in JCSS_StyleFormats.</p>
+      <div class='listing'><pre>
+   public function customFormatter(value : &#42;) : CustomType {
+    return doSomeConversion(value);
+   }
+   </pre></div>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">formatterKey</span>:String</code> &mdash; The key of the custom formatter.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">formatter</span>:Function</code> &mdash; The custom formatter function.
+   </td>
+</tr>
+</table>
+<p>
+<span class="label">See also</span>
+</p>
+<div class="seeAlso">JCSS_StyleFormat</div>
+</div>
+<a name="registerType()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">registerType</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function registerType(type:Class, Adapter:Class):void</code><p>
+   Registers an type to be automatically detected by JCSS.
+   
+   </p><p>JCSS sets a listener to the <code>stage.ADDED_TO_STAGE</code> event.
+   Any added display object that matches a formerly set type registration,
+   is automatically initialized.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">type</span>:Class</code> &mdash; The type to be watched for.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">Adapter</span>:Class</code> &mdash; The adapter class to be used in initialization.
+   </td>
+</tr>
+</table>
+</div>
+<a name="setStyle()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">setStyle</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function setStyle(selector:String, styleName:String, styleValue:uint, priority:* = 1):void</code><p>
+   Sets a global style.
+   
+   </p><p>It is possible to repeatedly invoke this method with equal style rules.
+   They are then merged together for performance reasons, no worries, too.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">selector</span>:String</code> &mdash; A selector that matchs a particular component.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">styleName</span>:String</code> &mdash; The name of the style to set.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">styleValue</span>:uint</code> &mdash; The value of the style to set.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">priority</span>:*</code> (default = <code>1</code>)<code></code> &mdash; The style priority (null, "!important" or "default").
+   </td>
+</tr>
+</table>
+</div>
+<a name="setStyleSheet()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">setStyleSheet</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function setStyleSheet(styleSheet:String):void</code><p>
+   Sets a global style sheet.
+   
+   </p><p>The style sheet usually is loaded from an external source but still may be
+   created at runtime in the application.</p>
+      <div class='listing'><pre>
+   var styleSheet : String = &lt;styles&gt;&lt;![CDATA[
+    Box {
+     backgroundColor: 0xFF0000;
+    }
+   ]]&gt;&lt;/styles&gt;.toString()
+   </pre></div>
+   
+   <p>It is possible to repeatedly invoke this method with different style sheets.
+   Equal style rules in different or the same sheet are merged together for performance
+   reasons, no worries.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">styleSheet</span>:String</code> &mdash; The global stylesheet.
+   </td>
+</tr>
+</table>
+</div>
+<a name="startBulkUpdate()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">startBulkUpdate</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function startBulkUpdate():void</code><p>
+   Starts a bulk update procedure.
+   
+   </p><p>If invoked, affected components are buffered and notified only once
+   after a later call of <code>commitBulkUpdate()</code>. If there are
+   different styles or state to set, that might affect a particular multiple
+   times, it is recommended to wrap the update in the bulk transaction.</p>
+   </div>
+<a name="startTypeMonitoring()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">startTypeMonitoring</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function startTypeMonitoring(stage:Stage):void</code><p>
+   Starts the automatic type registration.
+   
+   </p><p>You need to call this method before registering a type to be
+   detected by JCSS. The JCSS type monitoring requires this stage
+   instance to set a listener to the <code>stage.ADDED_TO_STAGE</code> event.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">stage</span>:Stage</code> &mdash; The state reference.
+   </td>
+</tr>
+</table>
+</div>
+<a name="styleRuleTreeAsString()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">styleRuleTreeAsString</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function styleRuleTreeAsString():String</code><p>
+   Returns a formatted tree of all currently set style rules.
+   
+   </p><p>The following example shows a style sheet and its tree representation.</p>
+   
+   <div class='listing'><pre>
+   var styleSheet : String = &lt;styles&gt;&lt;![CDATA[
+   
+       ToolTip {
+           borderSize: 0;
+       }
+   
+       Blue {
+           backgroundColor: #0000CC;
+           borderColor: #000066;
+           color: #FFFFFF;
+       }
+   
+       Blue ToolTip {
+           backgroundColor: #6666FF;
+           color: #FFFFFF;
+       }
+   
+       Red {
+           backgroundColor: #CC0000;
+           borderColor: #660000;
+           color: #FFFFFF;
+       }
+   
+       Red ToolTip {
+           backgroundColor: #FF6666;
+           color: #FFFFFF;
+       }
+   
+       Yellow {
+           backgroundColor: #CCCC00;
+           borderColor: #666600;
+       }
+   
+       Yellow ToolTip {
+           backgroundColor: #FFFF66;
+       }
+   
+   ]]&gt;&lt;/styles&gt;.toString();
+   </pre></div>
+   
+   <div class='listing'><pre>
+   [This 2]
+   |_____[Yellow 22]
+       | &gt;This Yellow specifity:2 {
+       |    backgroundColor: #CCCC00 (12);
+       |    borderColor: #666600 (13);
+       | }
+       |_____[ToolTip 26]
+           | &gt;This Yellow ToolTip specifity:3 {
+           |    backgroundColor: #FFFF66 (14);
+           | }
+   |_____[Blue 8]
+       | &gt;This Blue specifity:2 {
+       |    backgroundColor: #0000CC (2);
+       |    color: #FFFFFF (4);
+       |    borderColor: #000066 (3);
+       | }
+       |_____[ToolTip 12]
+           | &gt;This Blue ToolTip specifity:3 {
+           |    backgroundColor: #6666FF (5);
+           |    color: #FFFFFF (6);
+           | }
+   |_____[ToolTip 5]
+       | &gt;This ToolTip specifity:2 {
+       |    borderSize: 0 (1);
+       | }
+   |_____[Red 15]
+       | &gt;This Red specifity:2 {
+       |    backgroundColor: #CC0000 (7);
+       |    color: #FFFFFF (9);
+       |    borderColor: #660000 (8);
+       | }
+       |_____[ToolTip 19]
+           | &gt;This Red ToolTip specifity:3 {
+           |    backgroundColor: #FF6666 (10);
+           |    color: #FFFFFF (11);
+           | }
+   </pre></div>
+   <p></p>
+<span class="label">Returns</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20"></td><td><code>String</code></td>
+</tr>
+</table>
+</div>
+<a name="unregisterComponent()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">unregisterComponent</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function unregisterComponent(component:DisplayObject):void</code><p>
+   Removes a component instance from JCSS.
+   
+   </p><p>This method cleans up all references to the given component
+   and makes it eligible for garbage collection.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">component</span>:DisplayObject</code> &mdash; The display object to remove from JCSS.
+   </td>
+</tr>
+</table>
+</div>
+<a name="constantDetail"></a>
+<div class="detailSectionHeader">Constant detail</div>
+<a name="FORMAT_BOOLEAN"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">FORMAT_BOOLEAN</td><td class="detailHeaderType">constant</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const FORMAT_BOOLEAN:String = "jcss_format_boolan"</code><p>
+   Constant for the boolean formatter.
+   
+   </p><p>The boolean formatter casts <code>true</code>, 1, "1" and "true" to <code>true</code>
+   and the rest to false.</p>
+   </div>
+<a name="FORMAT_CLASS"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">FORMAT_CLASS</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const FORMAT_CLASS:String = "jcss_format_class"</code><p>
+   Constant for the class formatter.
+   
+   </p><p>If the given value is already of type class, the value is returned. All other
+   values are tried to convert into a class by using <code>flash.utils.getDefinitionByName()</code>.</p>
+   </div>
+<a name="FORMAT_COLOR"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">FORMAT_COLOR</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const FORMAT_COLOR:String = "jcss_format_color"</code><p>
+   Constant for the color formatter.
+   
+   </p><p>The color formatter accepts uint values or HTML color values such as "#FF0000".
+   uint values are simply returned while HTML color values are converted into uint.</p>
+   </div>
+<a name="FORMAT_NUMBER"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">FORMAT_NUMBER</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const FORMAT_NUMBER:String = "jcss_format_number"</code><p>
+   Constant for the number formatter.
+   
+   </p><p>The number formatter simply casts the given value to Number.</p>
+   </div>
+<a name="FORMAT_STRING"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">FORMAT_STRING</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const FORMAT_STRING:String = "jcss_format_string"</code><p>
+   Constant for the string formatter.
+   
+   </p><p>The string formatter simply casts the given value to String.</p>
+   </div>
+<a name="PRIORITY_DEFAULT"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">PRIORITY_DEFAULT</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const PRIORITY_DEFAULT:uint = 0</code><p>
+   Constant for the style priority "default".
+   
+   </p><p>The following rules apply to a default style:</p>
+   
+   <ul>
+   <li>A default style declared in a component instance is being overridden from
+   styles of any priority declared in the global style manager or in an ancestor
+   component.</li>
+   <li>If the component or the global style manager (JCSS) that has declared the default style
+   now specifies another rule for this style, then:
+     <ol>
+     <li>If the new style is a default style, the style with the higher specifity applies.</li>
+     <li>If the new style is a fix or an important style, that style applies.</li>
+     </ol>
+   </li>  
+   </ul>
+   </div>
+<a name="PRIORITY_FIX"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">PRIORITY_FIX</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const PRIORITY_FIX:uint = 1</code><p>
+   Constant for the style priority "fix".
+   
+   </p><p>The following rules apply to a fix style:</p>
+   
+   <ul>
+   <li>A fix style declared in a component instance can not be overridden from
+   fix or default styles declared in the global style manager or in an ancestor
+   component.</li>
+   <li>A fix style is being overridden from important styles declared anywhere in
+   the same display list subtree.</li>
+   <li>If the component or the global style manager (JCSS) that has declared the fix style
+   now specifies another rule for this style, then:
+     <ol>
+     <li>If the new style is also a fix style, the style with the higher specifity applies.</li>
+     <li>If the new style is a default style, it is being ignored.</li>
+     <li>If the new style is an important style, that style applies.</li>
+     </ol>
+   </li>  
+   </ul>
+   </div>
+<a name="PRIORITY_IMPORTANT"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">PRIORITY_IMPORTANT</td><td class="detailHeaderType">constant</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static const PRIORITY_IMPORTANT:uint = 2</code><p>
+   Constant for the style priority "important".
+   
+   </p><p>The following rules apply to an important style:</p>
+   
+   <ul>
+   <li>An important style declared in the global style manager or in an ancestor
+   component overrides all styles of default or fix (but not important) priority in child components.</li>
+   <li>If the component or the global style manager (JCSS) that has declared the important style
+   now specifies another rule for this style, then:
+     <ol>
+     <li>If the new style is also an important style, the later declared style applies.</li>
+     <li>If the new style is a fix or an default style, it is being ignored.</li>
+     </ol>
+   </li>  
+   </ul>
+   </div>
+<br>
+<br>
+<hr>
+<br>
+<p></p>
+<center class="copyright"> 
+</center>
+</div>
+</body>
+</html>
+<!-- -->
