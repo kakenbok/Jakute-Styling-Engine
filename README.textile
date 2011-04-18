@@ -1,4 +1,4 @@
-==no<style type="text/css">
+==<style type="text/css">
 pre {
 	background-color: #EEEEEE;
 	border: 1px solid #999999;
