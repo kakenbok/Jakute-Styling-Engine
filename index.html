@@ -28,7 +28,14 @@
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding-top:30px; font-style: italic; }
   </style>
-</head>
+
+	<script type="text/javascript" src="swfobject/swfobject.js">
+
+	<script type="text/javascript">
+		swfobject.registerObject("WithoutStyles", "9.0.115", "expressInstall.swf");
+	</script>
+  
+  </head>
 
 <body>
   <a href="http://github.com/kakenbok/Jakute-Styling-Engine"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
@@ -55,6 +62,17 @@
 	<h3>Style your application using CSS</h3>
 
 	With Jakute you may configure your application using style sheets. Style sheets can be created at runtime or may be loaded from an external source. You can apply style sheets globally or to a particular component instance.
+
+	<object id="Demo" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="270" height="60">
+		<param name="movie" value="examples/WithoutStyles.swf" />
+		<!--[if !IE]>-->
+		<object type="application/x-shockwave-flash" data="examples/WithoutStyles.swf" width="270" height="60">
+			<!--<![endif]-->
+			<p>
+				Alternative content
+			</p><!--[if !IE]>-->
+		</object> <!--<![endif]-->
+	</object>
 
 	[SWFExample example="http://sibirjak.com/osflash/wp-content/uploads/jakute/examples/features/usestyles/WithoutStyles.swf" width="290" height="80" /]
 
