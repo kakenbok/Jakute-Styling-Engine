@@ -1,6 +1,7 @@
 h2. Jakute Styling Engine - CSS Framework for ActionScript/Flash
 
-"Overview" : http://kakenbok.github.com/Jakute-Styling-Engine/ | "Doc" : http://kakenbok.github.com/Jakute-Styling-Engine/apidoc/
+"Overview":http://kakenbok.github.com/Jakute-Styling-Engine/
+"Doc":http://kakenbok.github.com/Jakute-Styling-Engine/apidoc/
 
 h3. Welcome
 
