@@ -2,10 +2,15 @@ h2. Jakute Styling Engine - CSS Framework for Flash
 
 h3. References
 
+*Downloads*
+
+* "Downloads":https://github.com/kakenbok/Jakute-Styling-Engine/downloads (ZIP, SWC)
+
+*Documentation*
+
 * "Quick Overview":http://kakenbok.github.com/Jakute-Styling-Engine/
 * "Project Homepage":http://sibirjak.com/osflash/projects/jakute-styling-engine/ (Overview, Features, Documentation, Examples)
 * "APIDoc":http://kakenbok.github.com/Jakute-Styling-Engine/apidoc/
-* "Downloads":https://github.com/kakenbok/Jakute-Styling-Engine/downloads (ZIP, SWC)
 
 h3. What is Jakute
 
