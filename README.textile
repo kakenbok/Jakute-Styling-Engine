@@ -4,7 +4,7 @@ h3. References
 
 *Downloads*
 
-* "Downloads":https://github.com/kakenbok/Jakute-Styling-Engine/downloads (ZIP, SWC)
+* "Downloads":http://sibirjak.com/osflash/projects/jakute-styling-engine/ (ZIP, SWC)
 
 *Documentation*
 
