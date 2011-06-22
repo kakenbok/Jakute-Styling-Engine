@@ -3,5 +3,5 @@ Jakute is a CSS Framework for Flash.
 h3. References
 
 * "Project Homepage":http://sibirjak.com/osflash/projects/jakute-styling-engine/ (Features, Overview, Documentation, Examples)
-* "Downloads (ZIP, SWC)":http://sibirjak.com/osflash/projects/jakute-styling-engine/downloads/
+* "Downloads":http://sibirjak.com/osflash/projects/jakute-styling-engine/downloads/ (ZIP, SWC)
 * "APIDoc":http://kakenbok.github.com/Jakute-Styling-Engine/apidoc/
