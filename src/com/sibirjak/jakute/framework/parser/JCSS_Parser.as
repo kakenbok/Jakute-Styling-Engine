@@ -93,7 +93,7 @@ package com.sibirjak.jakute.framework.parser {
 								}
 								
 								// style values
-								resultStyleValues = styleValue.match(/  (  [\w#\.][\w\.\-]*  )  /xg);
+								resultStyleValues = styleValue.match(/  (  [\w#\.-][\w\.\-]*  )  /xg);
 								if (resultStyleValues) {
 									styleDeclaration = new JCSS_StyleDeclaration();
 									styleDeclaration.propertyName = resultStyleDeclarations[1];
