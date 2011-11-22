@@ -1,3 +1,5 @@
 .settings
 .project
 /bin
+.idea/
+*.iml
