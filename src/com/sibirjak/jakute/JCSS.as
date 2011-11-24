@@ -32,6 +32,7 @@ package com.sibirjak.jakute {
 	import flash.display.DisplayObject;
 	import flash.display.Stage;
 	import flash.events.Event;
+	import flash.utils.describeType;
 	import flash.utils.getQualifiedClassName;
 
 	/**
@@ -187,6 +188,8 @@ package com.sibirjak.jakute {
 		 */
 		private var _stage : Stage;
 
+
+
 		/**
 		 * The single application style manager.
 		 */
@@ -196,6 +199,14 @@ package com.sibirjak.jakute {
 		 * Collection of all registered types to be automatically processed.
 		 */
 		private var _registeredTypes : Object;
+
+
+		/**
+		 * Whether interfaces should be monitored too
+		 */
+		private var _monitorInterfaces:Boolean;
+
+
 		
 		/**
 		 * JCSS.
@@ -258,10 +269,12 @@ package com.sibirjak.jakute {
 		 * detected by JCSS. The JCSS type monitoring requires this stage
 		 * instance to set a listener to the <code>stage.ADDED_TO_STAGE</code> event.</p>
 		 * 
-		 * @param stage The state reference.
+		 * @param stage The stage reference.
+		 * @param monitorInterfaces Whether interfaces implemented by a component should be monitored too.
 		 */
-		public function startTypeMonitoring(stage : Stage) : void {
+		public function startTypeMonitoring(stage : Stage, monitorInterfaces:Boolean = false) : void {
 			_stage = stage;
+			_monitorInterfaces = monitorInterfaces;
 		}
 
 		/**
@@ -398,13 +411,34 @@ package com.sibirjak.jakute {
 				// check if a type adapter for that component is present
 				var Adapter : Class = _registeredTypes[getQualifiedClassName(component)];
 				if (Adapter) {
-					var adapter : JCSS_Adapter = new Adapter();
+					bindAdapterToComponent(Adapter, component);
+				}
+				else if(_monitorInterfaces) {
+					var interfaceInfo:XMLList = describeType(component).implementsInterface;
 
-					var styleManager : JCSS_ComponentStyleManager = adapter.jcss_internal::getStyleManager_internal();
-					JCSS_StyleManagerMap.getInstance().register(component, styleManager);
-					styleManager.component = component;
+					var interfaceName:String;
+					for each (var thisInterface:XML in interfaceInfo)
+					{
+						interfaceName = thisInterface.@type.toString();
+						var InterfaceAdapter : Class = _registeredTypes[interfaceName];
+						bindAdapterToComponent(InterfaceAdapter, component);
+					}
 				}
 			}
+		}
+
+
+		private function bindAdapterToComponent(Adapter:Class, component:DisplayObject):void{
+
+			if(!Adapter) {
+				return;
+			}
+
+			var adapter:JCSS_Adapter = new Adapter();
+
+			var styleManager:JCSS_ComponentStyleManager = adapter.jcss_internal::getStyleManager_internal();
+			JCSS_StyleManagerMap.getInstance().register(component, styleManager);
+			styleManager.component = component;
 		}
 
 		/*
