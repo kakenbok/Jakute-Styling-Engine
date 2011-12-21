@@ -3,6 +3,7 @@ package selectorapi {
 	import selectorapi.styleeditor.Box;
 	import selectorapi.styleeditor.StyleRuleListItem;
 	import selectorapi.styleeditor.StyleRuleListItemRenderer;
+
 	import com.sibirjak.asdpc.button.Button;
 	import com.sibirjak.asdpc.button.ButtonEvent;
 	import com.sibirjak.asdpc.core.View;
@@ -14,10 +15,13 @@ package selectorapi {
 	import com.sibirjak.asdpcbeta.colorpicker.ColorPicker;
 	import com.sibirjak.asdpcbeta.selectbox.SelectBox;
 	import com.sibirjak.jakute.JCSS;
+	import com.sibirjak.jakute.JCSS_Sprite;
 	import com.sibirjak.jakute.framework.JCSS_ApplicationStyleManager;
-	import com.sibirjak.jakute.framework.core.JCSS_StyleManagerMap;
+	import com.sibirjak.jakute.framework.core.jcss_internal;
 	import com.sibirjak.jakute.framework.stylerules.JCSS_StyleRule;
+
 	import org.as3commons.collections.fx.LinkedMapFx;
+
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.geom.Rectangle;
@@ -43,13 +47,13 @@ package selectorapi {
 		public function StyleEditor() {
 			_styleRules = new LinkedMapFx();
 
-			var jcss : JCSS = JCSS.getInstance();
-			JCSS_StyleManagerMap.getInstance().applicationStyleManager.jcssStyleRuleEventCallback = jcssStyleRuleEventCallback;
+			JCSS_Sprite.jcss = new JCSS();
+			JCSS_Sprite.jcss.jcss_internal::applicationStyleManager.jcssStyleRuleEventCallback = jcssStyleRuleEventCallback;
 
-			jcss.setStyle("Box:over", "backgroundColor", 0xBBDDDD);
-			jcss.setStyle("Box Box", "backgroundColor", 0x88BB88);
-			jcss.setStyle("Box#1", "backgroundColor", 0xFFFF66);
-			jcss.setStyle("Box#1 > Box", "backgroundColor", 0xBCCC7A);
+			JCSS_Sprite.jcss.setStyle("Box:over", "backgroundColor", 0xBBDDDD);
+			JCSS_Sprite.jcss.setStyle("Box Box", "backgroundColor", 0x88BB88);
+			JCSS_Sprite.jcss.setStyle("Box#1", "backgroundColor", 0xFFFF66);
+			JCSS_Sprite.jcss.setStyle("Box#1 > Box", "backgroundColor", 0xBCCC7A);
 
 			/*
 			 * Boxes
@@ -213,7 +217,7 @@ package selectorapi {
 		}
 
 		private function addRuleHandler(event : ButtonEvent) : void {
-			JCSS.getInstance().setStyle(_addRuleInput.text, "backgroundColor", _backgroundColorPicker.selectedColor);
+			JCSS_Sprite.jcss.setStyle(_addRuleInput.text, "backgroundColor", _backgroundColorPicker.selectedColor);
 		}
 
 		private function jcssStyleRuleEventCallback(jcssEvent : Object) : void {

@@ -7,7 +7,7 @@ package helloworld.customadapter {
 
 	public class HelloWorld_CustomAdapter extends Sprite {
 		public function HelloWorld_CustomAdapter() {
-			var jcss : JCSS = JCSS.getInstance();
+			var jcss : JCSS = new JCSS();
 			jcss.setStyleSheet(CSS.styles);
 
 			var box : Component = new Component();

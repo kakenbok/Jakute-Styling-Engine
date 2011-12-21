@@ -1,7 +1,9 @@
 package buttontutorial.step3 {
 
-	import com.sibirjak.jakute.JCSS;
 	import com.sibirjak.jakute.JCSS_Sprite;
+	import com.sibirjak.jakute.constants.JCSS_StyleValueFormat;
+	import com.sibirjak.jakute.events.JCSS_ChangeEvent;
+
 	import flash.events.Event;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
@@ -15,8 +17,8 @@ package buttontutorial.step3 {
 
 		public function Label() {
 			jcss_cssName = "Label";
-			jcss_defineStyle("color", 0x333333, JCSS.FORMAT_COLOR);
-			jcss_defineStyle("size", 11, JCSS.FORMAT_NUMBER);
+			jcss_defineStyle("color", 0x333333, JCSS_StyleValueFormat.FORMAT_HTML_COLOR);
+			jcss_defineStyle("size", 11, JCSS_StyleValueFormat.FORMAT_NUMBER);
 
 			_textField = new TextField();
 			_textField.autoSize = TextFieldAutoSize.LEFT;
@@ -37,11 +39,11 @@ package buttontutorial.step3 {
 			return _textField.height;
 		}
 
-		override protected function jcss_onStylesInitialized(styles : Object) : void {
+		override protected function jcss_onStylesInitialized() : void {
 			draw();
 		}
 
-		override protected function jcss_onStylesChanged(styles : Object) : void {
+		override protected function jcss_onStylesChanged(changeEvent : JCSS_ChangeEvent) : void {
 			draw();
 		}
 

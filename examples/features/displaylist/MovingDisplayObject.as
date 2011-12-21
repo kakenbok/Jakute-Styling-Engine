@@ -1,7 +1,7 @@
 package features.displaylist {
-
-	import com.sibirjak.jakute.JCSS;
 	import features.displaylist.box.Box;
+	import com.sibirjak.jakute.JCSS;
+	import com.sibirjak.jakute.JCSS_Sprite;
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -14,7 +14,8 @@ package features.displaylist {
 		private var _currentDropTarget : Box;
 		
 		public function MovingDisplayObject() {
-			JCSS.getInstance().setStyleSheet(MovingDisplayObjectCSS.styles);
+			JCSS_Sprite.jcss = new JCSS();
+			JCSS_Sprite.jcss.setStyleSheet(MovingDisplayObjectCSS.styles);
 			
 			// red box
 			var redBox : Box = new Box();

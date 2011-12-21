@@ -1,5 +1,6 @@
 package helloworld {
 
+	import common.ColorUtil;
 	import flash.display.GradientType;
 	import flash.display.Sprite;
 	import flash.geom.Matrix;

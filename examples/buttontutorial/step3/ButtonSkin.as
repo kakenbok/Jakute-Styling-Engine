@@ -1,9 +1,12 @@
 package buttontutorial.step3 {
 
-	import com.sibirjak.jakute.JCSS;
 	import com.sibirjak.jakute.JCSS_Sprite;
+	import com.sibirjak.jakute.constants.JCSS_StyleValueFormat;
+	import com.sibirjak.jakute.events.JCSS_ChangeEvent;
+	import common.ColorUtil;
 	import flash.display.GradientType;
 	import flash.geom.Matrix;
+
 
 	public class ButtonSkin extends JCSS_Sprite {
 		// properties
@@ -12,12 +15,12 @@ package buttontutorial.step3 {
 
 		public function ButtonSkin() {
 			jcss_cssName = "ButtonSkin";
-			jcss_defineStyle("gradientDirection", "bright_to_dark", JCSS.FORMAT_STRING); // for :down
-			jcss_defineStyle("backgroundColor", 0xDFDFDF, JCSS.FORMAT_COLOR);
-			jcss_defineStyle("backgroundColorOffset", 0, JCSS.FORMAT_NUMBER); // for :over
-			jcss_defineStyle("borderColor", 0x999999, JCSS.FORMAT_COLOR);
-			jcss_defineStyle("borderSize", 2, JCSS.FORMAT_NUMBER);
-			jcss_defineStyle("borderRadius", 10, JCSS.FORMAT_NUMBER);
+			jcss_defineStyle("gradientDirection", "bright_to_dark", JCSS_StyleValueFormat.FORMAT_STRING); // :down
+			jcss_defineStyle("backgroundColor", 0xDFDFDF, JCSS_StyleValueFormat.FORMAT_HTML_COLOR);
+			jcss_defineStyle("backgroundColorOffset", 0, JCSS_StyleValueFormat.FORMAT_NUMBER); // :over
+			jcss_defineStyle("borderColor", 0x999999, JCSS_StyleValueFormat.FORMAT_HTML_COLOR);
+			jcss_defineStyle("borderSize", 2, JCSS_StyleValueFormat.FORMAT_NUMBER);
+			jcss_defineStyle("borderRadius", 10, JCSS_StyleValueFormat.FORMAT_NUMBER);
 		}
 
 		public function setSize(w : uint, h : uint) : void {
@@ -26,11 +29,11 @@ package buttontutorial.step3 {
 			draw();
 		}
 
-		override protected function jcss_onStylesInitialized(styles : Object) : void {
+		override protected function jcss_onStylesInitialized() : void {
 			draw();
 		}
 
-		override protected function jcss_onStylesChanged(styles : Object) : void {
+		override protected function jcss_onStylesChanged(changeEvent : JCSS_ChangeEvent) : void {
 			draw();
 		}
 

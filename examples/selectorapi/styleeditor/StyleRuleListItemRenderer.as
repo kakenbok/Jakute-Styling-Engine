@@ -5,8 +5,8 @@ package selectorapi.styleeditor {
 	import com.sibirjak.asdpc.listview.ListItemData;
 	import com.sibirjak.asdpc.listview.renderer.ListItemContent;
 	import com.sibirjak.asdpcbeta.colorpicker.ColorPicker;
-	import com.sibirjak.jakute.JCSS;
-	import com.sibirjak.jakute.framework.core.JCSS_StyleManagerMap;
+	import com.sibirjak.jakute.JCSS_Sprite;
+	import com.sibirjak.jakute.framework.core.jcss_internal;
 	import com.sibirjak.jakute.framework.stylerules.JCSS_StyleDeclaration;
 	import com.sibirjak.jakute.framework.stylerules.JCSS_StyleRule;
 
@@ -70,11 +70,11 @@ package selectorapi.styleeditor {
 		}
 
 		private function setBackgroundColor(color : uint) : void {
-			JCSS.getInstance().setStyle(getStyleRule().selectorString, "backgroundColor", color);
+			JCSS_Sprite.jcss.setStyle(getStyleRule().selectorString, "backgroundColor", color);
 		}
 
 		private function removeButtonClickHandler(event : ButtonEvent) : void {
-			JCSS_StyleManagerMap.getInstance().applicationStyleManager.removeStyleRule(getStyleRule());
+			JCSS_Sprite.jcss.jcss_internal::applicationStyleManager.removeStyleRule(getStyleRule());
 		}
 	}
 }

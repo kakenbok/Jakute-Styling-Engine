@@ -1,7 +1,7 @@
 package features.selectors.box {
-
-	import com.sibirjak.jakute.JCSS;
 	import com.sibirjak.jakute.JCSS_Sprite;
+	import com.sibirjak.jakute.constants.JCSS_StyleValueFormat;
+	import common.ColorUtil;
 	import flash.display.GradientType;
 	import flash.geom.Matrix;
 	import flash.text.TextField;
@@ -14,16 +14,16 @@ package features.selectors.box {
 
 		public function Box() {
 			jcss_cssName = "Box";
-			jcss_defineStyle("x", 0, JCSS.FORMAT_NUMBER);
-			jcss_defineStyle("y", 0, JCSS.FORMAT_NUMBER);
-			jcss_defineStyle("w", 150, JCSS.FORMAT_NUMBER);
-			jcss_defineStyle("h", 150, JCSS.FORMAT_NUMBER);
-			jcss_defineStyle("background-color", "#BCCC7A", JCSS.FORMAT_COLOR);
-			jcss_defineStyle("border-color", "#81991F", JCSS.FORMAT_COLOR);
-			jcss_defineStyle("border-size", 1, JCSS.FORMAT_NUMBER);
+			jcss_defineStyle("x", 0, JCSS_StyleValueFormat.FORMAT_NUMBER);
+			jcss_defineStyle("y", 0, JCSS_StyleValueFormat.FORMAT_NUMBER);
+			jcss_defineStyle("w", 150, JCSS_StyleValueFormat.FORMAT_NUMBER);
+			jcss_defineStyle("h", 150, JCSS_StyleValueFormat.FORMAT_NUMBER);
+			jcss_defineStyle("background-color", "#BCCC7A", JCSS_StyleValueFormat.FORMAT_HTML_COLOR);
+			jcss_defineStyle("border-color", "#81991F", JCSS_StyleValueFormat.FORMAT_HTML_COLOR);
+			jcss_defineStyle("border-size", 1, JCSS_StyleValueFormat.FORMAT_NUMBER);
 		}
 
-		override protected function jcss_onStylesInitialized(styles : Object) : void {
+		override protected function jcss_onStylesInitialized() : void {
 			createLabel();
 			draw();
 		}

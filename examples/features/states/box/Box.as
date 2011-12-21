@@ -1,7 +1,8 @@
 package features.states.box {
-
-	import com.sibirjak.jakute.JCSS;
 	import com.sibirjak.jakute.JCSS_Sprite;
+	import com.sibirjak.jakute.constants.JCSS_StyleValueFormat;
+	import com.sibirjak.jakute.events.JCSS_ChangeEvent;
+	import common.ColorUtil;
 	import flash.display.GradientType;
 	import flash.events.MouseEvent;
 	import flash.geom.Matrix;
@@ -18,16 +19,16 @@ package features.states.box {
 
 		public function Box() {
 			jcss_cssName = "Box";
-			jcss_defineStyle("x", 0, JCSS.FORMAT_NUMBER);
-			jcss_defineStyle("y", 0, JCSS.FORMAT_NUMBER);
-			jcss_defineStyle("w", 150, JCSS.FORMAT_NUMBER);
-			jcss_defineStyle("h", 150, JCSS.FORMAT_NUMBER);
-			jcss_defineStyle("background-color", "#BCCC7A", JCSS.FORMAT_COLOR);
-			jcss_defineStyle("background-gradient", "bright_to_dark", JCSS.FORMAT_STRING);
-			jcss_defineStyle("border-color", "#81991F", JCSS.FORMAT_COLOR);
+			jcss_defineStyle("x", 0, JCSS_StyleValueFormat.FORMAT_NUMBER);
+			jcss_defineStyle("y", 0, JCSS_StyleValueFormat.FORMAT_NUMBER);
+			jcss_defineStyle("w", 150, JCSS_StyleValueFormat.FORMAT_NUMBER);
+			jcss_defineStyle("h", 150, JCSS_StyleValueFormat.FORMAT_NUMBER);
+			jcss_defineStyle("background-color", "#BCCC7A", JCSS_StyleValueFormat.FORMAT_HTML_COLOR);
+			jcss_defineStyle("background-gradient", "bright_to_dark", JCSS_StyleValueFormat.FORMAT_STRING);
+			jcss_defineStyle("border-color", "#81991F", JCSS_StyleValueFormat.FORMAT_HTML_COLOR);
 		}
 
-		override protected function jcss_onStylesInitialized(styles : Object) : void {
+		override protected function jcss_onStylesInitialized() : void {
 			createLabel();
 			draw();
 
@@ -36,13 +37,13 @@ package features.states.box {
 			addEventListener(MouseEvent.MOUSE_OUT, mouseOutHandler);
 		}
 
-		override protected function jcss_onStylesChanged(styles : Object) : void {
+		override protected function jcss_onStylesChanged(changeEvent : JCSS_ChangeEvent) : void {
 			// redraw necessary
-			if (styles.hasOwnProperty("w")
-				|| styles.hasOwnProperty("h")
-				|| styles.hasOwnProperty("background-color")
-				|| styles.hasOwnProperty("background-gradient")
-				|| styles.hasOwnProperty("border-color")) {
+			if (changeEvent.valueHasChanged("w")
+				|| changeEvent.valueHasChanged("h")
+				|| changeEvent.valueHasChanged("background-color")
+				|| changeEvent.valueHasChanged("background-gradient")
+				|| changeEvent.valueHasChanged("border-color")) {
 				draw();
 
 			// only reposition or opacity update

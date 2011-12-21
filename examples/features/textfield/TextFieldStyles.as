@@ -1,6 +1,7 @@
 package features.textfield {
 
 	import com.sibirjak.jakute.JCSS;
+
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.text.TextField;
@@ -11,7 +12,7 @@ package features.textfield {
 		}
 
 		private function initHandler(event : Event) : void {
-			var jcss : JCSS = JCSS.getInstance();
+			var jcss : JCSS = new JCSS();
 			jcss.setStyleSheet(TextFieldStylesCSS.styles);
 			jcss.startTypeMonitoring(stage);
 			jcss.registerType(TextField, TextFieldAdapter);

@@ -2,8 +2,10 @@ package selectorapi.selectortest {
 
 	import com.sibirjak.asdpc.button.ButtonEvent;
 	import com.sibirjak.asdpcbeta.checkbox.CheckBox;
-	import com.sibirjak.jakute.JCSS;
 	import com.sibirjak.jakute.JCSS_Sprite;
+	import com.sibirjak.jakute.constants.JCSS_StyleValueFormat;
+	import com.sibirjak.jakute.events.JCSS_ChangeEvent;
+	import common.ColorUtil;
 	import flash.display.GradientType;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -11,6 +13,7 @@ package selectorapi.selectortest {
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
+
 
 	public class Box extends JCSS_Sprite {
 		// events
@@ -42,14 +45,14 @@ package selectorapi.selectortest {
 			jcss_setState("over", "false");
 			jcss_setState("down", "false");
 
-			jcss_defineStyle("backgroundColor", 0xEEEEEE, JCSS.FORMAT_COLOR);
+			jcss_defineStyle("backgroundColor", 0xEEEEEE, JCSS_StyleValueFormat.FORMAT_HTML_COLOR);
 
 			addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
 			addEventListener(MouseEvent.MOUSE_OVER, mouseOverHandler);
 			addEventListener(MouseEvent.MOUSE_OUT, mouseOutHandler);
 		}
 
-		override protected function jcss_onStylesInitialized(styles : Object) : void {
+		override protected function jcss_onStylesInitialized() : void {
 			_active = jcss_getState("active") == "true";
 			
 			_tf = new TextField();
@@ -84,7 +87,7 @@ package selectorapi.selectortest {
 			dispatchEvent(new Event(EVENT_CLICK, true));
 		}
 
-		override protected function jcss_onStylesChanged(styles : Object) : void {
+		override protected function jcss_onStylesChanged(changeEvent : JCSS_ChangeEvent) : void {
 			draw();
 		}
 

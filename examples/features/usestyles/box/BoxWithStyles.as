@@ -1,7 +1,7 @@
 package features.usestyles.box {
-
-	import com.sibirjak.jakute.JCSS;
 	import com.sibirjak.jakute.JCSS_Sprite;
+	import com.sibirjak.jakute.constants.JCSS_StyleValueFormat;
+	import common.ColorUtil;
 	import flash.display.GradientType;
 	import flash.geom.Matrix;
 
@@ -10,14 +10,14 @@ package features.usestyles.box {
 		public function BoxWithStyles(cssID : String = "") {
 			jcss_cssName = "Box";
 			jcss_cssID = cssID;
-			jcss_defineStyle("x", 0, JCSS.FORMAT_NUMBER);
-			jcss_defineStyle("y", 0, JCSS.FORMAT_NUMBER);
-			jcss_defineStyle("w", 100, JCSS.FORMAT_NUMBER);
-			jcss_defineStyle("h", 100, JCSS.FORMAT_NUMBER);
-			jcss_defineStyle("color", "#BCCC7A", JCSS.FORMAT_COLOR);
+			jcss_defineStyle("x", 0, JCSS_StyleValueFormat.FORMAT_NUMBER);
+			jcss_defineStyle("y", 0, JCSS_StyleValueFormat.FORMAT_NUMBER);
+			jcss_defineStyle("w", 100, JCSS_StyleValueFormat.FORMAT_NUMBER);
+			jcss_defineStyle("h", 100, JCSS_StyleValueFormat.FORMAT_NUMBER);
+			jcss_defineStyle("color", "#BCCC7A", JCSS_StyleValueFormat.FORMAT_HTML_COLOR);
 		}
 
-		override protected function jcss_onStylesInitialized(styles : Object) : void {
+		override protected function jcss_onStylesInitialized() : void {
 			draw();
 		}
 

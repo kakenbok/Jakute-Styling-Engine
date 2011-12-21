@@ -2,6 +2,7 @@ package buttontutorial.step3.panel {
 
 	import buttontutorial.step3.Button;
 	import com.sibirjak.asdpc.textfield.Label;
+	import common.ControlPanelBase;
 	import flash.events.Event;
 
 	public class ControlPanel extends ControlPanelBase {

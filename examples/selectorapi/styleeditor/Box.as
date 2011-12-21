@@ -1,7 +1,9 @@
 package selectorapi.styleeditor {
 
-	import com.sibirjak.jakute.JCSS;
 	import com.sibirjak.jakute.JCSS_Sprite;
+	import com.sibirjak.jakute.constants.JCSS_StyleValueFormat;
+	import com.sibirjak.jakute.events.JCSS_ChangeEvent;
+	import common.ColorUtil;
 	import flash.display.GradientType;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -9,6 +11,7 @@ package selectorapi.styleeditor {
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
+
 
 	public class Box extends JCSS_Sprite {
 		// events
@@ -39,14 +42,14 @@ package selectorapi.styleeditor {
 			jcss_setState("over", "false");
 			jcss_setState("down", "false");
 
-			jcss_defineStyle("backgroundColor", 0xEEEEEE, JCSS.FORMAT_COLOR);
+			jcss_defineStyle("backgroundColor", 0xEEEEEE, JCSS_StyleValueFormat.FORMAT_HTML_COLOR);
 
 			addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
 			addEventListener(MouseEvent.MOUSE_OVER, mouseOverHandler);
 			addEventListener(MouseEvent.MOUSE_OUT, mouseOutHandler);
 		}
 
-		override protected function jcss_onStylesInitialized(styles : Object) : void {
+		override protected function jcss_onStylesInitialized() : void {
 			_tf = new TextField();
 			_tf.mouseEnabled = false;
 			_tf.autoSize = TextFieldAutoSize.LEFT;
@@ -63,7 +66,7 @@ package selectorapi.styleeditor {
 			draw();
 		}
 
-		override protected function jcss_onStylesChanged(styles : Object) : void {
+		override protected function jcss_onStylesChanged(changeEvent : JCSS_ChangeEvent) : void {
 			draw();
 		}
 

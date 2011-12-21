@@ -1,7 +1,7 @@
 package features.externalcss {
-
 	import features.externalcss.box.Box;
 	import com.sibirjak.jakute.JCSS;
+	import com.sibirjak.jakute.JCSS_Sprite;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.net.URLLoader;
@@ -16,7 +16,8 @@ package features.externalcss {
 		}
 
 		private function stylesLoaded(event : Event) : void {
-			JCSS.getInstance().setStyleSheet(URLLoader(event.currentTarget).data);
+			JCSS_Sprite.jcss = new JCSS();
+			JCSS_Sprite.jcss.setStyleSheet(URLLoader(event.currentTarget).data);
 			
 			var box : Box = new Box();
 			box.addChild(new Box());

@@ -1,7 +1,10 @@
 package buttontutorial.step2 {
 
 	import buttontutorial.step2.panel.ControlPanel;
+
 	import com.sibirjak.jakute.JCSS;
+	import com.sibirjak.jakute.JCSS_Sprite;
+
 	import flash.display.Sprite;
 
 	public class ButtonExample extends Sprite {
@@ -9,7 +12,8 @@ package buttontutorial.step2 {
 
 		public function ButtonExample() {
 			// JCSS
-			JCSS.getInstance().setStyleSheet(CSS.styles);
+			JCSS_Sprite.jcss = new JCSS();
+			JCSS_Sprite.jcss.setStyleSheet(CSS.styles);
 
 			// button
 			_button = new Button();

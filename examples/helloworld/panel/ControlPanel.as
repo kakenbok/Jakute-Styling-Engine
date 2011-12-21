@@ -1,5 +1,6 @@
 package helloworld.panel {
 
+	import common.ControlPanelBase;
 	import helloworld.Component;
 
 	public class ControlPanel extends ControlPanelBase {

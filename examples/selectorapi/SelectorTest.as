@@ -1,10 +1,14 @@
 package selectorapi {
 
 	import selectorapi.selectortest.Box;
+
 	import com.sibirjak.asdpc.listview.ListItemEvent;
 	import com.sibirjak.asdpc.listview.ListView;
 	import com.sibirjak.asdpc.listview.renderer.ListItemRenderer;
 	import com.sibirjak.jakute.JCSS;
+	import com.sibirjak.jakute.JCSS_Sprite;
+	import com.sibirjak.jakute.constants.JCSS_StyleDeclarationPriority;
+
 	import flash.display.Sprite;
 
 	public class SelectorTest extends Sprite {
@@ -14,7 +18,8 @@ package selectorapi {
 		private var _selectList2 : ListView;
 		
 		public function SelectorTest() {
-			JCSS.getInstance().setStyle("> Box > Box", "backgroundColor", "#C2FF99", JCSS.PRIORITY_IMPORTANT);
+			JCSS_Sprite.jcss = new JCSS();
+			JCSS_Sprite.jcss.setStyle("> Box > Box", "backgroundColor", "#C2FF99", JCSS_StyleDeclarationPriority.PRIORITY_IMPORTANT);
 			_lastSelect = "> Box > Box";
 
 			/*
@@ -91,8 +96,8 @@ package selectorapi {
 		private function listClickHandler(event : ListItemEvent) : void {
 			var select : String = event.item;
 
-			JCSS.getInstance().setStyle(_lastSelect, "backgroundColor", 0xEEEEEE, JCSS.PRIORITY_IMPORTANT);
-			JCSS.getInstance().setStyle(select, "backgroundColor", "#C2FF99", JCSS.PRIORITY_IMPORTANT);
+			JCSS_Sprite.jcss.setStyle(_lastSelect, "backgroundColor", 0xEEEEEE, JCSS_StyleDeclarationPriority.PRIORITY_IMPORTANT);
+			JCSS_Sprite.jcss.setStyle(select, "backgroundColor", "#C2FF99", JCSS_StyleDeclarationPriority.PRIORITY_IMPORTANT);
 			
 			if (event.currentTarget == _selectList) _selectList2.deselectItemAt(_selectList2.selectedIndex);
 			else _selectList.deselectItemAt(_selectList.selectedIndex);

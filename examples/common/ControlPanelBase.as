@@ -1,4 +1,4 @@
-package {
+package common{
 
 	import com.sibirjak.asdpc.core.IView;
 	import com.sibirjak.asdpc.core.View;
@@ -14,8 +14,10 @@ package {
 	import com.sibirjak.asdpcbeta.radiobutton.RadioButton;
 	import com.sibirjak.asdpcbeta.radiobutton.RadioGroup;
 	import com.sibirjak.asdpcbeta.slider.Slider;
+
 	import org.as3commons.collections.LinkedMap;
 	import org.as3commons.collections.framework.IIterator;
+
 	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.events.Event;

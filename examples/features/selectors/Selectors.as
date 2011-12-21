@@ -1,12 +1,13 @@
 package features.selectors {
-
 	import features.selectors.box.Box;
 	import com.sibirjak.jakute.JCSS;
+	import com.sibirjak.jakute.JCSS_Sprite;
 	import flash.display.Sprite;
 
 	public class Selectors extends Sprite {
 		public function Selectors() {
-			JCSS.getInstance().setStyleSheet(SelectorsCSS.styles);
+			JCSS_Sprite.jcss = new JCSS();
+			JCSS_Sprite.jcss.setStyleSheet(SelectorsCSS.styles);
 			
 			var container : Box = new Box();
 			container.jcss_cssID = "first";

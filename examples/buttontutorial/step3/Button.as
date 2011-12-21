@@ -1,7 +1,9 @@
 package buttontutorial.step3 {
 
-	import com.sibirjak.jakute.JCSS;
 	import com.sibirjak.jakute.JCSS_Sprite;
+	import com.sibirjak.jakute.constants.JCSS_StyleValueFormat;
+	import com.sibirjak.jakute.events.JCSS_ChangeEvent;
+
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 
@@ -23,7 +25,7 @@ package buttontutorial.step3 {
 		public function Button() {
 			jcss_cssName = "Button";
 			jcss_encloseChildren();
-			jcss_defineStyle("labelOffset", 0, JCSS.FORMAT_NUMBER);
+			jcss_defineStyle("labelOffset", 0, JCSS_StyleValueFormat.FORMAT_NUMBER);
 
 			jcss_setStyleSheet(<styles><![CDATA[
 				Label {
@@ -80,7 +82,7 @@ package buttontutorial.step3 {
 			return state;
 		}
 
-		override protected function jcss_onStylesChanged(styles : Object) : void {
+		override protected function jcss_onStylesChanged(changeEvent : JCSS_ChangeEvent) : void {
 			var offset : uint = jcss_getStyle("labelOffset");
 			_label.x = 8 + offset;
 			_label.y = 4 + offset;

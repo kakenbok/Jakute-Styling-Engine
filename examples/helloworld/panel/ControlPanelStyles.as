@@ -5,29 +5,33 @@ package helloworld.panel {
 
 	public class ControlPanelStyles extends ControlPanel {
 		
-		public function ControlPanelStyles(component : Component) {
+		private var _jcss : JCSS;
+		
+		public function ControlPanelStyles(jcss : JCSS, component : Component) {
 			super(component);
+			
+			_jcss = jcss;
 		}
 
 		override protected function setWidth(w : uint) : void {
-			JCSS.getInstance().setStyle("Box", "width", w);
+			_jcss.setStyle("Box", "width", w);
 		}
 
 		override protected function setHeight(h : uint) : void {
-			JCSS.getInstance().setStyle("Box", "height", h);
+			_jcss.setStyle("Box", "height", h);
 		}
 
 		override protected function setBackgroundColor(color : uint) : void {
-			JCSS.getInstance().setStyle("Box", "background", color);
+			_jcss.setStyle("Box", "background", color);
 		}
 
 		override protected function setBorderColor(color : uint) : void {
-			JCSS.getInstance().setStyle("Box", "border", color);
+			_jcss.setStyle("Box", "border", color);
 		}
 
 		override protected function setBorderSize(size : uint) : void {
 			super.setBorderSize(size);
-			JCSS.getInstance().setStyle("Box", "thickness", size);
+			_jcss.setStyle("Box", "thickness", size);
 		}
 	}
 }
