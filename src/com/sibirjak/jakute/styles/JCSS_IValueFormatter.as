@@ -30,8 +30,27 @@ package com.sibirjak.jakute.styles {
 	 */
 	public interface JCSS_IValueFormatter {
 
+		/**
+		 * Returns a formatted style value.
+		 * 
+		 * <p>The method is meant to convert a literal style sheet declaration
+		 * into the type that is expected by the component.</p>
+		 * 
+		 * <p>The method argument is either a String coming from a style sheet
+		 * declaration or already a formatted value. You should therefore always test,
+		 * whether the value is already formatted or not. See the different
+		 * formatters included in this project.</p>
+		 * 
+		 * @param value The value to format.
+		 * @return The formatted value.
+		 */
 		function format(value : *) : *;
 		
+		/**
+		 * Compares two different style values.
+		 * 
+		 * <p>Note, the given values are already formatted.</p>
+		 */
 		function equals(value1 : *, value2 : *) : Boolean;
 
 	}

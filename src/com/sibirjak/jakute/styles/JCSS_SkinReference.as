@@ -29,22 +29,41 @@ package com.sibirjak.jakute.styles {
 	 * <p>The skin reference not only stores the skin class but also values
 	 * for the optional cacheID and constructorArgument properties.</p>
 	 * 
-	 * <p>Using the skin formatter, the system internally stores an object
-	 * of this class accociated with the skin property name. Setting a skin
-	 * style programatically should also provide an instance of this class.</p>
+	 * <p>Using the <code>JCSS_SkinFormatter</code> and literal style sheet
+	 * declarations, the system internally stores an object of this class accociated
+	 * to the skin property name. Setting a skin style programatically should
+	 * also provide an instance of this class.</p>
 	 * 
 	 * @author Jens Struwe 06.12.2011
 	 */
 	public class JCSS_SkinReference {
 
+		/**
+		 * JCSS_SkinReference.
+		 * 
+		 * @param Skin The display list class.
+		 * @param cacheID An identifier with that the skin is cached by the component.
+		 * @param constructorArgument A constructor argument to be passed to the new Skin instance.
+		 */
 		public function JCSS_SkinReference(Skin : Class = null, cacheID : String = null, constructorArgument : String = null) {
 			this.Skin = Skin;
 			this.cacheID = cacheID;
 			this.constructorArgument = constructorArgument;
 		}
 
+		/**
+		 * The display list class.
+		 */
 		public var Skin : Class;
+
+		/**
+		 * An identifier with that the skin is cached by the component.
+		 */
 		public var cacheID : String;
+
+		/**
+		 * A constructor argument to be passed to the new Skin instance.
+		 */
 		public var constructorArgument : String;
 
 	}
