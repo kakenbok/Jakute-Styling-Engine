@@ -24,7 +24,7 @@
 package com.sibirjak.jakute.framework {
 
 	import com.sibirjak.jakute.JCSS_Adapter;
-	import com.sibirjak.jakute.framework.core.JCSS_StyleManagerMap;
+	import com.sibirjak.jakute.events.JCSS_ChangeEvent;
 	import com.sibirjak.jakute.framework.core.jcss_internal;
 	import com.sibirjak.jakute.framework.roles.JCSS_ComponentRoleManager;
 	import com.sibirjak.jakute.framework.states.JCSS_StateManager;
@@ -32,10 +32,11 @@ package com.sibirjak.jakute.framework {
 	import com.sibirjak.jakute.framework.styles.JCSS_StyleValueManager;
 	import com.sibirjak.jakute.framework.update.JCSS_UpdateInfo;
 	import com.sibirjak.jakute.framework.update.JCSS_UpdateManager;
-
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 	import flash.events.Event;
+	
+	use namespace jcss_internal;
 
 	/**
 	 * @author Jens Struwe 11.01.2011
@@ -60,7 +61,7 @@ package com.sibirjak.jakute.framework {
 		private var _parentComponentStyleManager : JCSS_ComponentStyleManager;
 
 		private var _initialized : Boolean;
-
+		
 		/*
 		 * Constructor
 		 */
@@ -68,7 +69,7 @@ package com.sibirjak.jakute.framework {
 		public function JCSS_ComponentStyleManager(adapter : JCSS_Adapter) {
 			_jcssAdapter = adapter;
 
-			_styleValueManager = new JCSS_StyleValueManager();
+			_styleValueManager = new JCSS_StyleValueManager(this);
 			_stateManager = new JCSS_StateManager(this);
 			_roleManager = new JCSS_ComponentRoleManager(this);
 			
@@ -96,9 +97,9 @@ package com.sibirjak.jakute.framework {
 		public function set component(component : DisplayObject) : void {
 			//trace ("REGISTER", this);
 			_component = component;
-			_component.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
+			_component.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler, false, _jcss.stageEventPriority);
 
-			_jcssAdapter.jcss_internal::registered_internal();
+			_jcssAdapter.registered_internal();
 		}
 
 		public function get component() : DisplayObject {
@@ -107,6 +108,12 @@ package com.sibirjak.jakute.framework {
 
 		public function get initialized() : Boolean {
 			return _initialized;
+		}
+
+		public function cleanUp() : void {
+			_component.removeEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
+			_component.removeEventListener(Event.REMOVED_FROM_STAGE, removedFromStageHandler, false);
+			removeAllParentAndUpdateReferences();
 		}
 
 		/*
@@ -124,6 +131,7 @@ package com.sibirjak.jakute.framework {
 		
 		public function set cssID(cssID : String) : void {
 			if (_initialized) throw new Error("You cannot change the cssID after the component has been initialized.");
+			if (!cssID) cssID = null; // skip emtpy string ""
 			if (_cssID == cssID) return;
 			_cssID = cssID;
 		}
@@ -133,7 +141,7 @@ package com.sibirjak.jakute.framework {
 		}
 		
 		public function set cssClass(cssClass : String) : void {
-			if (!cssClass) cssClass = null; // if intitially set the empty string ""
+			if (!cssClass) cssClass = null; // skip emtpy string ""
 			if (_cssClass == cssClass) return;
 			
 			if (_updatesEnabled) {
@@ -181,15 +189,16 @@ package com.sibirjak.jakute.framework {
 		 * Styles
 		 */
 
-		/**
-		 * TODO enable priority fix to achieve unmodifiable styles.
-		 */
 		public function defineStyle(styleName : String, styleValue : *, format : String, priority : uint = 0) : void {
 			if (_initialized) throw new Error("You cannot define a style for an already initialized component");
 			
-			_styleValueManager.defineStyle(styleName, format);
+			_styleValueManager.defineStyle(styleName, styleValue, format, priority);
 			
 			setStyle("This", styleName, styleValue, priority);
+		}
+		
+		public function getDefinedStyles() : Object {
+			return _styleValueManager.definedStyles;
 		}
 		
 		public function getStyle(styleName : String) : * {
@@ -228,7 +237,7 @@ package com.sibirjak.jakute.framework {
 			_virtualParent = parent;
 
 			if (_virtualParent) {
-				_virtualParent.addEventListener(Event.REMOVED_FROM_STAGE, virtualParentRemovedFromStageHandler);
+				_virtualParent.addEventListener(Event.REMOVED_FROM_STAGE, virtualParentRemovedFromStageHandler, false, _jcss.stageEventPriority);
 			}
 
 			virtualParentChanged();
@@ -244,7 +253,7 @@ package com.sibirjak.jakute.framework {
 
 		public function foreachParentStyleManager(callback : Function) : Boolean {
 			if (!foreachParentComponentStyleManager(callback)) return false;
-			callback(JCSS_StyleManagerMap.getInstance().applicationStyleManager);
+			callback(_jcss.applicationStyleManager);
 			return true;
 		}
 		
@@ -258,7 +267,7 @@ package com.sibirjak.jakute.framework {
 		}
 
 		/*
-		 * State
+		 * Style values
 		 */
 
 		public function commitStyleChanged(updateInfo : JCSS_UpdateInfo) : void {
@@ -272,10 +281,11 @@ package com.sibirjak.jakute.framework {
 
 			} else {
 				var reason : String;
+				var propertyName : String;
 				var styleRule : JCSS_StyleRule;
 				for (var key : * in updateInfo.styleRules) {
 					styleRule = key;
-					reason = updateInfo.styleRules[styleRule];
+					reason = updateInfo.styleRules[styleRule][0];
 					
 					switch (reason) {
 						case JCSS_UpdateManager.STYLE_RULE_ACTIVATED:
@@ -285,19 +295,21 @@ package com.sibirjak.jakute.framework {
 						case JCSS_UpdateManager.STYLE_CHANGED:
 							_styleValueManager.updateStyleRule(styleRule);
 							break;
+						case JCSS_UpdateManager.STYLE_RULE_REMOVED:
 						case JCSS_UpdateManager.STYLE_RULE_DEACTIVATED:
 							_styleValueManager.removeStyleRule(styleRule);
+							break;
+						case JCSS_UpdateManager.STYLE_REMOVED:
+							propertyName = updateInfo.styleRules[styleRule][1];
+							_styleValueManager.removeStyle(styleRule, propertyName);
 							break;
 					}
 				}
 			}
 			
 			//trace ("------------------------------commitStateChange", this, parentChainAsString());
-			var changedStyles : Object = _styleValueManager.getChangedStyles();
-			if (changedStyles) {
-				//trace (stylesAsString(changedStyles));
-				_jcssAdapter.jcss_internal::stylesChanged_internal(changedStyles);
-			}
+			var changedStyles : JCSS_ChangeEvent = _styleValueManager.getChangedStyles();
+			if (changedStyles.hasChangedValue()) _jcssAdapter.stylesChanged_internal(changedStyles);
 		}
 
 		/*
@@ -329,6 +341,30 @@ package com.sibirjak.jakute.framework {
 			JCSS_UpdateManager.getInstance().updateStyleRule(this, styleRule, JCSS_UpdateManager.STYLE_CHANGED);
 		}
 
+		/**
+		 * Called after a style rule has been removed via clearStyle().
+		 */
+		public function styleManager_notifyStyleRuleRemoved(styleRule : JCSS_StyleRule) : void {
+			if (styleRule.numStates) {
+				var active : Boolean = _stateManager.styleRuleIsActive(styleRule);
+				_stateManager.removeListenersForStyleRule(styleRule);
+				if (!active) return;
+			}
+			
+			JCSS_UpdateManager.getInstance().updateStyleRule(this, styleRule, JCSS_UpdateManager.STYLE_RULE_REMOVED);
+		}
+		
+		/**
+		 * Called after a style has been removed via clearStyle().
+		 */
+		public function styleManager_notifyStyleRemoved(styleRule : JCSS_StyleRule, propertyName : String) : void {
+			if (styleRule.numStates) {
+				if (!_stateManager.styleRuleIsActive(styleRule)) return;
+			}
+
+			JCSS_UpdateManager.getInstance().updateStyleRule(this, styleRule, JCSS_UpdateManager.STYLE_REMOVED, propertyName);
+		}
+		
 		/*
 		 * ComponentRoleManager
 		 */
@@ -364,7 +400,7 @@ package com.sibirjak.jakute.framework {
 
 		private function addedToStageHandler(event : Event) : void {
 			_component.removeEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
-			_component.addEventListener(Event.REMOVED_FROM_STAGE, removedFromStageHandler);
+			_component.addEventListener(Event.REMOVED_FROM_STAGE, removedFromStageHandler, false, _jcss.stageEventPriority);
 			
 			//trace ("ADDED_TO_STAGE", this);
 			findAndRegisterToParent();
@@ -379,8 +415,8 @@ package com.sibirjak.jakute.framework {
 
 				_updatesEnabled = true;
 
-				var changedStyles : Object = _styleValueManager.getChangedStyles();
-				if (changedStyles) _jcssAdapter.jcss_internal::stylesChanged_internal(changedStyles);
+				var changedStyles : JCSS_ChangeEvent = _styleValueManager.getChangedStyles();
+				if (changedStyles.hasChangedValue()) _jcssAdapter.stylesChanged_internal(changedStyles);
 
 			} else {
 				// init style rules and styles
@@ -389,24 +425,28 @@ package com.sibirjak.jakute.framework {
 				_initialized = true;
 				_updatesEnabled = true;
 	
-				_jcssAdapter.jcss_internal::stylesInitialized_internal(_styleValueManager.styles);
+				_jcssAdapter.stylesInitialized_internal();
 			}
 
 		}
 		
 		private function removedFromStageHandler(event : Event) : void {
 			_component.removeEventListener(Event.REMOVED_FROM_STAGE, removedFromStageHandler);
-			_component.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler);
+			_component.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler, false, _jcss.stageEventPriority);
 
 			//trace ("REMOVED_FROM_STAGE", this, _jcssAdapter.component.stage, _jcssAdapter.component.root, _jcssAdapter.component.parent);
+			removeAllParentAndUpdateReferences();
+
+			_updatesEnabled = false;
+		}
+		
+		private function removeAllParentAndUpdateReferences() : void {
 			removeStyleRuleListeners();
 			unregisterFromParent();
 
 			removeVirtualParent();
 			
 			JCSS_UpdateManager.getInstance().removeFromUpdates(this);
-
-			_updatesEnabled = false;
 		}
 		
 		/*
@@ -450,7 +490,7 @@ package com.sibirjak.jakute.framework {
 			var parent : DisplayObject = _virtualParent ? _virtualParent : _component.parent;
 
 			while (parent) {
-				_parentComponentStyleManager = JCSS_StyleManagerMap.getInstance().getComponentStyleManager(parent);
+				_parentComponentStyleManager = _jcss.getComponentStyleManager(parent);
 				if (_parentComponentStyleManager) break;
 				parent = parent.parent;
 			}
@@ -459,7 +499,7 @@ package com.sibirjak.jakute.framework {
 			if (_parentComponentStyleManager) {
 				_parentComponentStyleManager.registerDescendant(this);
 			} else {
-				JCSS_StyleManagerMap.getInstance().applicationStyleManager.registerDescendant(this);
+				_jcss.applicationStyleManager.registerDescendant(this);
 			}
 			
 			initDepth();
@@ -503,7 +543,7 @@ package com.sibirjak.jakute.framework {
 			if (_parentComponentStyleManager) {
 				_parentComponentStyleManager.unregisterDescendant(this);
 			} else {
-				JCSS_StyleManagerMap.getInstance().applicationStyleManager.unregisterDescendant(this);
+				_jcss.applicationStyleManager.unregisterDescendant(this);
 			}
 		}
 		

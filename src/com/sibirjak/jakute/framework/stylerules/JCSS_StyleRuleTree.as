@@ -23,6 +23,7 @@
 ******************************************************************************/
 package com.sibirjak.jakute.framework.stylerules {
 
+	import com.sibirjak.jakute.framework.JCSS_ComponentStyleManager;
 	import com.sibirjak.jakute.framework.JCSS_StyleManager;
 
 	/**
@@ -66,6 +67,74 @@ package com.sibirjak.jakute.framework.stylerules {
 			}
 		}
 		
+		public function clearStyle(selectorString : String, styleName : String = null) : void {
+			var styleRule : JCSS_StyleRule = _selectorStyleRuleMap[selectorString];
+
+			
+			if (styleRule) {
+				
+				var removeStyleRule : Boolean;
+				var definedStyles : Object;
+				
+				// remove property
+				if (styleName) {
+					if (!styleRule.styles.hasOwnProperty(styleName)) return;
+					
+					var i : uint;
+					var propertyName : String;
+					for each (propertyName in styleRule.styles) i++;
+					
+					// other properties left
+					if (i > 1) {
+						if (styleRule.selectorString == ">This") {
+							//trace ("\REMOVE PROP", styleRule.selectorString, styleName, styleRule.selectorString == ">This");
+							if (_styleManager is JCSS_ComponentStyleManager) {
+								definedStyles = JCSS_ComponentStyleManager(_styleManager).getDefinedStyles();
+								styleRule.resetStyle(definedStyles, styleName);
+								_styleManager.styleRuleTree_notifyStyleRemoved(styleRule, styleName);
+							}
+							
+						} else {
+							//trace ("REMOVE PROP", styleRule.selectorString, styleName, styleRule.selectorString == ">This");
+							delete styleRule.styles[styleName];
+							_styleManager.styleRuleTree_notifyStyleRemoved(styleRule, styleName);
+						}
+					
+					// remove sole property from rule => remove rule
+					} else {
+						removeStyleRule = true;
+					}
+				
+				} else {
+					removeStyleRule = true;
+				}
+
+				// remove style rule
+				if (removeStyleRule) {
+					if (styleRule.selectorString == ">This") {
+						//trace ("\UPDATE RULE", styleRule.selectorString, styleRule.selectorString == ">This");
+						if (_styleManager is JCSS_ComponentStyleManager) {
+							definedStyles = JCSS_ComponentStyleManager(_styleManager).getDefinedStyles();
+							if (styleName) {
+								styleRule.resetStyle(definedStyles, styleName);
+								_styleManager.styleRuleTree_notifyStyleChanged(styleRule);
+							} else {
+								styleRule.reset(definedStyles);
+								_styleManager.styleRuleTree_notifyStyleChanged(styleRule);
+							}
+						}
+						
+					} else {
+						//trace ("REMOVE RULE", styleRule.selectorString, styleRule.selectorString == ">This");
+						removeExistingStyleRule(styleRule);
+						delete _selectorStyleRuleMap[styleRule.selectorString];
+		
+						_styleManager.styleRuleTree_notifyStyleRuleRemoved(styleRule);
+					}
+				}
+			}
+		}
+		
 		public function foreachStyleRule(callback : Function) : void {
 			for each (var styleRule : JCSS_StyleRule in _selectorStyleRuleMap) {
 				callback(styleRule);
@@ -76,6 +145,21 @@ package com.sibirjak.jakute.framework.stylerules {
 		 * Private
 		 */
 		
+		private function removeExistingStyleRule(styleRule : JCSS_StyleRule) : void {
+			var styleRuleTreeNode : JCSS_StyleRuleTreeNode = styleRule.styleRuleTreeNode;
+			var oldStyleRule : JCSS_StyleRule = styleRuleTreeNode.firstStyleRule;
+			styleRuleTreeNode.firstStyleRule = null;
+			
+			while (oldStyleRule) {
+				var nextRule : JCSS_StyleRule = oldStyleRule.nextRule;
+				if (oldStyleRule != styleRule) {
+					oldStyleRule.nextRule = styleRuleTreeNode.firstStyleRule;
+					styleRuleTreeNode.firstStyleRule = oldStyleRule;
+				}
+				oldStyleRule = nextRule;
+			}
+		}
+
 		private function addNewStyleRule(styleRuleTreeNode : JCSS_StyleRuleTreeNode, styleRule : JCSS_StyleRule, selector : JCSS_Selector) : Boolean {
 			
 			var descendantNodeAdded : Boolean = false;
@@ -85,13 +169,14 @@ package com.sibirjak.jakute.framework.stylerules {
 			if (!selector.descendant) { // last selector
 				
 				// if the node is empty, then there are no components registered
-				// to that component yet, so we have to find these components.
+				// to that style rule yet, so we have to find these components and
+				// hence return true.
 				var nodeEmpty : Boolean = styleRuleTreeNode.firstStyleRule == null;
-
+				
 				styleRule.styleRuleTreeNode = styleRuleTreeNode;
 				styleRule.nextRule = styleRuleTreeNode.firstStyleRule;
 				styleRuleTreeNode.firstStyleRule = styleRule;
-
+				
 				return nodeEmpty;
 			}
 			

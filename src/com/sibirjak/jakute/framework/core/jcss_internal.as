@@ -22,6 +22,7 @@
 * THE SOFTWARE.
 ******************************************************************************/
 package com.sibirjak.jakute.framework.core {
+
 	/**
 	 * @author Jens Struwe 11.01.2011
 	 */

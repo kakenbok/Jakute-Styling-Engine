@@ -39,11 +39,11 @@ package com.sibirjak.jakute.framework.update {
 			depth = theDepth;
 		}
 		
-		public function updateStyleRule(styleRule : JCSS_StyleRule, reason : String) : void {
+		public function updateStyleRule(styleRule : JCSS_StyleRule, reason : String, propertyName : String) : void {
 			if (updateAll) return;
 			
 			if (!styleRules) styleRules = new Dictionary();
-			styleRules[styleRule] = reason;
+			styleRules[styleRule] = [reason, propertyName];
 		}
 		
 	}

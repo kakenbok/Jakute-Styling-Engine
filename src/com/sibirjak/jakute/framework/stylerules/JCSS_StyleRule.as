@@ -23,14 +23,14 @@
 ******************************************************************************/
 package com.sibirjak.jakute.framework.stylerules {
 
-	import com.sibirjak.jakute.JCSS;
+	import com.sibirjak.jakute.constants.JCSS_StyleDeclarationPriority;
 	import com.sibirjak.jakute.framework.parser.JCSS_SelectorMetaData;
 
 	/**
 	 * @author Jens Struwe 06.09.2010
 	 */
 	public class JCSS_StyleRule {
-		
+
 		public var styleRuleTreeNode : JCSS_StyleRuleTreeNode;
 		
 		public var firstSelector : JCSS_Selector;
@@ -77,13 +77,28 @@ package com.sibirjak.jakute.framework.stylerules {
 				oldStyleDeclaration = styles[styleDeclaration.propertyName];
 				if (oldStyleDeclaration) {
 					if (styleDeclaration.priority < oldStyleDeclaration.priority) continue;
-					// TODO wieso die prio nicht erhoehen? war so im original
-					// hat sicher was damit zu tun, dass stile zur laufzeit einfach
-					// geaendert werden koennen.
-					// styleDeclaration.priority = oldStyleDeclaration.priority;
 				}
 				styles[styleDeclaration.propertyName] = styleDeclaration;
 			}
+		}
+		
+		public function reset(defaultStyles : Object) : void {
+			for each (var styleDeclaration : JCSS_StyleDeclaration in defaultStyles) {
+				var newStyleDeclaration : JCSS_StyleDeclaration = new JCSS_StyleDeclaration();
+				newStyleDeclaration.propertyName = styleDeclaration.propertyName;
+				newStyleDeclaration.value = styleDeclaration.value;
+				newStyleDeclaration.priority = styleDeclaration.priority;
+				styles[styleDeclaration.propertyName] = newStyleDeclaration;
+			}
+		}
+		
+		public function resetStyle(defaultStyles : Object, propertyName : String) : void {
+			var styleDeclaration : JCSS_StyleDeclaration = defaultStyles[propertyName];
+			var newStyleDeclaration : JCSS_StyleDeclaration = new JCSS_StyleDeclaration();
+			newStyleDeclaration.propertyName = propertyName;
+			newStyleDeclaration.value = styleDeclaration.value;
+			newStyleDeclaration.priority = styleDeclaration.priority;
+			styles[propertyName] = newStyleDeclaration;
 		}
 		
 		/*
@@ -100,8 +115,8 @@ package com.sibirjak.jakute.framework.stylerules {
 			for (var name : String in styles) {
 				styleDeclaration = styles[name];
 				stylesString += prefix + "   " + name + ": " + styleDeclaration.value;
-				if (styleDeclaration.priority == JCSS.PRIORITY_IMPORTANT) stylesString += " !important";
-				if (styleDeclaration.priority == JCSS.PRIORITY_DEFAULT) stylesString += " default";
+				if (styleDeclaration.priority == JCSS_StyleDeclarationPriority.PRIORITY_IMPORTANT) stylesString += " !important";
+				if (styleDeclaration.priority == JCSS_StyleDeclarationPriority.PRIORITY_DEFAULT) stylesString += " default";
 				stylesString += " (" + styleDeclaration.timeStamp + ")";
 				stylesString += ";\n";
 			}

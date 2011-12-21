@@ -21,38 +21,46 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 ******************************************************************************/
-package com.sibirjak.jakute.framework.core {
+package com.sibirjak.jakute.events {
 
-	import com.sibirjak.jakute.framework.JCSS_ComponentStyleManager;
+	import com.sibirjak.jakute.framework.core.jcss_internal;
 
-	import flash.display.DisplayObject;
-	import flash.utils.Dictionary;
+	import org.as3commons.collections.StringMap;
 
 	/**
-	 * @author Jens Struwe 11.01.2011
+	 * Style change info object.
+	 * 
+	 * <p>An instance of this object is passed to the adapter's <code>onStyleChanged</code>
+	 * event handler.</p>
+	 * 
+	 * @author Jens Struwe 06.12.2011
 	 */
-	public class JCSS_StyleManagerMap {
+	public class JCSS_ChangeEvent {
 		
-		private var _map : Dictionary;
-		
-		public function JCSS_StyleManagerMap() {
-			_map = new Dictionary();
-		}
-		
-		public function register(component : DisplayObject, styleManager : JCSS_ComponentStyleManager) : void {
-			_map[component] = styleManager;
-		}
+		private var _changedValues : StringMap;
 
-		public function unregister(component : DisplayObject) : void {
-			delete _map[component];
-		}
-
-		public function hasStyleManager(component : DisplayObject) : Boolean {
-			return _map[component] != null;
+		public function JCSS_ChangeEvent() {
+			_changedValues = new StringMap();
 		}
 		
-		public function getComponentStyleManager(component : DisplayObject) : JCSS_ComponentStyleManager {
-			return _map[component];
+		public function valueHasChanged(propertyName : String) : Boolean {
+			return _changedValues.hasKey(propertyName);
+		}
+		
+		public function value(propertyName : String) : Boolean {
+			return _changedValues.itemFor(propertyName);
+		}
+		
+		public function changedPropertiesToArray() : Array {
+			return _changedValues.keysToArray();
+		}
+		
+		jcss_internal function setValue(propertyName : String, value : *) : void {
+			_changedValues.add(propertyName, value);
+		}
+		
+		jcss_internal function hasChangedValue() : Boolean {
+			return _changedValues.size > 0;
 		}
 		
 	}

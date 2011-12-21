@@ -23,6 +23,7 @@
 ******************************************************************************/
 package com.sibirjak.jakute.framework {
 
+	import com.sibirjak.jakute.JCSS;
 	import com.sibirjak.jakute.framework.core.JCSS_ID;
 	import com.sibirjak.jakute.framework.parser.JCSS_Parser;
 	import com.sibirjak.jakute.framework.parser.JCSS_SelectorMetaData;
@@ -38,7 +39,8 @@ package com.sibirjak.jakute.framework {
 	 */
 	public class JCSS_StyleManager {
 		
-		protected var _styleManagerID : uint; // Only for debugging purposes
+		protected var _jcss : JCSS;
+		protected var _styleManagerID : uint; // Only for debugging purposes, not functional impact
 		protected var _styleRuleTree : JCSS_StyleRuleTree;
 		protected var _roleManager : JCSS_RoleManager;
 		
@@ -57,6 +59,14 @@ package com.sibirjak.jakute.framework {
 			_descendants = new Object();
 		}
 		
+		public function set jcss(jcss : JCSS) : void {
+			_jcss = jcss;
+		}
+		
+		public function get jcss() : JCSS {
+			return _jcss;
+		}
+
 		public function get depth() : uint {
 			return 0;
 		}
@@ -107,6 +117,15 @@ package com.sibirjak.jakute.framework {
 				_styleRuleTree.addStyleRule(styleRule);
 			}
 			
+			if (_updatesEnabled) JCSS_UpdateManager.getInstance().commit();
+		}
+		
+		public function clearStyle(selector : String, styleName : String = null) : void {
+			var selectorMetaData : JCSS_SelectorMetaData = JCSS_SelectorParser.parse(selector);
+			if (selectorMetaData.firstSelector) {
+				_styleRuleTree.clearStyle(selectorMetaData.selectorString, styleName);
+			}
+
 			if (_updatesEnabled) JCSS_UpdateManager.getInstance().commit();
 		}
 		
@@ -161,13 +180,36 @@ package com.sibirjak.jakute.framework {
 			}
 		}
 
+		public function styleRuleTree_notifyStyleRuleRemoved(styleRule : JCSS_StyleRule) : void {
+			/*
+			 * We do not remove style rule roles in this case for complexity reasons.
+			 * Roles are still existant after all rules for a specific tree node have
+			 * been removed. This is not a performance problem. Removing style rules is
+			 * a rather rare case, and often rules of the same signature are later added
+			 * again, so roles can be instantly used then.
+			 */
+			if (!_updatesEnabled) return;
+
+			for each (var styleManager : JCSS_ComponentStyleManager in styleRule.styleRuleTreeNode.registeredComponents) {
+				styleManager.styleManager_notifyStyleRuleRemoved(styleRule);
+			}
+		}
+
+		public function styleRuleTree_notifyStyleRemoved(styleRule : JCSS_StyleRule, propertyName : String) : void {
+			if (!_updatesEnabled) return;
+
+			for each (var styleManager : JCSS_ComponentStyleManager in styleRule.styleRuleTreeNode.registeredComponents) {
+				styleManager.styleManager_notifyStyleRemoved(styleRule, propertyName);
+			}
+		}
+
 		/*
 		 * Iterators
 		 */
 		
 		public function foreachChildComponentStyleManager(callbackComponent : Function, callbackFinishedChildren : Function = null) : void {
 			for each (var styleManager : JCSS_ComponentStyleManager in _descendants) {
-				if (callbackComponent(styleManager)) {
+				if (callbackComponent(styleManager)) { // recursively ? true : false
 					styleManager.foreachChildComponentStyleManager(callbackComponent, callbackFinishedChildren);
 				}
 				if (callbackFinishedChildren != null) callbackFinishedChildren(styleManager);
@@ -184,6 +226,6 @@ package com.sibirjak.jakute.framework {
 			string += "\n";
 			return string;
 		}
-		
+
 	}
 }

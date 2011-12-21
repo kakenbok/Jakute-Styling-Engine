@@ -36,7 +36,9 @@ package com.sibirjak.jakute.framework.update {
 		public static var STYLE_RULE_ACTIVATED : String = "styleRule_activated";
 		public static var STYLE_RULE_DEACTIVATED : String = "styleRule_deactivated";
 		public static var STYLE_RULE_ADDED : String = "styleRule_added";
+		public static var STYLE_RULE_REMOVED : String = "styleRule_removed";
 		public static var STYLE_CHANGED : String = "styleRule_changed";
+		public static var STYLE_REMOVED : String = "style_removed";
 		
 		private static var _transaction : JCSS_UpdateManager;
 		
@@ -52,10 +54,10 @@ package com.sibirjak.jakute.framework.update {
 			_updateStack = new LinkedMap();
 		}
 		
-		public function updateStyleRule(styleManager : JCSS_ComponentStyleManager, styleRule : JCSS_StyleRule, reason : String) : void {
+		public function updateStyleRule(styleManager : JCSS_ComponentStyleManager, styleRule : JCSS_StyleRule, reason : String, propertyName : String = null) : void {
 			//trace ("update", styleManager, styleRule.selectorString, reason);
 			var updateInfo : JCSS_UpdateInfo = getTransactionItem(styleManager);
-			updateInfo.updateStyleRule(styleRule, reason);
+			updateInfo.updateStyleRule(styleRule, reason, propertyName);
 		}
 		
 		public function updateAll(styleManager : JCSS_ComponentStyleManager) : void {

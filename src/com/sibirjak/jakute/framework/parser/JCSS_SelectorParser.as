@@ -72,6 +72,7 @@ package com.sibirjak.jakute.framework.parser {
 				 */
 	
 				if (resultSelector[2]) {
+					if (resultSelector[2] == "this") resultSelector[2] = "This";
 					if (resultSelector[2] != "This") addSelector(metaData, "This");
 	
 				/*

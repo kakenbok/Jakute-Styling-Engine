@@ -23,6 +23,7 @@
 ******************************************************************************/
 package com.sibirjak.jakute {
 
+	import com.sibirjak.jakute.events.JCSS_ChangeEvent;
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 
@@ -48,6 +49,28 @@ package com.sibirjak.jakute {
 	 */
 	public class JCSS_Sprite extends Sprite {
 		
+		/*
+		 * Static context
+		 */
+		
+		public static var jcss : JCSS;
+		
+		private static function _jcss_register(component : JCSS_Sprite, adapter : JCSS_Adapter) : void {
+			if (!jcss) {
+				jcss = new JCSS();
+			}
+			jcss.registerComponent(component, adapter);
+		}
+		
+		private static function _jcss_unregister(component : JCSS_Sprite) : void {
+			if (!jcss) return;
+			jcss.unregisterComponent(component);
+		}
+
+		/*
+		 * Instance context
+		 */
+
 		/**
 		 * The JCSS adapter.
 		 */
@@ -60,7 +83,7 @@ package com.sibirjak.jakute {
 			_jcssAdapter = new JCSS_Adapter();
 			_jcssAdapter.stylesInitializedHandler = jcss_stylesInitializedHandler;
 			_jcssAdapter.stylesChangedHandler = jcss_stylesStylesChangedHandler;
-			JCSS.getInstance().registerComponent(this, _jcssAdapter);
+			_jcss_register(this, _jcssAdapter);
 		}
 		
 		/*
@@ -169,6 +192,13 @@ package com.sibirjak.jakute {
 			return _jcssAdapter.getStyle(styleName);
 		}
 
+		/**
+		 * @copy JCSS_Adapter#clearStyle()
+		 */
+		public function jcss_clearStyle(selector : String, styleName : String = null) : void {
+			_jcssAdapter.clearStyle(selector, styleName);
+		}
+
 		/*
 		 * Properties
 		 */
@@ -209,19 +239,33 @@ package com.sibirjak.jakute {
 		}
 
 		/*
+		 * CleanUp
+		 */
+
+		public function cleanUp() : void {
+			_jcss_unregister(this);
+		}
+
+		/*
 		 * JCSS Notifications
 		 */
 
 		/**
 		 * @copy JCSS_Adapter#onStylesInitialized()
 		 */
-		protected function jcss_onStylesInitialized(styles : Object) : void {
+		protected function jcss_onStylesInitialized() : void {
 		}
 
 		/**
 		 * @copy JCSS_Adapter#onStylesChanged()
 		 */
-		protected function jcss_onStylesChanged(styles : Object) : void {
+		protected function jcss_onStylesChanged(changedStyles : JCSS_ChangeEvent) : void {
+		}
+		
+		/**
+		 * @copy JCSS_Adapter#onStyleRulesChanged()
+		 */
+		protected function jcss_onStyleRulesChanged(changedStyles : JCSS_ChangeEvent) : void {
 		}
 		
 		/*
@@ -231,15 +275,15 @@ package com.sibirjak.jakute {
 		/**
 		 * Handler for the initialized event.
 		 */
-		private function jcss_stylesInitializedHandler(styles : Object, adapter : JCSS_Adapter) : void {
-			jcss_onStylesInitialized(styles);
+		private function jcss_stylesInitializedHandler(adapter : JCSS_Adapter) : void {
+			jcss_onStylesInitialized();
 		}
 
 		/**
 		 * Handler for the styles changed event.
 		 */
-		private function jcss_stylesStylesChangedHandler(styles : Object, adapter : JCSS_Adapter) : void {
-			jcss_onStylesChanged(styles);
+		private function jcss_stylesStylesChangedHandler(changedStyles : JCSS_ChangeEvent, adapter : JCSS_Adapter) : void {
+			jcss_onStylesChanged(changedStyles);
 		}
 
 		/*

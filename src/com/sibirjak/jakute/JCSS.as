@@ -23,16 +23,20 @@
 ******************************************************************************/
 package com.sibirjak.jakute {
 
+	import avmplus.getQualifiedClassName;
 	import com.sibirjak.jakute.framework.JCSS_ApplicationStyleManager;
 	import com.sibirjak.jakute.framework.JCSS_ComponentStyleManager;
 	import com.sibirjak.jakute.framework.core.JCSS_StyleManagerMap;
 	import com.sibirjak.jakute.framework.core.jcss_internal;
 	import com.sibirjak.jakute.framework.styles.JCSS_StyleValueFormatter;
+	import com.sibirjak.jakute.styles.JCSS_IValueFormatter;
+
+	import org.as3commons.collections.Map;
+	import org.as3commons.collections.framework.IMapIterator;
 
 	import flash.display.DisplayObject;
 	import flash.display.Stage;
 	import flash.events.Event;
-	import flash.utils.getQualifiedClassName;
 
 	/**
 	 * Jakute Styling Engine (JCSS).
@@ -53,149 +57,40 @@ package com.sibirjak.jakute {
 	 */
 	public class JCSS {
 		
-		/*
-		 * Constants
-		 */
-
-		/**
-		 * Constant for the string formatter.
-		 * 
-		 * <p>The string formatter simply casts the given value to String.</p>
-		 */
-		public static const FORMAT_STRING : String = "jcss_format_string";
-
-		/**
-		 * Constant for the number formatter.
-		 * 
-		 * <p>The number formatter simply casts the given value to Number.</p>
-		 */
-		public static const FORMAT_NUMBER : String = "jcss_format_number";
-
-		/**
-		 * Constant for the boolean formatter.
-		 * 
-		 * <p>The boolean formatter casts <code>true</code>, 1, "1" and "true" to <code>true</code>
-		 * and the rest to false.</p>
-		 */
-		public static const FORMAT_BOOLEAN : String = "jcss_format_boolan";
-
-		/**
-		 * Constant for the color formatter.
-		 * 
-		 * <p>The color formatter accepts uint values or HTML color values such as "#FF0000".
-		 * uint values are simply returned while HTML color values are converted into uint.</p>
-		 */
-		public static const FORMAT_COLOR : String = "jcss_format_color";
-
-		/**
-		 * Constant for the class formatter.
-		 * 
-		 * <p>If the given value is already of type class, the value is returned. All other
-		 * values are tried to convert into a class by using <code>flash.utils.getDefinitionByName()</code>.</p>
-		 */
-		public static const FORMAT_CLASS : String = "jcss_format_class";
-
-		/**
-		 * Constant for the style priority "default".
-		 * 
-		 * <p>The following rules apply to a default style:</p>
-		 * 
-		 * <ul>
-		 * <li>A default style declared in a component instance is being overridden from
-		 * styles of any priority declared in the global style manager or in an ancestor
-		 * component.</li>
-		 * <li>If the component or the global style manager (JCSS) that has declared the default style
-		 * now specifies another rule for this style, then:
-		 * 		<ol>
-		 * 		<li>If the new style is a default style, the style with the higher specifity applies.</li>
-		 * 		<li>If the new style is a fix or an important style, that style applies.</li>
-		 * 		</ol>
-		 * </li>  
-		 * </ul>
-		 */
-		public static const PRIORITY_DEFAULT : uint = 0;
-
-		/**
-		 * Constant for the style priority "important".
-		 * 
-		 * <p>The following rules apply to an important style:</p>
-		 * 
-		 * <ul>
-		 * <li>An important style declared in the global style manager or in an ancestor
-		 * component overrides all styles of default or fix (but not important) priority in child components.</li>
-		 * <li>If the component or the global style manager (JCSS) that has declared the important style
-		 * now specifies another rule for this style, then:
-		 * 		<ol>
-		 * 		<li>If the new style is also an important style, the later declared style applies.</li>
-		 * 		<li>If the new style is a fix or an default style, it is being ignored.</li>
-		 * 		</ol>
-		 * </li>  
-		 * </ul>
-		 */
-		public static const PRIORITY_IMPORTANT : uint = 2;
-
-		/**
-		 * Constant for the style priority "fix".
-		 * 
-		 * <p>The following rules apply to a fix style:</p>
-		 * 
-		 * <ul>
-		 * <li>A fix style declared in a component instance can not be overridden from
-		 * fix or default styles declared in the global style manager or in an ancestor
-		 * component.</li>
-		 * <li>A fix style is being overridden from important styles declared anywhere in
-		 * the same display list subtree.</li>
-		 * <li>If the component or the global style manager (JCSS) that has declared the fix style
-		 * now specifies another rule for this style, then:
-		 * 		<ol>
-		 * 		<li>If the new style is also a fix style, the style with the higher specifity applies.</li>
-		 * 		<li>If the new style is a default style, it is being ignored.</li>
-		 * 		<li>If the new style is an important style, that style applies.</li>
-		 * 		</ol>
-		 * </li>  
-		 * </ul>
-		 */
-		public static const PRIORITY_FIX : uint = 1;
-
-		/*
-		 * Static context
-		 */
-
-		/**
-		 * Single instance.
-		 */
-		private static var _instance : JCSS;
-
-		/**
-		 * Returns the single instance of the JCSS service.
-		 * 
-		 * <p>The JCSS service will be created with the first call to this method.</p>
-		 * 
-		 * @return The single JCSS instance.
-		 */
-		public static function getInstance() : JCSS {
-			if (!_instance) _instance = new JCSS();
-			return _instance;
-		}
-
-		/*
-		 * Instance context
-		 */
-
 		/**
 		 * The stage reference.
 		 */
 		private var _stage : Stage;
 
 		/**
+		 * Priority on that JCSS listens to stage events.
+		 */
+		private var _stageEventPriority : int = 11;
+
+		/**
+		 * Style manager registry.
+		 */
+		private var _styleManagerMap : JCSS_StyleManagerMap;
+
+		/**
 		 * The single application style manager.
 		 */
-		private var _styleManager : JCSS_ApplicationStyleManager;
+		private var _applicationStyleManager : JCSS_ApplicationStyleManager;
 
 		/**
 		 * Collection of all registered types to be automatically processed.
 		 */
-		private var _registeredTypes : Object;
+		private var _registeredTypes : Map;
+		
+		/**
+		 * Type check cache.
+		 */
+		private var _typeCheckCache : Map;
+		
+		/**
+		 * Registered style value formatters.
+		 */
+		private var _styleValueFormatters : JCSS_StyleValueFormatter;
 		
 		/**
 		 * JCSS.
@@ -205,9 +100,28 @@ package com.sibirjak.jakute {
 		 * @param stage The state reference.
 		 */
 		public function JCSS() {
-			_styleManager = new JCSS_ApplicationStyleManager();
+			_styleManagerMap = new JCSS_StyleManagerMap();
 
-			JCSS_StyleManagerMap.getInstance().applicationStyleManager = _styleManager;
+			_applicationStyleManager = new JCSS_ApplicationStyleManager();
+			_applicationStyleManager.jcss = this;
+			
+			_styleValueFormatters = new JCSS_StyleValueFormatter();
+		}
+
+		/**
+		 * Stage event (add, remove) listening priority.
+		 * 
+		 * <p>Default is 11.</p>
+		 */
+		public function set stageEventPriority(stageEventPriority : int) : void {
+			_stageEventPriority = stageEventPriority;
+		}
+
+		/**
+		 * @private
+		 */
+		public function get stageEventPriority() : int {
+			return _stageEventPriority;
 		}
 
 		/*
@@ -230,12 +144,13 @@ package com.sibirjak.jakute {
 		 * @param adapter The JCSS component adapter.
 		 */
 		public function registerComponent(component : DisplayObject, adapter : JCSS_Adapter) : void {
-			if (JCSS_StyleManagerMap.getInstance().hasStyleManager(component)) throw new Error("You cannot register a component twice.");
+			if (_styleManagerMap.hasStyleManager(component)) throw new Error("You cannot register a component twice.");
 			if (adapter.component) throw new Error("You cannot reuse an adapter.");
 			if (component.stage) throw new Error("You cannot register a component that is already in the display list.");
 
 			var styleManager : JCSS_ComponentStyleManager = adapter.jcss_internal::getStyleManager_internal();
-			JCSS_StyleManagerMap.getInstance().register(component, styleManager);
+			_styleManagerMap.register(component, styleManager);
+			styleManager.jcss = this;
 			styleManager.component = component;
 		}
 
@@ -248,7 +163,11 @@ package com.sibirjak.jakute {
 		 * @param component The display object to remove from JCSS.
 		 */
 		public function unregisterComponent(component : DisplayObject) : void {
-			JCSS_StyleManagerMap.getInstance().unregister(component);
+			var styleManager : JCSS_ComponentStyleManager = _styleManagerMap.getComponentStyleManager(component);
+			if (styleManager) {
+				_styleManagerMap.unregister(component);
+				styleManager.cleanUp();
+			}
 		}
 
 		/**
@@ -259,9 +178,13 @@ package com.sibirjak.jakute {
 		 * instance to set a listener to the <code>stage.ADDED_TO_STAGE</code> event.</p>
 		 * 
 		 * @param stage The state reference.
+		 * @param monitorInterfaces Flag, indicates if interfaces should be examined.
 		 */
 		public function startTypeMonitoring(stage : Stage) : void {
 			_stage = stage;
+			_registeredTypes = new Map();
+			_typeCheckCache = new Map();
+			_stage.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler, true, _stageEventPriority);
 		}
 
 		/**
@@ -271,23 +194,22 @@ package com.sibirjak.jakute {
 		 * Any added display object that matches a formerly set type registration,
 		 * is automatically initialized.</p>
 		 * 
-		 * @param type The type to be watched for.
-		 * @param Adapter The adapter class to be used in initialization.
+		 * <p>Using the <code>matchExactType</code> flag you can determine whether a
+		 * component should exactly be of the specified type (tests
+		 * <code>getQualifiedClassName(component) == getQualifiedClassName(Type)</code>)
+		 * or is allowed to be a sub class or an implementor (tests <code>component is Type</code>).</p>
+		 * 
+		 * @param type The type to be watched.
+		 * @param Adapter The adapter class to be used with the component that matchs the type.
+		 * @param matchExactType Flag to control the component to Type comparision.
 		 */
-		public function registerType(type : Class, Adapter : Class) : void {
+		public function registerType(Type : Class, Adapter : Class, matchExactType : Boolean = false) : void {
 			if (!_stage) throw new Error("You need to call startTypeMonitoring(stage) before registering a type in JCSS.");
 
-			var className : String = getQualifiedClassName(type);
-
-			if (!_registeredTypes) {
-				_registeredTypes = new Object();
-				_stage.addEventListener(Event.ADDED_TO_STAGE, addedToStageHandler, true);
-
-			} else {
-				if (_registeredTypes[className]) return;
-			}
-
-			_registeredTypes[className] = Adapter;
+			if (_registeredTypes.hasKey(Type)) return;
+			
+			_registeredTypes.add(Type, [Adapter, matchExactType]);
+			_typeCheckCache.clear();
 		}
 
 		/*
@@ -310,8 +232,8 @@ package com.sibirjak.jakute {
 		 * @param formatter The custom formatter function.
 		 * @see JCSS_StyleFormat
 		 */
-		public function registerStyleValueFormatter(formatterKey : String, formatter : Function) : void {
-			JCSS_StyleValueFormatter.getInstance().registerFormatter(formatterKey, formatter);
+		public function registerStyleValueFormatter(formatterKey : String, formatter : JCSS_IValueFormatter) : void {
+			_styleValueFormatters.registerFormatter(formatterKey, formatter);
 		}
 
 		/*
@@ -327,7 +249,7 @@ package com.sibirjak.jakute {
 		 * times, it is recommended to wrap the update in the bulk transaction.</p>
 		 */
 		public function startBulkUpdate() : void {
-			_styleManager.startBulkUpdate();
+			_applicationStyleManager.startBulkUpdate();
 		}
 
 		/**
@@ -341,7 +263,7 @@ package com.sibirjak.jakute {
 		 * are notified alternating, e.g. C-1, C-2, C-2.1, C-2.2, C-1.3, C-2.4, C-1.1
 		 */
 		public function commitBulkUpdate() : void {
-			_styleManager.commitBulkUpdate();
+			_applicationStyleManager.commitBulkUpdate();
 		}
 
 		/**
@@ -365,7 +287,7 @@ package com.sibirjak.jakute {
 		 * @param styleSheet The global stylesheet.
 		 */
 		public function setStyleSheet(styleSheet : String) : void {
-			_styleManager.setStyleSheet(styleSheet);
+			_applicationStyleManager.setStyleSheet(styleSheet);
 		}
 
 		/**
@@ -380,9 +302,29 @@ package com.sibirjak.jakute {
 		 * @param priority The style priority (null, "!important" or "default").
 		 */
 		public function setStyle(selector : String, styleName : String, styleValue : *, priority : uint = 1) : void {
-			_styleManager.setStyle(selector, styleName, styleValue, priority);
+			_applicationStyleManager.setStyle(selector, styleName, styleValue, priority);
 		}
 		
+		public function clearStyle(selector : String, styleName : String = null) : void {
+			_applicationStyleManager.clearStyle(selector, styleName);
+		}
+		
+		/*
+		 * Internal
+		 */
+
+		jcss_internal function getStyleValueFormatter(key : String) : JCSS_IValueFormatter {
+			return _styleValueFormatters.getFormatter(key);
+		}
+
+		jcss_internal function get applicationStyleManager() : JCSS_ApplicationStyleManager {
+			return _applicationStyleManager;
+		}
+
+		jcss_internal function getComponentStyleManager(component : DisplayObject) : JCSS_ComponentStyleManager {
+			return _styleManagerMap.getComponentStyleManager(component);
+		}
+
 		/*
 		 * Private
 		 */
@@ -393,17 +335,43 @@ package com.sibirjak.jakute {
 		private function addedToStageHandler(event : Event) : void {
 			var component : DisplayObject = event.target as DisplayObject;
 
-			// component not registered yet
-			if (!JCSS_StyleManagerMap.getInstance().hasStyleManager(component)) {
-				// check if a type adapter for that component is present
-				var Adapter : Class = _registeredTypes[getQualifiedClassName(component)];
-				if (Adapter) {
-					var adapter : JCSS_Adapter = new Adapter();
+			// component already registered
+			if (_styleManagerMap.hasStyleManager(component)) return;
 
-					var styleManager : JCSS_ComponentStyleManager = adapter.jcss_internal::getStyleManager_internal();
-					JCSS_StyleManagerMap.getInstance().register(component, styleManager);
-					styleManager.component = component;
+			var componentClassName : String = getQualifiedClassName(component);
+			var Adapter : Class;
+			
+			if (_typeCheckCache.hasKey(componentClassName)) {
+				Adapter = _typeCheckCache.itemFor(componentClassName);
+
+			} else {
+				var iterator : IMapIterator = _registeredTypes.iterator() as IMapIterator;
+				while (iterator.hasNext()) {
+					var adapterAttributes : Array = iterator.next();
+					var Type : Class = iterator.key;
+					
+					if (adapterAttributes[1]) {
+						if (componentClassName == getQualifiedClassName(Type)) {
+							Adapter = adapterAttributes[0];
+						}
+					} else {
+						if (component is Type) {
+							Adapter = adapterAttributes[0];
+						}
+					}
+					
+					if (Adapter) break;
 				}
+				
+				_typeCheckCache.add(componentClassName, Adapter);
+			}
+			
+			if (Adapter) {
+				var adapter : JCSS_Adapter = new Adapter();
+				var styleManager : JCSS_ComponentStyleManager = adapter.jcss_internal::getStyleManager_internal();
+				_styleManagerMap.register(component, styleManager);
+				styleManager.jcss = this;
+				styleManager.component = component;
 			}
 		}
 
@@ -497,7 +465,7 @@ package com.sibirjak.jakute {
 		 *	</listing>
 		 */
 		public function styleRuleTreeAsString() : String {
-			return _styleManager.styleRuleTreeAsString();
+			return _applicationStyleManager.styleRuleTreeAsString();
 		}
 
 	}

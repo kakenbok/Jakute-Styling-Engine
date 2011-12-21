@@ -23,7 +23,7 @@
 ******************************************************************************/
 package com.sibirjak.jakute.framework.parser {
 
-	import com.sibirjak.jakute.JCSS;
+	import com.sibirjak.jakute.constants.JCSS_StyleDeclarationPriority;
 	import com.sibirjak.jakute.framework.stylerules.JCSS_StyleDeclaration;
 	import com.sibirjak.jakute.framework.stylerules.JCSS_StyleRule;
 	import com.sibirjak.jakute.framework.stylerules.JCSS_StyleRuleTree;
@@ -36,6 +36,7 @@ package com.sibirjak.jakute.framework.parser {
 		private static const REGEX_COMMENTS : RegExp = /  \/\*  .*?  \*\/  |  \/\/  [^\n]*$  /xsmg;
 		private static const REGEX_BLOCKS : RegExp = /  ([^\}\{]*?)  \{  ([^\}\{]*?)  \}  /xg;
 		private static const REGEX_STYLE_DECLARATIONS : RegExp = /  ([\w\-]+)  \s*:\s*  ([^;\n\r]+)  /xg;
+		private static const REGEX_STYLE_VALUE : RegExp = /  (  [^\s](.*[^\s])?  )  /x;
 
 		public static function parse(css : String, styleRuleTree : JCSS_StyleRuleTree) : void {
 
@@ -76,31 +77,30 @@ package com.sibirjak.jakute.framework.parser {
 							while (resultStyleDeclarations) {
 								
 								styleValue = resultStyleDeclarations[2];
-								stylePriority = JCSS.PRIORITY_FIX;
+								stylePriority = JCSS_StyleDeclarationPriority.PRIORITY_FIX;
 								
 								// test and remove important flag
 								resultImportant = RegExp(/  (^|\s)  !\s*important  (\s|$)  /x).exec(styleValue);
 								if (resultImportant)  {
-									stylePriority = JCSS.PRIORITY_IMPORTANT; 
+									stylePriority = JCSS_StyleDeclarationPriority.PRIORITY_IMPORTANT; 
 									styleValue = styleValue.substring(0, resultImportant["index"] + 1);
 								}
 								
 								// test and remove default flag
 								resultDefault = RegExp(/  (^|\s)  default  (\s|$)  /x).exec(styleValue);
 								if (resultDefault)  {
-									stylePriority = JCSS.PRIORITY_DEFAULT; 
+									stylePriority = JCSS_StyleDeclarationPriority.PRIORITY_DEFAULT; 
 									styleValue = styleValue.substring(0, resultDefault["index"] + 1);
 								}
 								
-								// style values
-								resultStyleValues = styleValue.match(/  (  [\w#\.][\w\.\-]*  )  /xg);
+								// style values (non-space (.*non-space)?)
+								resultStyleValues = REGEX_STYLE_VALUE.exec(styleValue);
+								
 								if (resultStyleValues) {
 									styleDeclaration = new JCSS_StyleDeclaration();
 									styleDeclaration.propertyName = resultStyleDeclarations[1];
 									styleDeclaration.priority = stylePriority;
 									styleDeclaration.value = resultStyleValues[0];
-									// TODO enable list of values
-									//resultStyleValues.length > 1 ? resultStyleValues : resultStyleValues[0];
 
 									if (!styleRule) styleRule = new JCSS_StyleRule(selectorMeta);
 									styleRule.styles[resultStyleDeclarations[1]] = styleDeclaration;

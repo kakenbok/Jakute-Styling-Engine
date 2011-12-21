@@ -23,6 +23,7 @@
 ******************************************************************************/
 package com.sibirjak.jakute {
 
+	import com.sibirjak.jakute.events.JCSS_ChangeEvent;
 	import com.sibirjak.jakute.framework.JCSS_ComponentStyleManager;
 	import com.sibirjak.jakute.framework.core.jcss_internal;
 
@@ -105,7 +106,7 @@ package com.sibirjak.jakute {
 		}
 
 		/**
-		 * Returns true if style already have been initialized.
+		 * Returns true if styles already have been initialized.
 		 * 
 		 * @return <code>true</code> if styles initialized.
 		 */
@@ -197,13 +198,13 @@ package com.sibirjak.jakute {
 		 * <p>Styles need to be defined initially. Not initially defined styles are ignored
 		 * and never affect the particular component.</p>
 		 * 
-		 * <p>Styles can be defined only initially (before the initialized event).
+		 * <p>Styles can only be defined initially (before the initialized event).
 		 * Otherwise an error is thrown.</p>
 		 * 
 		 * @param styleName The name of the style of a component.
 		 * @param styleValue The initial value of the component style.
 		 * @param format The key of the formatter of the style value.
-		 * @param isDefault Indicates if the initial style value may be overriden.
+		 * @param priority Style priority (default, fix, important).
 		 */
 		public function defineStyle(styleName : String, styleValue : *, format : String, priority : uint = 0) : void {
 			_styleManager.defineStyle(styleName, styleValue, format, priority);
@@ -262,14 +263,38 @@ package com.sibirjak.jakute {
 		}
 
 		/**
-		 * Returns the current value of the given style name.
+		 * Returns the current value for the given style name.
 		 * 
 		 * <p>Returns initially (before the initialized event) <code>null<code>, for sure.</p>
+		 * 
+		 * @param styleName The name of the style.
+		 * @return The current value of the style.
 		 */
 		public function getStyle(styleName : String) : * {
 			return _styleManager.getStyle(styleName);
 		}
 		
+		/**
+		 * Removes a style that has formerly been set.
+		 * 
+		 * <p>If <code>styleName</code> is specified, the style is removed from the style
+		 * rule specified with the given selector.</p>
+		 * 
+		 * <p>The method does nothing if a style rule with the given selector has not been
+		 * set beforehand or a style with the given <code>styleName</code> has not been declared
+		 * within the style rule described by the given selector.</p>
+		 * 
+		 * <p>Using this method to clear styles set to the component directly (by passing
+		 * the selector <code>"This"</code> or <code>""</code>) will reset the style
+		 * to its default value specified by the component.</p>
+		 * 
+		 * @param selector A selector that matchs a particular component.
+		 * @param styleName The name of the style to remove.
+		 */
+		public function clearStyle(selector : String, styleName : String = null) : void {
+			_styleManager.clearStyle(selector, styleName);
+		}
+
 		/*
 		 * Properties
 		 */
@@ -443,8 +468,8 @@ package com.sibirjak.jakute {
 		 * However, this enables to reuse the same handler with different adapters.</p> 
 		 * 
 		 *	<listing>
-			theAdapter.stylesChangedHandler = function(allChangedStyles : Object, adapter : JCSS_Adapter) : void {
-				if (allChangedStyles["backgroundColor"] != undefined) {
+			theAdapter.stylesChangedHandler = function(changedStyles : JCSS_ChangedStyles, adapter : JCSS_Adapter) : void {
+				if (changedStyles.valueHasChanged("backgroundColor")) {
 					Box(adapter.component).updateBackground();
 				}
 			};
@@ -492,27 +517,27 @@ package com.sibirjak.jakute {
 		 * @param styles All styles of the component.
 		 * @private
 		 */
-		jcss_internal function stylesInitialized_internal(styles : Object) : void {
+		jcss_internal function stylesInitialized_internal() : void {
 			//trace ("---- styles initialized", componentSelectorAsString());
 			if (_stylesInitializedHandler != null) {
-				_stylesInitializedHandler(styles, this);
+				_stylesInitializedHandler(this);
 			} else {
-				onStylesInitialized(styles);
+				onStylesInitialized();
 			}
 		}
 		
 		/**
 		 * Styles changed callback.
 		 * 
-		 * @param styles All recently changed styles.
+		 * @param changedStyles All recently changed styles and style rules.
 		 * @private
 		 */
-		jcss_internal function stylesChanged_internal(styles : Object) : void {
+		jcss_internal function stylesChanged_internal(changedStyles : JCSS_ChangeEvent) : void {
 			//trace ("-------- styles changed", componentSelectorAsString());
 			if (_stylesChangedHandler != null) {
-				_stylesChangedHandler(styles, this);
+				_stylesChangedHandler(changedStyles, this);
 			} else {
-				onStylesChanged(styles);
+				onStylesChanged(changedStyles);
 			}
 		}
 
@@ -536,10 +561,9 @@ package com.sibirjak.jakute {
 		 * 
 		 * <p>Template method, to be overridden in a sub class.</p>
 		 * 
-		 * @param styles All initial styles of the component.
 		 * @see #stylesInitializedHandler
 		 */
-		protected function onStylesInitialized(styles : Object) : void {
+		protected function onStylesInitialized() : void {
 			// template method
 		}
 		
@@ -548,10 +572,10 @@ package com.sibirjak.jakute {
 		 * 
 		 * <p>Template method, to be overridden in a sub class.</p>
 		 * 
-		 * @param styles All recently changed styles.
+		 * @param changedStyles All recently changed styles.
 		 * @see #stylesChangedHandler
 		 */
-		protected function onStylesChanged(styles : Object) : void {
+		protected function onStylesChanged(changedStyles : JCSS_ChangeEvent) : void {
 			// template method
 		}
 		

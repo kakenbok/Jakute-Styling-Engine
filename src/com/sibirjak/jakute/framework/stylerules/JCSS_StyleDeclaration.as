@@ -23,7 +23,7 @@
 ******************************************************************************/
 package com.sibirjak.jakute.framework.stylerules {
 
-	import com.sibirjak.jakute.JCSS;
+	import com.sibirjak.jakute.constants.JCSS_StyleDeclarationPriority;
 
 	/**
 	 * @author Jens Struwe 06.09.2010
@@ -34,9 +34,10 @@ package com.sibirjak.jakute.framework.stylerules {
 
 		public var propertyName : String;
 		public var value : *;
-		public var timeStamp : uint;
+		public var format : String;
+		public var priority : uint = JCSS_StyleDeclarationPriority.PRIORITY_FIX;
 		
-		public var priority : uint = JCSS.PRIORITY_FIX;
+		public var timeStamp : uint;
 		
 		public function JCSS_StyleDeclaration() {
 			timeStamp = ++STYLE_DECLARATION_TIMESTAMP;

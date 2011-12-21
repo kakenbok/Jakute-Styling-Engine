@@ -23,14 +23,23 @@
 ******************************************************************************/
 package com.sibirjak.jakute.framework.styles {
 
-	import com.sibirjak.jakute.JCSS;
+	import com.sibirjak.jakute.constants.JCSS_StyleDeclarationPriority;
+	import com.sibirjak.jakute.constants.JCSS_StyleValueFormat;
+	import com.sibirjak.jakute.events.JCSS_ChangeEvent;
+	import com.sibirjak.jakute.framework.JCSS_ComponentStyleManager;
+	import com.sibirjak.jakute.framework.core.jcss_internal;
 	import com.sibirjak.jakute.framework.stylerules.JCSS_StyleDeclaration;
 	import com.sibirjak.jakute.framework.stylerules.JCSS_StyleRule;
+	import com.sibirjak.jakute.styles.JCSS_IValueFormatter;
+	
+	use namespace jcss_internal;
 
 	/**
 	 * @author Jens Struwe 11.01.2011
 	 */
 	public class JCSS_StyleValueManager {
+		
+		private var _styleManager : JCSS_ComponentStyleManager;
 		
 		private var _definedStyles : Object;
 		
@@ -42,7 +51,8 @@ package com.sibirjak.jakute.framework.styles {
 
 		private var _snapshot : Object;
 		
-		public function JCSS_StyleValueManager() {
+		public function JCSS_StyleValueManager(styleManager : JCSS_ComponentStyleManager) {
+			_styleManager = styleManager;
 			_definedStyles = new Object();
 			
 			clearAllStyles();
@@ -52,8 +62,18 @@ package com.sibirjak.jakute.framework.styles {
 		 * Define styles
 		 */
 		
-		public function defineStyle(styleName : String, format : String) : void {
-			_definedStyles[styleName] = format;
+		public function defineStyle(styleName : String, styleValue : *, format : String, priority : uint) : void {
+			var styleDeclaration : JCSS_StyleDeclaration = new JCSS_StyleDeclaration();
+			styleDeclaration.propertyName = styleName;
+			styleDeclaration.value = styleValue;
+			styleDeclaration.format = format;
+			styleDeclaration.priority = priority;
+			
+			_definedStyles[styleName] = styleDeclaration;
+		}
+
+		public function get definedStyles() : Object {
+			return _definedStyles;
 		}
 
 		/*
@@ -102,6 +122,23 @@ package com.sibirjak.jakute.framework.styles {
 			}
 		}
 		
+		public function removeStyle(styleRule : JCSS_StyleRule, propertyName : String) : void {
+			// no change if current style is not from the rule
+			if (styleRule != _styleStyleRuleMap[propertyName]) return;
+
+			delete _styles[propertyName];
+			delete _styleStyleRuleMap[propertyName];
+			delete _stylesTimeStampMap[propertyName];
+
+			var tmpStyleRule : JCSS_StyleRule;
+			for each (tmpStyleRule in _styleRules) {
+				if (!tmpStyleRule.styles[propertyName]) continue; // rule does not define the property
+				if (!shouldSetStyleFromRule(tmpStyleRule, propertyName)) continue;
+
+				setStyle(tmpStyleRule, propertyName);
+			}
+		}
+		
 		/*
 		 * Get styles
 		 */
@@ -125,19 +162,23 @@ package com.sibirjak.jakute.framework.styles {
 			}
 		}
 
-		public function getChangedStyles() : Object {
-			//if (!_snapshot) return null; // can this be null?
-
-			var stylesChanged : Boolean;
-			var changedStyles : Object = new Object();
+		public function getChangedStyles() : JCSS_ChangeEvent {
+			//info ("getChangedStyles");
+			var changedStyles : JCSS_ChangeEvent = new JCSS_ChangeEvent();
 			for (var propertyName : String in _styles) {
-				if (_styles[propertyName] !== _snapshot[propertyName]) {
-					changedStyles[propertyName] = _styles[propertyName];
-					stylesChanged = true;
+				//info ("--", propertyName, _styles[propertyName]);
+				//info ("--", _styleStyleRuleMap[propertyName], _snapshotStyleRules[propertyName]);
+				var formatter : JCSS_IValueFormatter = _styleManager.jcss.getStyleValueFormatter(
+					JCSS_StyleDeclaration(_definedStyles[propertyName]).format
+				);
+				// style changed
+				if (!formatter.equals(_styles[propertyName], _snapshot[propertyName])) {
+					changedStyles.setValue(propertyName, _styles[propertyName]);
 				}
 			}
+
 			_snapshot = null;
-			return stylesChanged ? changedStyles : null;
+			return changedStyles;
 		}
 		
 		/*
@@ -158,8 +199,12 @@ package com.sibirjak.jakute.framework.styles {
 		
 		private function setStyle(styleRule : JCSS_StyleRule, propertyName : String) : void {
 			var value : * = JCSS_StyleDeclaration(styleRule.styles[propertyName]).value;
-			var formatter : Function = JCSS_StyleValueFormatter.getInstance().getFormatter(_definedStyles[propertyName]);
-			if (formatter != null) value = formatter(value);
+
+			var formatter : JCSS_IValueFormatter = _styleManager.jcss.getStyleValueFormatter(
+				JCSS_StyleDeclaration(_definedStyles[propertyName]).format
+			);
+			value = JCSS_IValueFormatter(formatter).format(value);
+			JCSS_StyleDeclaration(styleRule.styles[propertyName]).value = value; // format style rule value
 			
 			_styles[propertyName] = value;
 			_styleStyleRuleMap[propertyName] = styleRule;
@@ -209,14 +254,14 @@ package com.sibirjak.jakute.framework.styles {
 					 * a less specific default style does not override a more specific default
 					 * style when declared both in the same component instance.
 					 */
-					if (styleDeclaration.priority == JCSS.PRIORITY_DEFAULT) {
+					if (styleDeclaration.priority == JCSS_StyleDeclarationPriority.PRIORITY_DEFAULT) {
 						return diff < 0 ? false : true;
 					}
 					/*
 					 * a less specific default style does not override a more specific default
 					 * style when declared both in the same component instance.
 					 */
-					if (styleDeclaration.priority == JCSS.PRIORITY_IMPORTANT) {
+					if (styleDeclaration.priority == JCSS_StyleDeclarationPriority.PRIORITY_IMPORTANT) {
 						return styleDeclaration.timeStamp < oldStyleDeclaration.timeStamp ? false : true;
 					}
 				}
@@ -227,7 +272,7 @@ package com.sibirjak.jakute.framework.styles {
 			 */
 			if (diff < 0) { // new style is lesser specific
 				// a less specific style of any priority overrides a more specific default style
-				if (oldStyleDeclaration.priority == JCSS.PRIORITY_DEFAULT) {
+				if (oldStyleDeclaration.priority == JCSS_StyleDeclarationPriority.PRIORITY_DEFAULT) {
 					return true;
 				}
 				// a less specific style with higher priority overrides a more specific style
@@ -235,7 +280,7 @@ package com.sibirjak.jakute.framework.styles {
 				
 			} else { // new style is more specific
 				// a more specific default style does not override a lesser specific style of any priority
-				if (styleDeclaration.priority == JCSS.PRIORITY_DEFAULT) {
+				if (styleDeclaration.priority == JCSS_StyleDeclarationPriority.PRIORITY_DEFAULT) {
 					return false;
 				}
 				// a more specific style with lesser priority does not override a lesser specific style
@@ -258,9 +303,9 @@ package com.sibirjak.jakute.framework.styles {
 				styleDeclaration = styleRule.styles[propertyName];
 				styleValue = styles[propertyName];
 				
-				if (_definedStyles[propertyName] == JCSS.FORMAT_COLOR) styleValue = hexToString(styleValue);
-				if (styleDeclaration.priority == JCSS.PRIORITY_DEFAULT) styleValue += " default";
-				if (styleDeclaration.priority == JCSS.PRIORITY_IMPORTANT) styleValue += " !important";
+				if (JCSS_StyleDeclaration(_definedStyles[propertyName]).format == JCSS_StyleValueFormat.FORMAT_HTML_COLOR) styleValue = hexToString(styleValue);
+				if (styleDeclaration.priority == JCSS_StyleDeclarationPriority.PRIORITY_DEFAULT) styleValue += " default";
+				if (styleDeclaration.priority == JCSS_StyleDeclarationPriority.PRIORITY_IMPORTANT) styleValue += " !important";
 				
 				string += fillToSize(propertyName + ":", 30) + fillToSize(styleValue + ";", 30);
 				string += fillToSize("[specifity: " + styleRule.specifity, 24);
@@ -278,7 +323,6 @@ package com.sibirjak.jakute.framework.styles {
 				for (var i : uint = string.length; i < size; i++) string += " ";
 				return string;
 			}
-
 		}
 
 	}

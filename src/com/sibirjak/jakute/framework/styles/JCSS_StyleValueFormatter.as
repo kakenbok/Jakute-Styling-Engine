@@ -23,26 +23,22 @@
 ******************************************************************************/
 package com.sibirjak.jakute.framework.styles {
 
-	import com.sibirjak.jakute.JCSS;
-
-	import flash.utils.getDefinitionByName;
+	import com.sibirjak.jakute.constants.JCSS_StyleValueFormat;
+	import com.sibirjak.jakute.framework.styles.formatter.JCSS_BooleanFormatter;
+	import com.sibirjak.jakute.framework.styles.formatter.JCSS_ClassFormatter;
+	import com.sibirjak.jakute.framework.styles.formatter.JCSS_HTMLColorFormatter;
+	import com.sibirjak.jakute.framework.styles.formatter.JCSS_HTMLColorListFormatter;
+	import com.sibirjak.jakute.framework.styles.formatter.JCSS_NumberFormatter;
+	import com.sibirjak.jakute.framework.styles.formatter.JCSS_SkinFormatter;
+	import com.sibirjak.jakute.framework.styles.formatter.JCSS_StringFormatter;
+	import com.sibirjak.jakute.framework.styles.formatter.JCSS_StringListFormatter;
+	import com.sibirjak.jakute.styles.JCSS_IValueFormatter;
 
 	/**
 	 * @author Jens Struwe 11.01.2011
 	 */
 	public class JCSS_StyleValueFormatter {
 		
-		/*
-		 * Static context
-		 */
-
-		private static var _instance : JCSS_StyleValueFormatter;
-		
-		public static function getInstance() : JCSS_StyleValueFormatter {
-			if (!_instance) _instance = new JCSS_StyleValueFormatter();
-			return _instance;
-		}
-
 		/*
 		 * Instance context
 		 */
@@ -52,59 +48,27 @@ package com.sibirjak.jakute.framework.styles {
 		public function JCSS_StyleValueFormatter() {
 			_formatters = new Object();
 			
-			_formatters[JCSS.FORMAT_STRING] = formatString;
-			_formatters[JCSS.FORMAT_NUMBER] = formatNumber;
-			_formatters[JCSS.FORMAT_BOOLEAN] = formatBoolean;
-			_formatters[JCSS.FORMAT_COLOR] = formatColor;
-			_formatters[JCSS.FORMAT_CLASS] = formatClass;
+			_formatters[JCSS_StyleValueFormat.FORMAT_STRING] = new JCSS_StringFormatter();
+			_formatters[JCSS_StyleValueFormat.FORMAT_STRING_LIST] = new JCSS_StringListFormatter();
+
+			_formatters[JCSS_StyleValueFormat.FORMAT_NUMBER] = new JCSS_NumberFormatter();
+
+			_formatters[JCSS_StyleValueFormat.FORMAT_BOOLEAN] = new JCSS_BooleanFormatter();
+
+			_formatters[JCSS_StyleValueFormat.FORMAT_HTML_COLOR] = new JCSS_HTMLColorFormatter();
+			_formatters[JCSS_StyleValueFormat.FORMAT_HTML_COLOR_LIST] = new JCSS_HTMLColorListFormatter();
+
+			_formatters[JCSS_StyleValueFormat.FORMAT_CLASS] = new JCSS_ClassFormatter();
+
+			_formatters[JCSS_StyleValueFormat.FORMAT_SKIN] = new JCSS_SkinFormatter();
 		}
 		
-		public function registerFormatter(key : String, formatter : Function) : void {
+		public function registerFormatter(key : String, formatter : JCSS_IValueFormatter) : void {
 			_formatters[key] = formatter;
 		}
 
-		public function getFormatter(key : String) : Function {
+		public function getFormatter(key : String) : JCSS_IValueFormatter {
 			return _formatters[key];
-		}
-
-		public function formatString(value : *) : String {
-			return String(value);
-		}
-
-		public function formatNumber(value : *) : Number {
-			return Number(value);
-		}
-
-		public function formatBoolean(value : *) : Boolean {
-			if (value is Boolean) return value;
-			switch (value) {
-				case 1:
-				case "1":
-				case "true":
-					return true;
-			}
-			return false;
-		}
-
-		/**
-		 * The value here is supposed to be already a number or in
-		 * the form of #RRGGBB.
-		 */
-		public function formatColor(value : *) : uint {
-			if (value is uint) return value;
-			return uint("0x" + String(value).replace("#", ""));
-		}
-
-		public function formatClass(value : *) : Class {
-			if (value is Class) return value;
-			if (value is String) {
-				try {
-					return getDefinitionByName(value) as Class;
-				} catch (e : Error) {
-					// do nothing
-				}
-			}
-			return null;
 		}
 
 	}

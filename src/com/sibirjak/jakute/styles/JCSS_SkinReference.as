@@ -21,39 +21,31 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 ******************************************************************************/
-package com.sibirjak.jakute.framework.core {
-
-	import com.sibirjak.jakute.framework.JCSS_ComponentStyleManager;
-
-	import flash.display.DisplayObject;
-	import flash.utils.Dictionary;
+package com.sibirjak.jakute.styles {
 
 	/**
-	 * @author Jens Struwe 11.01.2011
+	 * Skin reference style value.
+	 * 
+	 * <p>The skin reference not only stores the skin class but also values
+	 * for the optional cacheID and constructorArgument properties.</p>
+	 * 
+	 * <p>Using the skin formatter, the system internally stores an object
+	 * of this class accociated with the skin property name. Setting a skin
+	 * style programatically should also provide an instance of this class.</p>
+	 * 
+	 * @author Jens Struwe 06.12.2011
 	 */
-	public class JCSS_StyleManagerMap {
-		
-		private var _map : Dictionary;
-		
-		public function JCSS_StyleManagerMap() {
-			_map = new Dictionary();
-		}
-		
-		public function register(component : DisplayObject, styleManager : JCSS_ComponentStyleManager) : void {
-			_map[component] = styleManager;
+	public class JCSS_SkinReference {
+
+		public function JCSS_SkinReference(Skin : Class = null, cacheID : String = null, constructorArgument : String = null) {
+			this.Skin = Skin;
+			this.cacheID = cacheID;
+			this.constructorArgument = constructorArgument;
 		}
 
-		public function unregister(component : DisplayObject) : void {
-			delete _map[component];
-		}
+		public var Skin : Class;
+		public var cacheID : String;
+		public var constructorArgument : String;
 
-		public function hasStyleManager(component : DisplayObject) : Boolean {
-			return _map[component] != null;
-		}
-		
-		public function getComponentStyleManager(component : DisplayObject) : JCSS_ComponentStyleManager {
-			return _map[component];
-		}
-		
 	}
 }

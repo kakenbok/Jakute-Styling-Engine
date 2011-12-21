@@ -21,39 +21,18 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 * THE SOFTWARE.
 ******************************************************************************/
-package com.sibirjak.jakute.framework.core {
-
-	import com.sibirjak.jakute.framework.JCSS_ComponentStyleManager;
-
-	import flash.display.DisplayObject;
-	import flash.utils.Dictionary;
+package com.sibirjak.jakute.styles {
 
 	/**
-	 * @author Jens Struwe 11.01.2011
+	 * Definition of a style value formatter.
+	 * 
+	 * @author Jens Struwe 07.12.2011
 	 */
-	public class JCSS_StyleManagerMap {
-		
-		private var _map : Dictionary;
-		
-		public function JCSS_StyleManagerMap() {
-			_map = new Dictionary();
-		}
-		
-		public function register(component : DisplayObject, styleManager : JCSS_ComponentStyleManager) : void {
-			_map[component] = styleManager;
-		}
+	public interface JCSS_IValueFormatter {
 
-		public function unregister(component : DisplayObject) : void {
-			delete _map[component];
-		}
+		function format(value : *) : *;
+		
+		function equals(value1 : *, value2 : *) : Boolean;
 
-		public function hasStyleManager(component : DisplayObject) : Boolean {
-			return _map[component] != null;
-		}
-		
-		public function getComponentStyleManager(component : DisplayObject) : JCSS_ComponentStyleManager {
-			return _map[component];
-		}
-		
 	}
 }

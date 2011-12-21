@@ -220,6 +220,7 @@ package com.sibirjak.jakute.framework.roles {
 
 		private function setComponentKeys() : void {
 			_componentKeys[_componentStyleManager().cssName] = 0;
+			
 			if (_componentStyleManager().cssID) _componentKeys[_componentStyleManager().cssName + "#" + _componentStyleManager().cssID] = 0;
 
 			if (_componentStyleManager().cssClass) {
