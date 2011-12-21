@@ -23,7 +23,6 @@
 ******************************************************************************/
 package com.sibirjak.jakute {
 
-	import avmplus.getQualifiedClassName;
 	import com.sibirjak.jakute.framework.JCSS_ApplicationStyleManager;
 	import com.sibirjak.jakute.framework.JCSS_ComponentStyleManager;
 	import com.sibirjak.jakute.framework.core.JCSS_StyleManagerMap;
@@ -37,6 +36,7 @@ package com.sibirjak.jakute {
 	import flash.display.DisplayObject;
 	import flash.display.Stage;
 	import flash.events.Event;
+	import flash.utils.getQualifiedClassName;
 
 	/**
 	 * Jakute Styling Engine (JCSS).

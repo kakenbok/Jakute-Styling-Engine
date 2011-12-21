@@ -4,13 +4,13 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="../../../style.css" type="text/css" media="screen">
 <link rel="stylesheet" href="../../../print.css" type="text/css" media="print">
-<meta content="JCSS_Sprite,com.sibirjak.jakute.JCSS_Sprite,_jcssAdapter,jcss_cssClass,jcss_cssID,jcss_cssName,jcss_initialized,jcss_virtualParent,jcss_childrenEnclosed,jcss_commitBulkUpdate,jcss_componentSelectorAsString,jcss_defineStyle,jcss_encloseChildren,jcss_getState,jcss_getStyle,jcss_onStylesChanged,jcss_onStylesInitialized,jcss_parentChainAsString,jcss_setState,jcss_setStyle,jcss_setStyleSheet,jcss_startBulkUpdate,jcss_styleRuleTreeAsString,jcss_stylesAsString" name="keywords">
+<meta content="JCSS_Sprite,com.sibirjak.jakute.JCSS_Sprite,_jcssAdapter,jcss,jcss_cssClass,jcss_cssID,jcss_cssName,jcss_initialized,jcss_virtualParent,cleanUp,jcss_childrenEnclosed,jcss_clearStyle,jcss_commitBulkUpdate,jcss_componentSelectorAsString,jcss_defineStyle,jcss_encloseChildren,jcss_getState,jcss_getStyle,jcss_onStyleRulesChanged,jcss_onStylesChanged,jcss_onStylesInitialized,jcss_parentChainAsString,jcss_setState,jcss_setStyle,jcss_setStyleSheet,jcss_startBulkUpdate,jcss_styleRuleTreeAsString,jcss_stylesAsString" name="keywords">
 <title>com.sibirjak.jakute.JCSS_Sprite</title>
 </head>
 <body>
 <script type="text/javascript" language="javascript" src="../../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../../cookies.js"></script><script type="text/javascript" language="javascript">
 <!--
-				asdocTitle = 'JCSS_Sprite - Jakute Styling Engine 0.9.0';
+				asdocTitle = 'JCSS_Sprite - Jakute Styling Engine 0.9.2';
 				var baseRef = '../../../';
 				window.onload = configPage;
 			--></script>
@@ -71,6 +71,11 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <th>&nbsp;</th><th colspan="2">Property</th><th class="summaryTableOwnerCol">Defined&nbsp;by</th>
 </tr>
 <tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#jcss">jcss</a> : <a href="../jakute/JCSS.html">JCSS</a>
+<div class="summaryTableDescription">[static]</div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#jcss_cssClass">jcss_cssClass</a> : String<div class="summaryTableDescription">
    Sets and returns the component css class.</div>
 </td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
@@ -87,7 +92,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 </tr>
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol"><a class="signatureLink" href="#jcss_initialized">jcss_initialized</a> : Boolean<div class="summaryTableDescription">[read-only]
-   Returns true if style already have been initialized.</div>
+   Returns true if styles already have been initialized.</div>
 </td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
 </tr>
 <tr class="">
@@ -130,6 +135,13 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
+<a class="signatureLink" href="#cleanUp()">cleanUp</a>():void</div>
+<div class="summaryTableDescription"></div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
 <a class="signatureLink" href="#jcss_childrenEnclosed()">jcss_childrenEnclosed</a>():Boolean</div>
 <div class="summaryTableDescription">
    Returns <code>true</code>, if <code>encloseChildren()</code> is set, else false.</div>
@@ -138,9 +150,17 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
+<a class="signatureLink" href="#jcss_clearStyle()">jcss_clearStyle</a>(selector:<a href="">String</a>, styleName:<a href="">String</a> = null):void</div>
+<div class="summaryTableDescription">
+   Removes a style that has formerly been set.</div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
 <a class="signatureLink" href="#jcss_commitBulkUpdate()">jcss_commitBulkUpdate</a>():void</div>
 <div class="summaryTableDescription">
-   </div>
+   Executes a bulk update that was started via <code>startBulkUpdate()</code>.</div>
 </td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
 </tr>
 <tr class="">
@@ -180,7 +200,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#jcss_getStyle()">jcss_getStyle</a>(styleName:<a href="">String</a>):*</div>
 <div class="summaryTableDescription">
-   Returns the current value of the given style name.</div>
+   Returns the current value for the given style name.</div>
 </td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
 </tr>
 <tr class="">
@@ -220,7 +240,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#jcss_startBulkUpdate()">jcss_startBulkUpdate</a>():void</div>
 <div class="summaryTableDescription">
-   </div>
+   Starts a bulk update procedure.</div>
 </td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
 </tr>
 <tr class="">
@@ -228,7 +248,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <div class="summarySignature">
 <a class="signatureLink" href="#jcss_styleRuleTreeAsString()">jcss_styleRuleTreeAsString</a>():String</div>
 <div class="summaryTableDescription">
-   </div>
+   Returns a formatted tree of all currently set style rules.</div>
 </td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
 </tr>
 <tr class="">
@@ -251,7 +271,15 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#jcss_onStylesChanged()">jcss_onStylesChanged</a>(styles:<a href="">Object</a>):void</div>
+<a class="signatureLink" href="#jcss_onStyleRulesChanged()">jcss_onStyleRulesChanged</a>(changedStyles:<a href="events/JCSS_ChangeEvent.html">JCSS_ChangeEvent</a>):void</div>
+<div class="summaryTableDescription">
+   </div>
+</td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
+</tr>
+<tr class="">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
+<div class="summarySignature">
+<a class="signatureLink" href="#jcss_onStylesChanged()">jcss_onStylesChanged</a>(changedStyles:<a href="events/JCSS_ChangeEvent.html">JCSS_ChangeEvent</a>):void</div>
 <div class="summaryTableDescription">
    Default handler for the styles changed event.</div>
 </td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
@@ -259,7 +287,7 @@ if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Cl
 <tr class="">
 <td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableInheritanceCol">&nbsp;</td><td class="summaryTableSignatureCol">
 <div class="summarySignature">
-<a class="signatureLink" href="#jcss_onStylesInitialized()">jcss_onStylesInitialized</a>(styles:<a href="">Object</a>):void</div>
+<a class="signatureLink" href="#jcss_onStylesInitialized()">jcss_onStylesInitialized</a>():void</div>
 <div class="summaryTableDescription">
    Default handler for the initialized event.</div>
 </td><td class="summaryTableOwnerCol">JCSS_Sprite</td>
@@ -273,10 +301,19 @@ showHideInherited();
 <div class="MainContent">
 <a name="propertyDetail"></a>
 <div class="detailSectionHeader">Property detail</div>
+<a name="jcss"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss</td><td class="detailHeaderType">property</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public static var jcss:<a href="../jakute/JCSS.html">JCSS</a></code>
+</div>
 <a name="_jcssAdapter"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">_jcssAdapter</td><td class="detailHeaderType">property</td>
+<td class="detailHeaderName">_jcssAdapter</td><td class="detailHeaderType">property</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
@@ -345,7 +382,7 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>jcss_initialized:Boolean</code>&nbsp;&nbsp;[read-only]<p>
-   Returns true if style already have been initialized.
+   Returns true if styles already have been initialized.
    
    </p><span class="label">Implementation</span>
 <br>
@@ -414,10 +451,19 @@ showHideInherited();
    </p></div>
 <a name="methodDetail"></a>
 <div class="detailSectionHeader">Method detail</div>
+<a name="cleanUp()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">cleanUp</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function cleanUp():void</code>
+</div>
 <a name="jcss_childrenEnclosed()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
-<td class="detailHeaderName">jcss_childrenEnclosed</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td>
+<td class="detailHeaderName">jcss_childrenEnclosed</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
 </tr>
 </table>
 <div class="detailBody">
@@ -431,6 +477,42 @@ showHideInherited();
 </tr>
 </table>
 </div>
+<a name="jcss_clearStyle()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_clearStyle</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>public function jcss_clearStyle(selector:<a href="">String</a>, styleName:<a href="">String</a> = null):void</code><p>
+   Removes a style that has formerly been set.
+   
+   </p><p>If <code>styleName</code> is specified, the style is removed from the style
+   rule specified with the given selector.</p>
+   
+   <p>The method does nothing if a style rule with the given selector has not been
+   set beforehand or a style with the given <code>styleName</code> has not been declared
+   within the style rule described by the given selector.</p>
+   
+   <p>Using this method to clear styles set to the component directly (by passing
+   the selector <code>"This"</code> or <code>""</code>) will reset the style
+   to its default value specified by the component.</p>
+   
+   <span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">selector</span>:<a href="">String</a></code> &mdash; A selector that matchs a particular component.
+   </td>
+</tr>
+<tr>
+<td class="paramSpacer">&nbsp;</td>
+</tr>
+<tr>
+<td width="20px"></td><td><code><span class="label">styleName</span>:<a href="">String</a></code> (default = <code>null</code>)<code></code> &mdash; The name of the style to remove.
+   </td>
+</tr>
+</table>
+</div>
 <a name="jcss_commitBulkUpdate()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -439,7 +521,15 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function jcss_commitBulkUpdate():void</code><p>
-   </p></div>
+   Executes a bulk update that was started via <code>startBulkUpdate()</code>.
+   
+   </p><p>Affected components are notified only once regardless of the specific
+   changes between <code>startBulkUpdate()</code> and this command.</p>
+   
+   <p>Ancestor components are always notified before their children. A further
+   order is not specified. It can be possible that children of different branches
+   are notified alternating, e.g. C-1, C-2, C-2.1, C-2.2, C-1.3, C-2.4, C-1.1
+   </div>
 <a name="jcss_componentSelectorAsString()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -474,7 +564,7 @@ showHideInherited();
    </p><p>Styles need to be defined initially. Not initially defined styles are ignored
    and never affect the particular component.</p>
    
-   <p>Styles can be defined only initially (before the initialized event).
+   <p>Styles can only be defined initially (before the initialized event).
    Otherwise an error is thrown.</p>
    
    <span class="label">Parameters</span>
@@ -501,7 +591,7 @@ showHideInherited();
 <td class="paramSpacer">&nbsp;</td>
 </tr>
 <tr>
-<td width="20px"></td><td><code><span class="label">priority</span>:<a href=""></a></code> (default = <code>0</code>)<code></code> &mdash; Indicates if the initial style value may be overriden.
+<td width="20px"></td><td><code><span class="label">priority</span>:<a href=""></a></code> (default = <code>0</code>)<code></code> &mdash; Style priority (default, fix, important).
    </td>
 </tr>
 </table>
@@ -573,20 +663,38 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function jcss_getStyle(styleName:<a href="">String</a>):*</code><p>
-   Returns the current value of the given style name.
+   Returns the current value for the given style name.
    
    </p><p>Returns initially (before the initialized event) <code>null<code>, for sure.</p>
+   
    <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">styleName</span>:<a href="">String</a></code></td>
+<td width="20px"></td><td><code><span class="label">styleName</span>:<a href="">String</a></code> &mdash; The name of the style.
+   </td>
 </tr>
 </table>
 <p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20"></td><td><code>*</code></td>
+<td width="20"></td><td><code>*</code> &mdash; The current value of the style.
+   </td>
+</tr>
+</table>
+</div>
+<a name="jcss_onStyleRulesChanged()"></a>
+<table cellspacing="0" cellpadding="0" class="detailHeader">
+<tr>
+<td class="detailHeaderName">jcss_onStyleRulesChanged</td><td class="detailHeaderParens">()</td><td class="detailHeaderType">method</td><td class="detailHeaderRule">&nbsp;</td>
+</tr>
+</table>
+<div class="detailBody">
+<code>protected function jcss_onStyleRulesChanged(changedStyles:<a href="events/JCSS_ChangeEvent.html">JCSS_ChangeEvent</a>):void</code><p>
+   </p><span class="label">Parameters</span>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20px"></td><td><code><span class="label">changedStyles</span>:<a href="events/JCSS_ChangeEvent.html">JCSS_ChangeEvent</a></code></td>
 </tr>
 </table>
 </div>
@@ -597,7 +705,7 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>protected function jcss_onStylesChanged(styles:<a href="">Object</a>):void</code><p>
+<code>protected function jcss_onStylesChanged(changedStyles:<a href="events/JCSS_ChangeEvent.html">JCSS_ChangeEvent</a>):void</code><p>
    Default handler for the styles changed event.
    
    </p><p>Template method, to be overridden in a sub class.</p>
@@ -605,7 +713,7 @@ showHideInherited();
    <span class="label">Parameters</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>
-<td width="20px"></td><td><code><span class="label">styles</span>:<a href="">Object</a></code> &mdash; All recently changed styles.
+<td width="20px"></td><td><code><span class="label">changedStyles</span>:<a href="events/JCSS_ChangeEvent.html">JCSS_ChangeEvent</a></code> &mdash; All recently changed styles.
    </td>
 </tr>
 </table>
@@ -617,19 +725,12 @@ showHideInherited();
 </tr>
 </table>
 <div class="detailBody">
-<code>protected function jcss_onStylesInitialized(styles:<a href="">Object</a>):void</code><p>
+<code>protected function jcss_onStylesInitialized():void</code><p>
    Default handler for the initialized event.
    
    </p><p>Template method, to be overridden in a sub class.</p>
    
-   <span class="label">Parameters</span>
-<table border="0" cellspacing="0" cellpadding="0">
-<tr>
-<td width="20px"></td><td><code><span class="label">styles</span>:<a href="">Object</a></code> &mdash; All initial styles of the component.
-   </td>
-</tr>
-</table>
-</div>
+   </div>
 <a name="jcss_parentChainAsString()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -760,7 +861,13 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function jcss_startBulkUpdate():void</code><p>
-   </p></div>
+   Starts a bulk update procedure.
+   
+   </p><p>If invoked, affected components are buffered and notified only once
+   after a later call of <code>commitBulkUpdate()</code>. If there are
+   different styles or state to set, that might affect a particular multiple
+   times, it is recommended to wrap the update in the bulk transaction.</p>
+   </div>
 <a name="jcss_styleRuleTreeAsString()"></a>
 <table cellspacing="0" cellpadding="0" class="detailHeader">
 <tr>
@@ -769,7 +876,90 @@ showHideInherited();
 </table>
 <div class="detailBody">
 <code>public function jcss_styleRuleTreeAsString():String</code><p>
-   </p><p></p>
+   Returns a formatted tree of all currently set style rules.
+   
+   </p><p>The following example shows a style sheet and its tree representation.</p>
+   
+   <div class='listing'><pre>
+   var styleSheet : String = &lt;styles&gt;&lt;![CDATA[
+   
+       ToolTip {
+           borderSize: 0;
+       }
+   
+       Blue {
+           backgroundColor: #0000CC;
+           borderColor: #000066;
+           color: #FFFFFF;
+       }
+   
+       Blue ToolTip {
+           backgroundColor: #6666FF;
+           color: #FFFFFF;
+       }
+   
+       Red {
+           backgroundColor: #CC0000;
+           borderColor: #660000;
+           color: #FFFFFF;
+       }
+   
+       Red ToolTip {
+           backgroundColor: #FF6666;
+           color: #FFFFFF;
+       }
+   
+       Yellow {
+           backgroundColor: #CCCC00;
+           borderColor: #666600;
+       }
+   
+       Yellow ToolTip {
+           backgroundColor: #FFFF66;
+       }
+   
+   ]]&gt;&lt;/styles&gt;.toString();
+   </pre></div>
+   
+   <div class='listing'><pre>
+   [This 2]
+   |_____[Yellow 22]
+       | &gt;This Yellow specifity:2 {
+       |    backgroundColor: #CCCC00 (12);
+       |    borderColor: #666600 (13);
+       | }
+       |_____[ToolTip 26]
+           | &gt;This Yellow ToolTip specifity:3 {
+           |    backgroundColor: #FFFF66 (14);
+           | }
+   |_____[Blue 8]
+       | &gt;This Blue specifity:2 {
+       |    backgroundColor: #0000CC (2);
+       |    color: #FFFFFF (4);
+       |    borderColor: #000066 (3);
+       | }
+       |_____[ToolTip 12]
+           | &gt;This Blue ToolTip specifity:3 {
+           |    backgroundColor: #6666FF (5);
+           |    color: #FFFFFF (6);
+           | }
+   |_____[ToolTip 5]
+       | &gt;This ToolTip specifity:2 {
+       |    borderSize: 0 (1);
+       | }
+   |_____[Red 15]
+       | &gt;This Red specifity:2 {
+       |    backgroundColor: #CC0000 (7);
+       |    color: #FFFFFF (9);
+       |    borderColor: #660000 (8);
+       | }
+       |_____[ToolTip 19]
+           | &gt;This Red ToolTip specifity:3 {
+           |    backgroundColor: #FF6666 (10);
+           |    color: #FFFFFF (11);
+           | }
+   </pre></div>
+   <p></p>
 <span class="label">Returns</span>
 <table border="0" cellspacing="0" cellpadding="0">
 <tr>

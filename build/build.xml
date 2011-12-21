@@ -33,7 +33,7 @@
 		<delete dir="${DOC}/apidoc" failonerror="false" />
 	</target>
 
-	<target name="APIDoc" depends="Clean">
+	<target name="APIDoc" depends="Clean" description="API">
 		<exec executable="${ASDOC}" failonerror="true">
 			<arg line="-doc-sources 'src/com/sibirjak/jakute'" />
 			<arg line="-source-path '${SRC}'" />
@@ -42,7 +42,10 @@
 
 			<arg line="-external-library-path libs" />
 
-			<arg line="-package com.sibirjak.jakute 'Public JCSS package (public).'" />
+			<arg line="-package com.sibirjak.jakute 'JCSS (public).'" />
+			<arg line="-package com.sibirjak.jakute.constants 'Constants (public).'" />
+			<arg line="-package com.sibirjak.jakute.events 'Events (public).'" />
+			<arg line="-package com.sibirjak.jakute.styles 'Style formatter classes (public).'" />
 			<arg line="-package com.sibirjak.jakute.framework 'Framework internal code (hidden).'" />
 			<arg line="-package com.sibirjak.jakute.framework.core 'Framework internal code (hidden).'" />
 			<arg line="-package com.sibirjak.jakute.framework.finder 'Framework internal code (hidden).'" />
@@ -51,6 +54,7 @@
 			<arg line="-package com.sibirjak.jakute.framework.states 'Framework internal code (hidden).'" />
 			<arg line="-package com.sibirjak.jakute.framework.stylerules 'Framework internal code (hidden).'" />
 			<arg line="-package com.sibirjak.jakute.framework.styles 'Framework internal code (hidden).'" />
+			<arg line="-package com.sibirjak.jakute.framework.styles.formatter 'Framework internal code (hidden).'" />
 			<arg line="-package com.sibirjak.jakute.framework.update 'Framework internal code (hidden).'" />
 
 		</exec>
